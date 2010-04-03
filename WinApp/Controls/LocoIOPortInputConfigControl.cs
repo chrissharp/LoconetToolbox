@@ -51,7 +51,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public PortMode Mode
         {
             get { return cbModes.SelectedItem as PortMode; }
-            set { cbModes.SelectedIndex = cbModes.Items.IndexOf(value); }
+            set { cbModes.SelectedIndex = (value != null) ? cbModes.Items.IndexOf(value) : -1; }
         }
 
         /// <summary>

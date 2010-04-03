@@ -102,6 +102,9 @@ namespace LocoNetToolBox.WinApp.Controls
                 inputControl.Visible = rbInput.Checked;
                 outputControl.Visible = rbOutput.Checked;
 
+                tlpMain.ColumnStyles[4] = new ColumnStyle(rbInput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
+                tlpMain.ColumnStyles[5] = new ColumnStyle(rbOutput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
+
                 var addr = (int)tbAddress.Value;
                 tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
                 tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;

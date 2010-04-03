@@ -36,6 +36,8 @@ namespace LocoNetToolBox.Devices.LocoIO
 
             new PortMode(PortMode.Directions.Input, Constants.OPC_INPUT_REP, 0x5F, 0x00, "Block Detector, Active High"),
             new PortMode(PortMode.Directions.Input, Constants.OPC_INPUT_REP, 0x1F, 0x10, "Block Detector, Active Low"),
+            new PortMode(PortMode.Directions.Input, Constants.OPC_INPUT_REP, 0x5B, 0x00, "Block Detector, Reset Delay, Active High"),
+            new PortMode(PortMode.Directions.Input, Constants.OPC_INPUT_REP, 0x1B, 0x10, "Block Detector, Reset Delay, Active Low"),
             new PortMode(PortMode.Directions.Input, Constants.OPC_SW_REQ,    0x0F, 0x10, "Toggle Switch, Direct Control"),
             new PortMode(PortMode.Directions.Input, Constants.OPC_SW_REP,    0x07, 0x10, "Toggle Switch, Indirect Control"),
             new PortMode(PortMode.Directions.Input, Constants.OPC_SW_REQ,    0x6F, 0x00, "Push Button, Active High, Direct Control"),
