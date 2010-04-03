@@ -50,9 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Devices\LocoIO\PortConfig.cs" />
+    <Compile Include="Devices\LocoIO\PortMode.cs" />
+    <Compile Include="Devices\LocoIO\PortMode.Statics.cs" />
     <Compile Include="Devices\MgvServo\ServoProgrammer.cs" />
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Protocol\Busy.cs" />
+    <Compile Include="Protocol\Constants.cs" />
     <Compile Include="Protocol\SwitchReport.cs" />
     <Compile Include="Protocol\SwitchRequest.cs" />
     <Compile Include="Protocol\InputReport.cs" />

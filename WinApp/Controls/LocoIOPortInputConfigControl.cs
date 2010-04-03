@@ -36,44 +36,30 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         public event EventHandler Changed;
 
-        private static readonly List<PortConfig.InputTypes> InputTypes = new List<PortConfig.InputTypes>() {
-                                                                         PortConfig.InputTypes.None,
-                                                                         PortConfig.InputTypes.Sensor,
-                                                                         PortConfig.InputTypes.Button
-                                                                     };
-        private PortConfig config;
-
         /// <summary>
         /// Default ctor
         /// </summary>
         public LocoIOPortInputConfigControl()
         {
             InitializeComponent();
-        }
-
-        internal void Initialize(PortConfig config)
-        {
-            this.config = null;
-            cbActiveLow.Checked = config.ActiveLow;
-            cbDelay.Checked = config.Delay;
-            cbDirect.Checked = (config.InputMessage == PortConfig.InputMessages.Direct);
-            cbInputType.SelectedIndex = InputTypes.IndexOf(config.InputType);
-            this.config = config;
+            cbModes.Items.AddRange(PortMode.Inputs.ToArray());
         }
 
         /// <summary>
-        /// Checkbox has changed.
+        /// Gets / sets the current mode
         /// </summary>
-        private void OnCheckedChanged(object sender, EventArgs e)
+        public PortMode Mode
         {
-            if (config != null)
-            {
-                config.ActiveLow = cbActiveLow.Checked;
-                config.Delay = cbDelay.Checked;
-                config.InputMessage = cbDirect.Checked ? PortConfig.InputMessages.Direct : PortConfig.InputMessages.Indirect;
-                config.InputType = InputTypes[Math.Max(0, cbInputType.SelectedIndex)];
-                Changed.Fire(this);
-            }
+            get { return cbModes.SelectedItem as PortMode; }
+            set { cbModes.SelectedIndex = cbModes.Items.IndexOf(value); }
+        }
+
+        /// <summary>
+        /// Selection has changed.
+        /// </summary>
+        private void cbModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Changed.Fire(this);
         }
     }
 }

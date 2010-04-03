@@ -37,7 +37,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         private bool initialized = false;
         private int port = 1;
-        private readonly PortConfig config = new PortConfig();
+        private PortMode mode;
 
         /// <summary>
         /// Default ctor
@@ -45,7 +45,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOPortConfigurationControl()
         {
             InitializeComponent();
-            Initialize();
+            initialized = true;
         }
 
         /// <summary>
@@ -58,6 +58,29 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 port = value;
                 lbPort.Text = value.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets / sets the current mode
+        /// </summary>
+        public PortMode Mode
+        {
+            get { return mode; }
+            set
+            {
+                if (mode != value)
+                {
+                    mode = null;
+
+                    rbInput.Checked = (value != null) && value.IsInput;
+                    rbOutput.Checked = (value != null) && value.IsOutput;
+                    inputControl.Mode = value;
+                    outputControl.Mode = value;
+
+                    mode = value;
+                    UpdateUI();
+                }
             }
         }
 
@@ -76,11 +99,13 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             if (initialized)
             {
-                inputControl.Visible = (config.Direction == PortConfig.Directions.Input);
-                outputControl.Visible = (config.Direction == PortConfig.Directions.Output);
-                tbConfig.Text = config.Config.ToString();
-                tbValue1.Text = config.Value1.ToString();
-                tbValue2.Text = config.Value2.ToString();
+                inputControl.Visible = rbInput.Checked;
+                outputControl.Visible = rbOutput.Checked;
+
+                var addr = (int)tbAddress.Value;
+                tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
+                tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;
+                tbValue2.Text = (mode != null) ? mode.GetValue2(addr).ToString() : string.Empty;
             }
         }
 
@@ -89,7 +114,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void rbInput_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbInput.Checked) { config.Direction = PortConfig.Directions.Input; }
             UpdateUI();
         }
 
@@ -98,7 +122,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void rbOutput_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbOutput.Checked) { config.Direction = PortConfig.Directions.Output; }
             UpdateUI();
         }
 
@@ -107,7 +130,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void tbAddress_ValueChanged(object sender, EventArgs e)
         {
-            config.Address = (int)tbAddress.Value;
             UpdateUI();
         }
 
@@ -116,57 +138,43 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void OnConfigChanged(object sender, EventArgs e)
         {
+            if (rbInput.Checked)
+            {
+                this.mode = inputControl.Mode;
+            }
+            else if (rbOutput.Checked)
+            {
+                this.mode = outputControl.Mode;
+            }
             UpdateUI();
-        }
-
-        /// <summary>
-        /// Put port config in controls
-        /// </summary>
-        private void Initialize()
-        {
-            initialized = false;
-            try
-            {
-                inputControl.Initialize(config);
-                outputControl.Initialize(config);
-                rbInput.Checked = config.Direction == PortConfig.Directions.Input;
-                rbOutput.Checked = config.Direction == PortConfig.Directions.Output;
-                tbAddress.Value = config.Address;
-            }
-            finally
-            {
-                initialized = true;
-                UpdateUI();
-            }
         }
 
         private void tbConfig_Validated(object sender, EventArgs e)
         {
-            byte value;
-            if (byte.TryParse(tbConfig.Text.Trim(), out value))
-            {
-                config.Config = value;
-                Initialize();
-            }
+            SetModeFromValues();
         }
 
         private void tbValue1_Validated(object sender, EventArgs e)
         {
-            byte value;
-            if (byte.TryParse(tbValue1.Text.Trim(), out value))
-            {
-                config.Value1 = value;
-                Initialize();
-            }
+            SetModeFromValues();
         }
 
         private void tbValue2_Validated(object sender, EventArgs e)
         {
-            byte value;
-            if (byte.TryParse(tbValue2.Text.Trim(), out value))
+            SetModeFromValues();
+        }
+
+        private void SetModeFromValues()
+        {
+            int config;
+            int value1;
+            int value2;
+
+            if (int.TryParse(tbConfig.Text.Trim(), out config) &&
+                int.TryParse(tbValue1.Text.Trim(), out value1) &&
+                int.TryParse(tbValue2.Text.Trim(), out value2))
             {
-                config.Value2 = value;
-                Initialize();
+                this.Mode = PortMode.Find(config, value1, value2);
             }
         }
     }
