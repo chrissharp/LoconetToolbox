@@ -37,7 +37,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         private bool initialized = false;
         private int port = 1;
-        private PortMode mode;
+        private PinMode mode;
 
         /// <summary>
         /// Default ctor
@@ -64,7 +64,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Gets / sets the current mode
         /// </summary>
-        public PortMode Mode
+        public PinMode Mode
         {
             get { return mode; }
             set
@@ -177,7 +177,7 @@ namespace LocoNetToolBox.WinApp.Controls
                 int.TryParse(tbValue1.Text.Trim(), out value1) &&
                 int.TryParse(tbValue2.Text.Trim(), out value2))
             {
-                this.Mode = PortMode.Find(config, value1, value2);
+                this.Mode = PinMode.Find(config, value1, value2);
             }
         }
     }

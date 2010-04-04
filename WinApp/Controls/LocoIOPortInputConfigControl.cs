@@ -42,15 +42,15 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOPortInputConfigControl()
         {
             InitializeComponent();
-            cbModes.Items.AddRange(PortMode.Inputs.ToArray());
+            cbModes.Items.AddRange(PinMode.Inputs.ToArray());
         }
 
         /// <summary>
         /// Gets / sets the current mode
         /// </summary>
-        public PortMode Mode
+        public PinMode Mode
         {
-            get { return cbModes.SelectedItem as PortMode; }
+            get { return cbModes.SelectedItem as PinMode; }
             set { cbModes.SelectedIndex = (value != null) ? cbModes.Items.IndexOf(value) : -1; }
         }
 

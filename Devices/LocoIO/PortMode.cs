@@ -27,7 +27,7 @@ using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
-    public sealed partial class PortMode
+    public sealed partial class PinMode
     {
         /// <summary>
         /// Directions for a single port.
@@ -37,7 +37,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Default ctor
         /// </summary>
-        private PortMode(Directions direction, int opcode, int sv0, int sv2, string name)
+        private PinMode(Directions direction, int opcode, int sv0, int sv2, string name)
         {
             this.Direction = direction;
             this.Opcode = opcode;
