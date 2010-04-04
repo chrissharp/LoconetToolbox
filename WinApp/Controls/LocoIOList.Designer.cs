@@ -50,7 +50,8 @@
             this.lbModules.TabIndex = 0;
             this.lbModules.UseCompatibleStateImageBehavior = false;
             this.lbModules.View = System.Windows.Forms.View.Details;
-            this.lbModules.ItemActivate += new System.EventHandler(this.ctxProgram_Click);
+            this.lbModules.ItemActivate += new System.EventHandler(this.lbModules_ItemActivate);
+            this.lbModules.SelectedIndexChanged += new System.EventHandler(this.lbModules_SelectedIndexChanged);
             // 
             // chAddress
             // 
@@ -65,14 +66,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxProgram});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
             // 
             // ctxProgram
             // 
             this.ctxProgram.Name = "ctxProgram";
-            this.ctxProgram.Size = new System.Drawing.Size(152, 22);
+            this.ctxProgram.Size = new System.Drawing.Size(120, 22);
             this.ctxProgram.Text = "Program";
-            this.ctxProgram.Click += new System.EventHandler(this.ctxProgram_Click);
             // 
             // LocoIOList
             // 

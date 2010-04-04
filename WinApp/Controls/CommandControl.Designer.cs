@@ -36,6 +36,7 @@
             this.cmdAdvanced = new System.Windows.Forms.Button();
             this.cmdServoProgrammer = new System.Windows.Forms.Button();
             this.cmdServoTester = new System.Windows.Forms.Button();
+            this.cmdProgramLocoIO = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.tlpMain.Controls.Add(this.cmdAdvanced, 0, 10);
             this.tlpMain.Controls.Add(this.cmdServoProgrammer, 1, 8);
             this.tlpMain.Controls.Add(this.cmdServoTester, 0, 8);
+            this.tlpMain.Controls.Add(this.cmdProgramLocoIO, 1, 4);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
@@ -140,6 +142,16 @@
             this.cmdServoTester.UseVisualStyleBackColor = true;
             this.cmdServoTester.Click += new System.EventHandler(this.cmdServoTester_Click);
             // 
+            // cmdProgramLocoIO
+            // 
+            this.cmdProgramLocoIO.Location = new System.Drawing.Point(191, 87);
+            this.cmdProgramLocoIO.Name = "cmdProgramLocoIO";
+            this.cmdProgramLocoIO.Size = new System.Drawing.Size(133, 45);
+            this.cmdProgramLocoIO.TabIndex = 21;
+            this.cmdProgramLocoIO.Text = "Program MGV50";
+            this.cmdProgramLocoIO.UseVisualStyleBackColor = true;
+            this.cmdProgramLocoIO.Click += new System.EventHandler(this.cmdProgramLocoIO_Click);
+            // 
             // CommandControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.Label lbFunctions;
         private System.Windows.Forms.Button cmdAdvanced;
         private System.Windows.Forms.Button cmdServoTester;
+        private System.Windows.Forms.Button cmdProgramLocoIO;
     }
 }

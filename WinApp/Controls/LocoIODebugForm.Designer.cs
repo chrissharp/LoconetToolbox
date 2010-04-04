@@ -37,7 +37,6 @@
             this.configControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.configControl.Location = new System.Drawing.Point(0, 0);
             this.configControl.Name = "configControl";
-            this.configControl.Port = 1;
             this.configControl.Size = new System.Drawing.Size(712, 102);
             this.configControl.TabIndex = 0;
             // 

@@ -31,9 +31,9 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdWriteAll = new System.Windows.Forms.Button();
             this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOConfigurationControl();
-            this.cmdWriteChanges = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
             this.readWorker = new System.ComponentModel.BackgroundWorker();
+            this.cmdReadAll = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,28 +42,28 @@
             this.tlpMain.ColumnCount = 4;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.Controls.Add(this.cmdWriteAll, 1, 1);
             this.tlpMain.Controls.Add(this.configurationControl, 0, 0);
-            this.tlpMain.Controls.Add(this.cmdWriteChanges, 0, 1);
             this.tlpMain.Controls.Add(this.cmdClose, 3, 1);
+            this.tlpMain.Controls.Add(this.cmdReadAll, 0, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(641, 550);
+            this.tlpMain.Size = new System.Drawing.Size(641, 290);
             this.tlpMain.TabIndex = 0;
             // 
             // cmdWriteAll
             // 
-            this.cmdWriteAll.Location = new System.Drawing.Point(102, 522);
+            this.cmdWriteAll.Location = new System.Drawing.Point(102, 262);
             this.cmdWriteAll.Name = "cmdWriteAll";
             this.cmdWriteAll.Size = new System.Drawing.Size(93, 25);
             this.cmdWriteAll.TabIndex = 2;
-            this.cmdWriteAll.Text = "Write all";
+            this.cmdWriteAll.Text = "&Write all";
             this.cmdWriteAll.UseVisualStyleBackColor = true;
             // 
             // configurationControl
@@ -72,25 +72,16 @@
             this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.configurationControl.Location = new System.Drawing.Point(3, 3);
             this.configurationControl.Name = "configurationControl";
-            this.configurationControl.Size = new System.Drawing.Size(635, 513);
+            this.configurationControl.Size = new System.Drawing.Size(635, 253);
             this.configurationControl.TabIndex = 0;
-            // 
-            // cmdWriteChanges
-            // 
-            this.cmdWriteChanges.Location = new System.Drawing.Point(3, 522);
-            this.cmdWriteChanges.Name = "cmdWriteChanges";
-            this.cmdWriteChanges.Size = new System.Drawing.Size(93, 25);
-            this.cmdWriteChanges.TabIndex = 1;
-            this.cmdWriteChanges.Text = "Write changes";
-            this.cmdWriteChanges.UseVisualStyleBackColor = true;
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(545, 522);
+            this.cmdClose.Location = new System.Drawing.Point(545, 262);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(93, 25);
             this.cmdClose.TabIndex = 3;
-            this.cmdClose.Text = "Close";
+            this.cmdClose.Text = "&Close";
             this.cmdClose.UseVisualStyleBackColor = true;
             // 
             // readWorker
@@ -99,11 +90,20 @@
             this.readWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.readWorker_DoWork);
             this.readWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.readWorker_RunWorkerCompleted);
             // 
+            // cmdReadAll
+            // 
+            this.cmdReadAll.Location = new System.Drawing.Point(3, 262);
+            this.cmdReadAll.Name = "cmdReadAll";
+            this.cmdReadAll.Size = new System.Drawing.Size(93, 25);
+            this.cmdReadAll.TabIndex = 4;
+            this.cmdReadAll.Text = "&Read all";
+            this.cmdReadAll.UseVisualStyleBackColor = true;
+            // 
             // LocoIOConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 550);
+            this.ClientSize = new System.Drawing.Size(641, 290);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -120,9 +120,9 @@
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private LocoIOConfigurationControl configurationControl;
         private System.Windows.Forms.Button cmdWriteAll;
-        private System.Windows.Forms.Button cmdWriteChanges;
         private System.Windows.Forms.Button cmdClose;
         private System.ComponentModel.BackgroundWorker readWorker;
+        private System.Windows.Forms.Button cmdReadAll;
 
     }
 }

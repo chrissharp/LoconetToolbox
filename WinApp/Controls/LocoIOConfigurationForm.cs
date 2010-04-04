@@ -40,8 +40,8 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOConfigurationForm()
         {
             InitializeComponent();
+            cmdReadAll.Enabled = false;
             cmdWriteAll.Enabled = false;
-            cmdWriteChanges.Enabled = false;
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void readWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            cmdReadAll.Enabled = true;
             cmdWriteAll.Enabled = true;
-            cmdWriteChanges.Enabled = true;
         }
     }
 }

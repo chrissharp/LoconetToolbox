@@ -33,6 +33,7 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class CommandControl : UserControl
     {
         private LocoBuffer lb;
+        private LocoNetAddress currentAddress;
 
         /// <summary>
         /// Default ctor
@@ -40,12 +41,48 @@ namespace LocoNetToolBox.WinApp.Controls
         public CommandControl()
         {
             InitializeComponent();
+            UpdateUI();
         }
 
         /// <summary>
         /// Connect to locobuffer
         /// </summary>
         internal LocoBuffer LocoBuffer { set { lb = value; } }
+
+        /// <summary>
+        /// Sets the current loconet address (null means no selection)
+        /// </summary>
+        internal LocoNetAddress CurrentAddress
+        {
+            set
+            {
+                currentAddress = value;
+                UpdateUI();
+            }
+        }
+
+        /// <summary>
+        /// Program LocoIO module
+        /// </summary>
+        internal void ProgramLocoIO()
+        {
+            if (currentAddress != null)
+            {
+                using (var dialog = new LocoIOConfigurationForm())
+                {
+                    dialog.Initialize(lb, currentAddress);
+                    dialog.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update the controls
+        /// </summary>
+        private void UpdateUI()
+        {
+            cmdProgramLocoIO.Enabled = (currentAddress != null);
+        }
 
         /// <summary>
         /// Execute the given request.
@@ -104,6 +141,14 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 dialog.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Program the LocoIO on the current address.
+        /// </summary>
+        private void cmdProgramLocoIO_Click(object sender, EventArgs e)
+        {
+            ProgramLocoIO();
         }
     }
 }

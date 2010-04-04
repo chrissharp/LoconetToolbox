@@ -36,8 +36,8 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class LocoIOPinConfigurationControl : UserControl
     {
         private bool initialized = false;
-        private int port = 1;
         private PinMode mode;
+        private int address = 1;
 
         /// <summary>
         /// Default ctor
@@ -46,19 +46,6 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             InitializeComponent();
             initialized = true;
-        }
-
-        /// <summary>
-        /// Gets the port number (1-16)
-        /// </summary>
-        public int Port
-        {
-            get { return port; }
-            set
-            {
-                port = value;
-                lbPort.Text = value.ToString();
-            }
         }
 
         /// <summary>
@@ -85,6 +72,15 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
+        /// Gets / sets the address configured for this pin.
+        /// </summary>
+        public int Address
+        {
+            get { return address; }
+            set { if (address != value) { address = value; UpdateUI(); } }
+        }
+
+        /// <summary>
         /// Read all settings
         /// </summary>
         internal void ReadAll(LocoBuffer lb, LocoNetAddress address)
@@ -105,7 +101,7 @@ namespace LocoNetToolBox.WinApp.Controls
                 tlpMain.ColumnStyles[4] = new ColumnStyle(rbInput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
                 tlpMain.ColumnStyles[5] = new ColumnStyle(rbOutput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
 
-                var addr = (int)tbAddress.Value;
+                var addr = this.address;
                 tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
                 tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;
                 tbValue2.Text = (mode != null) ? mode.GetValue2(addr).ToString() : string.Empty;

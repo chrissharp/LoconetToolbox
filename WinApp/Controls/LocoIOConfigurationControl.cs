@@ -25,28 +25,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOConfigurationControl : UserControl
     {
-        private readonly LocoIOPinConfigurationControl[] portControls;
-
         /// <summary>
         /// Default ctor
         /// </summary>
         public LocoIOConfigurationControl()
         {
             InitializeComponent();
-            this.portControls = new LocoIOPinConfigurationControl[] {
-                cfgPort1, cfgPort2, cfgPort3, cfgPort4, cfgPort5, cfgPort6, cfgPort7, cfgPort8, 
-                cfgPort9, cfgPort10, cfgPort11, cfgPort12, cfgPort13, cfgPort14, cfgPort15, cfgPort16
-            };
-            foreach (var ctr in portControls)
-            {
-                ctr.Enabled = true;
-            }
+            connector1.FirstPin = 1;
+            connector2.FirstPin = 9;
         }
 
         /// <summary>
@@ -54,10 +47,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         internal void ReadAll(LocoBuffer lb, LocoNetAddress address)
         {
-            foreach (var ctr in portControls)
-            {
-                ctr.ReadAll(lb, address);
-            }
         }
     }
 }

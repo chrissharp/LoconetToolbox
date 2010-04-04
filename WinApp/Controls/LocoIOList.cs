@@ -31,6 +31,16 @@ namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOList : UserControl
     {
+        /// <summary>
+        /// Selected address has changed.
+        /// </summary>
+        public event EventHandler SelectionChanged;
+
+        /// <summary>
+        /// Program the locoio on the selected address.
+        /// </summary>
+        public event EventHandler ProgramSelectedAddress;
+
         private LocoBuffer lb;
 
         /// <summary>
@@ -57,6 +67,23 @@ namespace LocoNetToolBox.WinApp.Controls
                 {
                     lb.PreviewMessage += new MessageHandler(lb_PreviewMessage);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the selected address.
+        /// Returns null if there is no selection.
+        /// </summary>
+        public LocoNetAddress SelectedAddress
+        {
+            get
+            {
+                if (lbModules.SelectedItems.Count > 0)
+                {
+                    var item = lbModules.SelectedItems[0];
+                    return (LocoNetAddress)item.Tag;
+                }
+                return null;
             }
         }
 
@@ -97,23 +124,19 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Edit on activate
+        /// Selection has changed
         /// </summary>
-        private void ctxProgram_Click(object sender, EventArgs e)
+        private void lbModules_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (var dialog = new LocoIOConfigurationForm())
-            {
-                if (lbModules.SelectedItems.Count > 0)
-                {
-                    var item = lbModules.SelectedItems[0];
-                    dialog.Initialize(lb, (LocoNetAddress)item.Tag);
-                }
-                else
-                {
-                    dialog.Initialize(null, new LocoNetAddress(81, 1));
-                }
-                dialog.ShowDialog(this);
-            }
+            SelectionChanged.Fire(this);
+        }
+
+        /// <summary>
+        /// Program active address
+        /// </summary>
+        private void lbModules_ItemActivate(object sender, EventArgs e)
+        {
+            ProgramSelectedAddress.Fire(this);
         }
     }
 }

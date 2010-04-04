@@ -44,6 +44,25 @@ namespace LocoNetToolBox.WinApp
             locoBufferView1.LocoBuffer = lb;
             commandControl1.LocoBuffer = lb;
             locoIOList1.LocoBuffer = lb;
+
+            locoIOList1.SelectionChanged += new EventHandler(locoIOList1_SelectionChanged);
+            locoIOList1.ProgramSelectedAddress += new EventHandler(locoIOList1_ProgramSelectedAddress);
+        }
+
+        /// <summary>
+        /// Program selected address
+        /// </summary>
+        private void locoIOList1_ProgramSelectedAddress(object sender, EventArgs e)
+        {
+            commandControl1.ProgramLocoIO();
+        }
+
+        /// <summary>
+        /// Selected Loconet address changed
+        /// </summary>
+        private void locoIOList1_SelectionChanged(object sender, EventArgs e)
+        {
+            commandControl1.CurrentAddress = locoIOList1.SelectedAddress;
         }
 
         /// <summary>
