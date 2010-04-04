@@ -1,6 +1,6 @@
 ﻿namespace LocoNetToolBox.WinApp.Controls
 {
-    partial class LocoIOPortInputConfigControl
+    partial class LocoIOPinOutputConfigControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -42,13 +42,13 @@
             this.cbModes.TabIndex = 0;
             this.cbModes.SelectedIndexChanged += new System.EventHandler(this.cbModes_SelectedIndexChanged);
             // 
-            // LocoIOPortInputConfigControl
+            // LocoIOPortOutputConfigControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.cbModes);
-            this.Name = "LocoIOPortInputConfigControl";
+            this.Name = "LocoIOPortOutputConfigControl";
             this.Size = new System.Drawing.Size(221, 166);
             this.ResumeLayout(false);
 

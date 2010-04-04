@@ -31,7 +31,7 @@ namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOConfigurationControl : UserControl
     {
-        private readonly LocoIOPortConfigurationControl[] portControls;
+        private readonly LocoIOPinConfigurationControl[] portControls;
 
         /// <summary>
         /// Default ctor
@@ -39,7 +39,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOConfigurationControl()
         {
             InitializeComponent();
-            this.portControls = new LocoIOPortConfigurationControl[] {
+            this.portControls = new LocoIOPinConfigurationControl[] {
                 cfgPort1, cfgPort2, cfgPort3, cfgPort4, cfgPort5, cfgPort6, cfgPort7, cfgPort8, 
                 cfgPort9, cfgPort10, cfgPort11, cfgPort12, cfgPort13, cfgPort14, cfgPort15, cfgPort16
             };

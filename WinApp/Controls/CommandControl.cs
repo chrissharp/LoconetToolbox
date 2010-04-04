@@ -100,7 +100,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
         private void cmdAdvanced_Click(object sender, EventArgs e)
         {
-            using (var dialog = new LocoIOPortDebugForm())
+            using (var dialog = new LocoIODebugForm())
             {
                 dialog.ShowDialog();
             }

@@ -19,19 +19,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using LocoNetToolBox.Devices.LocoIO;
+
 namespace LocoNetToolBox.WinApp.Controls
 {
-    public partial class LocoIOPortDebugForm : Form
+    public partial class LocoIOPinInputConfigControl : UserControl
     {
-        public LocoIOPortDebugForm()
+        /// <summary>
+        /// Fired when settings are changed.
+        /// </summary>
+        public event EventHandler Changed;
+
+        /// <summary>
+        /// Default ctor
+        /// </summary>
+        public LocoIOPinInputConfigControl()
         {
             InitializeComponent();
+            cbModes.Items.AddRange(PinMode.Inputs.ToArray());
+        }
+
+        /// <summary>
+        /// Gets / sets the current mode
+        /// </summary>
+        public PinMode Mode
+        {
+            get { return cbModes.SelectedItem as PinMode; }
+            set { cbModes.SelectedIndex = (value != null) ? cbModes.Items.IndexOf(value) : -1; }
+        }
+
+        /// <summary>
+        /// Selection has changed.
+        /// </summary>
+        private void cbModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Changed.Fire(this);
         }
     }
 }

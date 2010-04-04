@@ -33,7 +33,7 @@ namespace LocoNetToolBox.WinApp.Controls
     /// <summary>
     /// LocoIO Single port editor.
     /// </summary>
-    public partial class LocoIOPortConfigurationControl : UserControl
+    public partial class LocoIOPinConfigurationControl : UserControl
     {
         private bool initialized = false;
         private int port = 1;
@@ -42,7 +42,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        public LocoIOPortConfigurationControl()
+        public LocoIOPinConfigurationControl()
         {
             InitializeComponent();
             initialized = true;

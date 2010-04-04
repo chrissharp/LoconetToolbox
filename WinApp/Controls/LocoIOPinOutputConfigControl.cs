@@ -29,7 +29,7 @@ using LocoNetToolBox.Devices.LocoIO;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
-    public partial class LocoIOPortInputConfigControl : UserControl
+    public partial class LocoIOPinOutputConfigControl : UserControl
     {
         /// <summary>
         /// Fired when settings are changed.
@@ -39,10 +39,10 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        public LocoIOPortInputConfigControl()
+        public LocoIOPinOutputConfigControl()
         {
             InitializeComponent();
-            cbModes.Items.AddRange(PinMode.Inputs.ToArray());
+            cbModes.Items.AddRange(PinMode.Outputs.ToArray());
         }
 
         /// <summary>

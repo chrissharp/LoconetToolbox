@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.cfgPort16 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort15 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort14 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort13 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort12 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort11 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort10 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort9 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort8 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort7 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort6 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort5 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort4 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort3 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort2 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
-            this.cfgPort1 = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
+            this.cfgPort16 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort15 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort14 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort13 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort12 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort11 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort10 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort9 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort8 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort7 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort6 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort5 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort4 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort3 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort2 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
+            this.cfgPort1 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,21 +251,21 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpMain;
-        private LocoIOPortConfigurationControl cfgPort1;
-        private LocoIOPortConfigurationControl cfgPort16;
-        private LocoIOPortConfigurationControl cfgPort15;
-        private LocoIOPortConfigurationControl cfgPort14;
-        private LocoIOPortConfigurationControl cfgPort13;
-        private LocoIOPortConfigurationControl cfgPort12;
-        private LocoIOPortConfigurationControl cfgPort11;
-        private LocoIOPortConfigurationControl cfgPort10;
-        private LocoIOPortConfigurationControl cfgPort9;
-        private LocoIOPortConfigurationControl cfgPort8;
-        private LocoIOPortConfigurationControl cfgPort7;
-        private LocoIOPortConfigurationControl cfgPort6;
-        private LocoIOPortConfigurationControl cfgPort5;
-        private LocoIOPortConfigurationControl cfgPort4;
-        private LocoIOPortConfigurationControl cfgPort3;
-        private LocoIOPortConfigurationControl cfgPort2;
+        private LocoIOPinConfigurationControl cfgPort1;
+        private LocoIOPinConfigurationControl cfgPort16;
+        private LocoIOPinConfigurationControl cfgPort15;
+        private LocoIOPinConfigurationControl cfgPort14;
+        private LocoIOPinConfigurationControl cfgPort13;
+        private LocoIOPinConfigurationControl cfgPort12;
+        private LocoIOPinConfigurationControl cfgPort11;
+        private LocoIOPinConfigurationControl cfgPort10;
+        private LocoIOPinConfigurationControl cfgPort9;
+        private LocoIOPinConfigurationControl cfgPort8;
+        private LocoIOPinConfigurationControl cfgPort7;
+        private LocoIOPinConfigurationControl cfgPort6;
+        private LocoIOPinConfigurationControl cfgPort5;
+        private LocoIOPinConfigurationControl cfgPort4;
+        private LocoIOPinConfigurationControl cfgPort3;
+        private LocoIOPinConfigurationControl cfgPort2;
     }
 }

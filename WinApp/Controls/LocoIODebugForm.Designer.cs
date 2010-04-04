@@ -1,6 +1,6 @@
 ﻿namespace LocoNetToolBox.WinApp.Controls
 {
-    partial class LocoIOPortDebugForm
+    partial class LocoIODebugForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.configControl = new LocoNetToolBox.WinApp.Controls.LocoIOPortConfigurationControl();
+            this.configControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
             this.SuspendLayout();
             // 
             // configControl
@@ -59,6 +59,6 @@
 
         #endregion
 
-        private LocoIOPortConfigurationControl configControl;
+        private LocoIOPinConfigurationControl configControl;
     }
 }

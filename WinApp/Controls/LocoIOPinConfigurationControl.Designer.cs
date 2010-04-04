@@ -1,6 +1,6 @@
 ﻿namespace LocoNetToolBox.WinApp.Controls
 {
-    partial class LocoIOPortConfigurationControl
+    partial class LocoIOPinConfigurationControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,8 +36,8 @@
             this.tbConfig = new System.Windows.Forms.TextBox();
             this.tbValue1 = new System.Windows.Forms.TextBox();
             this.tbValue2 = new System.Windows.Forms.TextBox();
-            this.inputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPortInputConfigControl();
-            this.outputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPortOutputConfigControl();
+            this.inputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinInputConfigControl();
+            this.outputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinOutputConfigControl();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAddress)).BeginInit();
             this.SuspendLayout();
@@ -195,8 +195,8 @@
         private System.Windows.Forms.RadioButton rbOutput;
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.NumericUpDown tbAddress;
-        private LocoIOPortInputConfigControl inputControl;
-        private LocoIOPortOutputConfigControl outputControl;
+        private LocoIOPinInputConfigControl inputControl;
+        private LocoIOPinOutputConfigControl outputControl;
         private System.Windows.Forms.TextBox tbValue2;
         private System.Windows.Forms.TextBox tbConfig;
         private System.Windows.Forms.TextBox tbValue1;
