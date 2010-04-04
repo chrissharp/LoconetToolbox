@@ -47,13 +47,17 @@
             this.cfgPort2 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
             this.cfgPort1 = new LocoNetToolBox.WinApp.Controls.LocoIOPinConfigurationControl();
             this.tbAddr1 = new System.Windows.Forms.NumericUpDown();
-            this.cbConnectorMode = new System.Windows.Forms.ComboBox();
             this.lbPin1 = new System.Windows.Forms.Label();
             this.lbPin3 = new System.Windows.Forms.Label();
             this.lbPin5 = new System.Windows.Forms.Label();
             this.lbPin6 = new System.Windows.Forms.Label();
             this.lbPin7 = new System.Windows.Forms.Label();
             this.lbPin8 = new System.Windows.Forms.Label();
+            this.lvModes = new System.Windows.Forms.ListView();
+            this.lbPinCaption = new System.Windows.Forms.Label();
+            this.lbAddressCaption = new System.Windows.Forms.Label();
+            this.lbConfigAdvCaption = new System.Windows.Forms.Label();
+            this.lbConfigCaption = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAddr8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbAddr7)).BeginInit();
@@ -73,35 +77,40 @@
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.Controls.Add(this.lbPin4, 0, 3);
-            this.tlpMain.Controls.Add(this.lbPin2, 0, 1);
-            this.tlpMain.Controls.Add(this.tbAddr8, 1, 7);
-            this.tlpMain.Controls.Add(this.tbAddr7, 1, 6);
-            this.tlpMain.Controls.Add(this.tbAddr6, 1, 5);
-            this.tlpMain.Controls.Add(this.tbAddr5, 1, 4);
-            this.tlpMain.Controls.Add(this.tbAddr4, 1, 3);
-            this.tlpMain.Controls.Add(this.tbAddr3, 1, 2);
-            this.tlpMain.Controls.Add(this.tbAddr2, 1, 1);
-            this.tlpMain.Controls.Add(this.cfgPort8, 2, 7);
-            this.tlpMain.Controls.Add(this.cfgPort7, 2, 6);
-            this.tlpMain.Controls.Add(this.cfgPort6, 2, 5);
-            this.tlpMain.Controls.Add(this.cfgPort5, 2, 4);
-            this.tlpMain.Controls.Add(this.cfgPort4, 2, 3);
-            this.tlpMain.Controls.Add(this.cfgPort3, 2, 2);
-            this.tlpMain.Controls.Add(this.cfgPort2, 2, 1);
-            this.tlpMain.Controls.Add(this.cfgPort1, 2, 0);
-            this.tlpMain.Controls.Add(this.tbAddr1, 1, 0);
-            this.tlpMain.Controls.Add(this.cbConnectorMode, 3, 0);
-            this.tlpMain.Controls.Add(this.lbPin1, 0, 0);
-            this.tlpMain.Controls.Add(this.lbPin3, 0, 2);
-            this.tlpMain.Controls.Add(this.lbPin5, 0, 4);
-            this.tlpMain.Controls.Add(this.lbPin6, 0, 5);
-            this.tlpMain.Controls.Add(this.lbPin7, 0, 6);
-            this.tlpMain.Controls.Add(this.lbPin8, 0, 7);
+            this.tlpMain.Controls.Add(this.lbPin4, 0, 4);
+            this.tlpMain.Controls.Add(this.lbPin2, 0, 2);
+            this.tlpMain.Controls.Add(this.tbAddr8, 1, 8);
+            this.tlpMain.Controls.Add(this.tbAddr7, 1, 7);
+            this.tlpMain.Controls.Add(this.tbAddr6, 1, 6);
+            this.tlpMain.Controls.Add(this.tbAddr5, 1, 5);
+            this.tlpMain.Controls.Add(this.tbAddr4, 1, 4);
+            this.tlpMain.Controls.Add(this.tbAddr3, 1, 3);
+            this.tlpMain.Controls.Add(this.tbAddr2, 1, 2);
+            this.tlpMain.Controls.Add(this.cfgPort8, 2, 8);
+            this.tlpMain.Controls.Add(this.cfgPort7, 2, 7);
+            this.tlpMain.Controls.Add(this.cfgPort6, 2, 6);
+            this.tlpMain.Controls.Add(this.cfgPort5, 2, 5);
+            this.tlpMain.Controls.Add(this.cfgPort4, 2, 4);
+            this.tlpMain.Controls.Add(this.cfgPort3, 2, 3);
+            this.tlpMain.Controls.Add(this.cfgPort2, 2, 2);
+            this.tlpMain.Controls.Add(this.cfgPort1, 2, 1);
+            this.tlpMain.Controls.Add(this.tbAddr1, 1, 1);
+            this.tlpMain.Controls.Add(this.lbPin1, 0, 1);
+            this.tlpMain.Controls.Add(this.lbPin3, 0, 3);
+            this.tlpMain.Controls.Add(this.lbPin5, 0, 5);
+            this.tlpMain.Controls.Add(this.lbPin6, 0, 6);
+            this.tlpMain.Controls.Add(this.lbPin7, 0, 7);
+            this.tlpMain.Controls.Add(this.lbPin8, 0, 8);
+            this.tlpMain.Controls.Add(this.lvModes, 3, 1);
+            this.tlpMain.Controls.Add(this.lbPinCaption, 0, 0);
+            this.tlpMain.Controls.Add(this.lbAddressCaption, 1, 0);
+            this.tlpMain.Controls.Add(this.lbConfigAdvCaption, 2, 0);
+            this.tlpMain.Controls.Add(this.lbConfigCaption, 3, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 16;
+            this.tlpMain.RowCount = 9;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -110,22 +119,14 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(605, 264);
+            this.tlpMain.Size = new System.Drawing.Size(605, 284);
             this.tlpMain.TabIndex = 0;
             // 
             // lbPin4
             // 
             this.lbPin4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin4.AutoSize = true;
-            this.lbPin4.Location = new System.Drawing.Point(3, 109);
+            this.lbPin4.Location = new System.Drawing.Point(3, 129);
             this.lbPin4.Name = "lbPin4";
             this.lbPin4.Size = new System.Drawing.Size(31, 13);
             this.lbPin4.TabIndex = 22;
@@ -135,7 +136,7 @@
             // 
             this.lbPin2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin2.AutoSize = true;
-            this.lbPin2.Location = new System.Drawing.Point(3, 43);
+            this.lbPin2.Location = new System.Drawing.Point(3, 63);
             this.lbPin2.Name = "lbPin2";
             this.lbPin2.Size = new System.Drawing.Size(31, 13);
             this.lbPin2.TabIndex = 18;
@@ -144,7 +145,7 @@
             // tbAddr8
             // 
             this.tbAddr8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr8.Location = new System.Drawing.Point(40, 237);
+            this.tbAddr8.Location = new System.Drawing.Point(40, 257);
             this.tbAddr8.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -167,7 +168,7 @@
             // tbAddr7
             // 
             this.tbAddr7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr7.Location = new System.Drawing.Point(40, 204);
+            this.tbAddr7.Location = new System.Drawing.Point(40, 224);
             this.tbAddr7.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -190,7 +191,7 @@
             // tbAddr6
             // 
             this.tbAddr6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr6.Location = new System.Drawing.Point(40, 171);
+            this.tbAddr6.Location = new System.Drawing.Point(40, 191);
             this.tbAddr6.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -213,7 +214,7 @@
             // tbAddr5
             // 
             this.tbAddr5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr5.Location = new System.Drawing.Point(40, 138);
+            this.tbAddr5.Location = new System.Drawing.Point(40, 158);
             this.tbAddr5.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -236,7 +237,7 @@
             // tbAddr4
             // 
             this.tbAddr4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr4.Location = new System.Drawing.Point(40, 105);
+            this.tbAddr4.Location = new System.Drawing.Point(40, 125);
             this.tbAddr4.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -259,7 +260,7 @@
             // tbAddr3
             // 
             this.tbAddr3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr3.Location = new System.Drawing.Point(40, 72);
+            this.tbAddr3.Location = new System.Drawing.Point(40, 92);
             this.tbAddr3.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -282,7 +283,7 @@
             // tbAddr2
             // 
             this.tbAddr2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr2.Location = new System.Drawing.Point(40, 39);
+            this.tbAddr2.Location = new System.Drawing.Point(40, 59);
             this.tbAddr2.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -307,7 +308,7 @@
             this.cfgPort8.Address = 1;
             this.cfgPort8.AutoSize = true;
             this.cfgPort8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort8.Location = new System.Drawing.Point(107, 234);
+            this.cfgPort8.Location = new System.Drawing.Point(107, 254);
             this.cfgPort8.Mode = null;
             this.cfgPort8.Name = "cfgPort8";
             this.cfgPort8.Size = new System.Drawing.Size(244, 27);
@@ -318,7 +319,7 @@
             this.cfgPort7.Address = 1;
             this.cfgPort7.AutoSize = true;
             this.cfgPort7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort7.Location = new System.Drawing.Point(107, 201);
+            this.cfgPort7.Location = new System.Drawing.Point(107, 221);
             this.cfgPort7.Mode = null;
             this.cfgPort7.Name = "cfgPort7";
             this.cfgPort7.Size = new System.Drawing.Size(244, 27);
@@ -329,7 +330,7 @@
             this.cfgPort6.Address = 1;
             this.cfgPort6.AutoSize = true;
             this.cfgPort6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort6.Location = new System.Drawing.Point(107, 168);
+            this.cfgPort6.Location = new System.Drawing.Point(107, 188);
             this.cfgPort6.Mode = null;
             this.cfgPort6.Name = "cfgPort6";
             this.cfgPort6.Size = new System.Drawing.Size(244, 27);
@@ -340,7 +341,7 @@
             this.cfgPort5.Address = 1;
             this.cfgPort5.AutoSize = true;
             this.cfgPort5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort5.Location = new System.Drawing.Point(107, 135);
+            this.cfgPort5.Location = new System.Drawing.Point(107, 155);
             this.cfgPort5.Mode = null;
             this.cfgPort5.Name = "cfgPort5";
             this.cfgPort5.Size = new System.Drawing.Size(244, 27);
@@ -351,7 +352,7 @@
             this.cfgPort4.Address = 1;
             this.cfgPort4.AutoSize = true;
             this.cfgPort4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort4.Location = new System.Drawing.Point(107, 102);
+            this.cfgPort4.Location = new System.Drawing.Point(107, 122);
             this.cfgPort4.Mode = null;
             this.cfgPort4.Name = "cfgPort4";
             this.cfgPort4.Size = new System.Drawing.Size(244, 27);
@@ -362,7 +363,7 @@
             this.cfgPort3.Address = 1;
             this.cfgPort3.AutoSize = true;
             this.cfgPort3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort3.Location = new System.Drawing.Point(107, 69);
+            this.cfgPort3.Location = new System.Drawing.Point(107, 89);
             this.cfgPort3.Mode = null;
             this.cfgPort3.Name = "cfgPort3";
             this.cfgPort3.Size = new System.Drawing.Size(244, 27);
@@ -373,7 +374,7 @@
             this.cfgPort2.Address = 1;
             this.cfgPort2.AutoSize = true;
             this.cfgPort2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort2.Location = new System.Drawing.Point(107, 36);
+            this.cfgPort2.Location = new System.Drawing.Point(107, 56);
             this.cfgPort2.Mode = null;
             this.cfgPort2.Name = "cfgPort2";
             this.cfgPort2.Size = new System.Drawing.Size(244, 27);
@@ -384,7 +385,7 @@
             this.cfgPort1.Address = 1;
             this.cfgPort1.AutoSize = true;
             this.cfgPort1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cfgPort1.Location = new System.Drawing.Point(107, 3);
+            this.cfgPort1.Location = new System.Drawing.Point(107, 23);
             this.cfgPort1.Mode = null;
             this.cfgPort1.Name = "cfgPort1";
             this.cfgPort1.Size = new System.Drawing.Size(244, 27);
@@ -393,7 +394,7 @@
             // tbAddr1
             // 
             this.tbAddr1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr1.Location = new System.Drawing.Point(40, 6);
+            this.tbAddr1.Location = new System.Drawing.Point(40, 26);
             this.tbAddr1.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -413,21 +414,11 @@
             0,
             0});
             // 
-            // cbConnectorMode
-            // 
-            this.cbConnectorMode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbConnectorMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbConnectorMode.FormattingEnabled = true;
-            this.cbConnectorMode.Location = new System.Drawing.Point(357, 3);
-            this.cbConnectorMode.Name = "cbConnectorMode";
-            this.cbConnectorMode.Size = new System.Drawing.Size(245, 21);
-            this.cbConnectorMode.TabIndex = 16;
-            // 
             // lbPin1
             // 
             this.lbPin1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin1.AutoSize = true;
-            this.lbPin1.Location = new System.Drawing.Point(3, 10);
+            this.lbPin1.Location = new System.Drawing.Point(3, 30);
             this.lbPin1.Name = "lbPin1";
             this.lbPin1.Size = new System.Drawing.Size(31, 13);
             this.lbPin1.TabIndex = 17;
@@ -437,7 +428,7 @@
             // 
             this.lbPin3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin3.AutoSize = true;
-            this.lbPin3.Location = new System.Drawing.Point(3, 76);
+            this.lbPin3.Location = new System.Drawing.Point(3, 96);
             this.lbPin3.Name = "lbPin3";
             this.lbPin3.Size = new System.Drawing.Size(31, 13);
             this.lbPin3.TabIndex = 19;
@@ -447,7 +438,7 @@
             // 
             this.lbPin5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin5.AutoSize = true;
-            this.lbPin5.Location = new System.Drawing.Point(3, 142);
+            this.lbPin5.Location = new System.Drawing.Point(3, 162);
             this.lbPin5.Name = "lbPin5";
             this.lbPin5.Size = new System.Drawing.Size(31, 13);
             this.lbPin5.TabIndex = 20;
@@ -457,7 +448,7 @@
             // 
             this.lbPin6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin6.AutoSize = true;
-            this.lbPin6.Location = new System.Drawing.Point(3, 175);
+            this.lbPin6.Location = new System.Drawing.Point(3, 195);
             this.lbPin6.Name = "lbPin6";
             this.lbPin6.Size = new System.Drawing.Size(31, 13);
             this.lbPin6.TabIndex = 21;
@@ -467,7 +458,7 @@
             // 
             this.lbPin7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin7.AutoSize = true;
-            this.lbPin7.Location = new System.Drawing.Point(3, 208);
+            this.lbPin7.Location = new System.Drawing.Point(3, 228);
             this.lbPin7.Name = "lbPin7";
             this.lbPin7.Size = new System.Drawing.Size(31, 13);
             this.lbPin7.TabIndex = 23;
@@ -477,11 +468,62 @@
             // 
             this.lbPin8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin8.AutoSize = true;
-            this.lbPin8.Location = new System.Drawing.Point(3, 241);
+            this.lbPin8.Location = new System.Drawing.Point(3, 261);
             this.lbPin8.Name = "lbPin8";
             this.lbPin8.Size = new System.Drawing.Size(31, 13);
             this.lbPin8.TabIndex = 24;
             this.lbPin8.Text = "Pin 1";
+            // 
+            // lvModes
+            // 
+            this.lvModes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvModes.Location = new System.Drawing.Point(357, 23);
+            this.lvModes.MultiSelect = false;
+            this.lvModes.Name = "lvModes";
+            this.tlpMain.SetRowSpan(this.lvModes, 8);
+            this.lvModes.Size = new System.Drawing.Size(245, 258);
+            this.lvModes.TabIndex = 25;
+            this.lvModes.UseCompatibleStateImageBehavior = false;
+            this.lvModes.View = System.Windows.Forms.View.List;
+            this.lvModes.SelectedIndexChanged += new System.EventHandler(this.lvModes_SelectedIndexChanged);
+            // 
+            // lbPinCaption
+            // 
+            this.lbPinCaption.AutoSize = true;
+            this.lbPinCaption.Location = new System.Drawing.Point(3, 0);
+            this.lbPinCaption.Name = "lbPinCaption";
+            this.lbPinCaption.Size = new System.Drawing.Size(22, 13);
+            this.lbPinCaption.TabIndex = 26;
+            this.lbPinCaption.Text = "Pin";
+            // 
+            // lbAddressCaption
+            // 
+            this.lbAddressCaption.AutoSize = true;
+            this.lbAddressCaption.Location = new System.Drawing.Point(40, 0);
+            this.lbAddressCaption.Name = "lbAddressCaption";
+            this.lbAddressCaption.Size = new System.Drawing.Size(45, 13);
+            this.lbAddressCaption.TabIndex = 27;
+            this.lbAddressCaption.Text = "Address";
+            // 
+            // lbConfigAdvCaption
+            // 
+            this.lbConfigAdvCaption.AutoSize = true;
+            this.lbConfigAdvCaption.Location = new System.Drawing.Point(107, 0);
+            this.lbConfigAdvCaption.Name = "lbConfigAdvCaption";
+            this.lbConfigAdvCaption.Size = new System.Drawing.Size(69, 13);
+            this.lbConfigAdvCaption.TabIndex = 28;
+            this.lbConfigAdvCaption.Text = "Configuration";
+            // 
+            // lbConfigCaption
+            // 
+            this.lbConfigCaption.AutoSize = true;
+            this.lbConfigCaption.Location = new System.Drawing.Point(357, 0);
+            this.lbConfigCaption.Name = "lbConfigCaption";
+            this.lbConfigCaption.Size = new System.Drawing.Size(69, 13);
+            this.lbConfigCaption.TabIndex = 29;
+            this.lbConfigCaption.Text = "Configuration";
             // 
             // LocoIOConnectorConfigurationControl
             // 
@@ -524,7 +566,6 @@
         private System.Windows.Forms.NumericUpDown tbAddr3;
         private System.Windows.Forms.NumericUpDown tbAddr2;
         private System.Windows.Forms.NumericUpDown tbAddr1;
-        private System.Windows.Forms.ComboBox cbConnectorMode;
         private System.Windows.Forms.Label lbPin4;
         private System.Windows.Forms.Label lbPin2;
         private System.Windows.Forms.Label lbPin1;
@@ -533,5 +574,10 @@
         private System.Windows.Forms.Label lbPin6;
         private System.Windows.Forms.Label lbPin7;
         private System.Windows.Forms.Label lbPin8;
+        private System.Windows.Forms.ListView lvModes;
+        private System.Windows.Forms.Label lbPinCaption;
+        private System.Windows.Forms.Label lbAddressCaption;
+        private System.Windows.Forms.Label lbConfigAdvCaption;
+        private System.Windows.Forms.Label lbConfigCaption;
     }
 }

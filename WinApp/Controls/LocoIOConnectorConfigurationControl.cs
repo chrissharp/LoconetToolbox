@@ -50,11 +50,14 @@ namespace LocoNetToolBox.WinApp.Controls
 
             for (int i = 0; i < 8; i++)
             {
-                addresses[i].ValueChanged += (s, x) => OnAddressChanged(addresses[i], pins[i]);
+                var tbAddr = addresses[i];
+                var pin = pins[i];
+                tbAddr.GotFocus += (s, x) => tbAddr.Select(0, tbAddr.Value.ToString().Length);
+                tbAddr.ValueChanged += (s, x) => OnAddressChanged(tbAddr, pin);
             }
 
             this.FirstPin = 1;
-            cbConnectorMode.Items.AddRange(ConnectorMode.All.ToArray());
+            lvModes.Items.AddRange(ConnectorMode.All.Select(x => new ListViewItem(x.Name) { Tag = x }).ToArray());
             UpdateUI();
         }
 
@@ -67,7 +70,7 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    labels[i].Text = string.Format(Strings.PinX, (value + i)); 
+                    labels[i].Text = (value + i).ToString();
                 }
             }
         }
@@ -89,7 +92,9 @@ namespace LocoNetToolBox.WinApp.Controls
             tlpMain.ColumnStyles[2] = new ColumnStyle(advanced ? SizeType.Percent : SizeType.AutoSize, 100);
             tlpMain.ColumnStyles[3] = new ColumnStyle(advanced ? SizeType.AutoSize : SizeType.Percent, 100);
             foreach (var pin in pins) { pin.Visible = advanced; }
-            cbConnectorMode.Visible = !advanced;
+            lvModes.Visible = !advanced;
+            lbConfigAdvCaption.Visible = advanced;
+            lbConfigCaption.Visible = !advanced;
         }
 
         /// <summary>
@@ -98,6 +103,14 @@ namespace LocoNetToolBox.WinApp.Controls
         private void OnAddressChanged(NumericUpDown tbAddr, LocoIOPinConfigurationControl pin)
         {
             pin.Address = (int)tbAddr.Value;
+        }
+
+        /// <summary>
+        /// Selected connector mode has changed.
+        /// </summary>
+        private void lvModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

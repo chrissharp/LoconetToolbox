@@ -17,7 +17,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// </summary>
         private ConnectorMode(string name, params PinMode[] pins)
         {
-            if ((pins.Length < 1) || (pins.Length > 8))
+            if (pins.Length > 8)
             {
                 throw new ArgumentException("Invalid number of pins");
             }

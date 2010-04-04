@@ -9,6 +9,8 @@ namespace LocoNetToolBox.Devices.LocoIO
     {
         private static readonly ConnectorMode[] modes = new ConnectorMode[]
         {
+            new ConnectorMode("None"),
+
             new ConnectorMode("MGV93",
                 PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,

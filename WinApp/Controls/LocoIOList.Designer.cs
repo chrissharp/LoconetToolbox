@@ -44,6 +44,7 @@
             this.chVersion});
             this.lbModules.ContextMenuStrip = this.contextMenuStrip1;
             this.lbModules.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbModules.FullRowSelect = true;
             this.lbModules.Location = new System.Drawing.Point(0, 0);
             this.lbModules.Name = "lbModules";
             this.lbModules.Size = new System.Drawing.Size(150, 150);
