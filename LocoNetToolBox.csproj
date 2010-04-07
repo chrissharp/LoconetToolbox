@@ -51,9 +51,9 @@
   <ItemGroup>
     <Compile Include="Devices\LocoIO\ConnectorMode.cs" />
     <Compile Include="Devices\LocoIO\ConnectorMode.Statics.cs" />
+    <Compile Include="Devices\LocoIO\PinConfig.cs" />
     <Compile Include="Devices\LocoIO\PinMode.cs" />
     <Compile Include="Devices\LocoIO\PinMode.Statics.cs" />
-    <Compile Include="Devices\LocoIO\PortConfig.cs" />
     <Compile Include="Devices\MgvServo\ServoProgrammer.cs" />
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Protocol\Busy.cs" />
