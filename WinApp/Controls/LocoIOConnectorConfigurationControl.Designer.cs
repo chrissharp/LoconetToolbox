@@ -152,7 +152,7 @@
             0,
             0});
             this.tbAddr8.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -175,7 +175,7 @@
             0,
             0});
             this.tbAddr7.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -198,7 +198,7 @@
             0,
             0});
             this.tbAddr6.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -221,7 +221,7 @@
             0,
             0});
             this.tbAddr5.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -244,7 +244,7 @@
             0,
             0});
             this.tbAddr4.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -267,7 +267,7 @@
             0,
             0});
             this.tbAddr3.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -290,7 +290,7 @@
             0,
             0});
             this.tbAddr2.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -305,88 +305,72 @@
             // 
             // cfgPort8
             // 
-            this.cfgPort8.Address = 1;
             this.cfgPort8.AutoSize = true;
             this.cfgPort8.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort8.Location = new System.Drawing.Point(107, 254);
-            this.cfgPort8.Mode = null;
             this.cfgPort8.Name = "cfgPort8";
             this.cfgPort8.Size = new System.Drawing.Size(244, 27);
             this.cfgPort8.TabIndex = 7;
             // 
             // cfgPort7
             // 
-            this.cfgPort7.Address = 1;
             this.cfgPort7.AutoSize = true;
             this.cfgPort7.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort7.Location = new System.Drawing.Point(107, 221);
-            this.cfgPort7.Mode = null;
             this.cfgPort7.Name = "cfgPort7";
             this.cfgPort7.Size = new System.Drawing.Size(244, 27);
             this.cfgPort7.TabIndex = 6;
             // 
             // cfgPort6
             // 
-            this.cfgPort6.Address = 1;
             this.cfgPort6.AutoSize = true;
             this.cfgPort6.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort6.Location = new System.Drawing.Point(107, 188);
-            this.cfgPort6.Mode = null;
             this.cfgPort6.Name = "cfgPort6";
             this.cfgPort6.Size = new System.Drawing.Size(244, 27);
             this.cfgPort6.TabIndex = 5;
             // 
             // cfgPort5
             // 
-            this.cfgPort5.Address = 1;
             this.cfgPort5.AutoSize = true;
             this.cfgPort5.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort5.Location = new System.Drawing.Point(107, 155);
-            this.cfgPort5.Mode = null;
             this.cfgPort5.Name = "cfgPort5";
             this.cfgPort5.Size = new System.Drawing.Size(244, 27);
             this.cfgPort5.TabIndex = 4;
             // 
             // cfgPort4
             // 
-            this.cfgPort4.Address = 1;
             this.cfgPort4.AutoSize = true;
             this.cfgPort4.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort4.Location = new System.Drawing.Point(107, 122);
-            this.cfgPort4.Mode = null;
             this.cfgPort4.Name = "cfgPort4";
             this.cfgPort4.Size = new System.Drawing.Size(244, 27);
             this.cfgPort4.TabIndex = 3;
             // 
             // cfgPort3
             // 
-            this.cfgPort3.Address = 1;
             this.cfgPort3.AutoSize = true;
             this.cfgPort3.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort3.Location = new System.Drawing.Point(107, 89);
-            this.cfgPort3.Mode = null;
             this.cfgPort3.Name = "cfgPort3";
             this.cfgPort3.Size = new System.Drawing.Size(244, 27);
             this.cfgPort3.TabIndex = 2;
             // 
             // cfgPort2
             // 
-            this.cfgPort2.Address = 1;
             this.cfgPort2.AutoSize = true;
             this.cfgPort2.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort2.Location = new System.Drawing.Point(107, 56);
-            this.cfgPort2.Mode = null;
             this.cfgPort2.Name = "cfgPort2";
             this.cfgPort2.Size = new System.Drawing.Size(244, 27);
             this.cfgPort2.TabIndex = 1;
             // 
             // cfgPort1
             // 
-            this.cfgPort1.Address = 1;
             this.cfgPort1.AutoSize = true;
             this.cfgPort1.Dock = System.Windows.Forms.DockStyle.Top;
             this.cfgPort1.Location = new System.Drawing.Point(107, 23);
-            this.cfgPort1.Mode = null;
             this.cfgPort1.Name = "cfgPort1";
             this.cfgPort1.Size = new System.Drawing.Size(244, 27);
             this.cfgPort1.TabIndex = 0;
@@ -401,7 +385,7 @@
             0,
             0});
             this.tbAddr1.Minimum = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});

@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
 using Message = LocoNetToolBox.Protocol.Message;
 
@@ -79,14 +80,18 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void cmdRead_Click(object sender, EventArgs e)
         {
-            var cmd = new PeerXferRequest1()
+            var programmer = new Programmer(lb, new LocoNetAddress((byte)tbDstL.Value, (byte)tbDstH.Value));
+            var configs = new SVConfig[] { new SVConfig((int)tbSvAddress.Value) };
+            programmer.Read(configs);
+
+            if (configs[0].Valid)
             {
-                Command = PeerXferRequest.Commands.Read,
-                SvAddress = (int)tbSvAddress.Value,
-                DestinationLow = (byte)tbDstL.Value,
-                DestinationHigh = (byte)tbDstH.Value
-            };
-            Execute(cmd);
+                MessageBox.Show("Value = " + configs[0].Value);
+            }
+            else
+            {
+                MessageBox.Show("Cannot read SV");
+            }
         }
 
         private void cmdGpOn_Click(object sender, EventArgs e)

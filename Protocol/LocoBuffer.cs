@@ -117,10 +117,10 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Send the given message
         /// </summary>
-        internal void Send(params byte[] msg)
+        internal void Send(Message decoded, params byte[] msg)
         {
             Message.UpdateChecksum(msg, msg.Length);
-            if (SendMessage != null) { SendMessage(msg); }
+            if (SendMessage != null) { SendMessage(msg, decoded); }
             var port = Open();
             var length = Message.GetMessageLength(msg);
             try
@@ -229,17 +229,17 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Call all appriopriate handlers for the given message.
         /// </summary>
-        private void HandleMessage(byte[] msg)
+        private void HandleMessage(byte[] msg, Message decoded)
         {
             lock (handlersLock)
             {
                 var preview = this.PreviewMessage;
-                if (preview != null) { preview(msg); }
+                if (preview != null) { preview(msg, decoded); }
 
                 for (int i = handlers.Count-1; i >= 0; i--)
                 {
                     var handler = handlers[i];
-                    var done = handler(msg);
+                    var done = handler(msg, decoded);
                     if (done) { break; }
                 }
             }

@@ -32,6 +32,8 @@ namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOConfigurationControl : UserControl
     {
+        private LocoIOConfig config;
+
         /// <summary>
         /// Default ctor
         /// </summary>
@@ -43,10 +45,35 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
+        /// Connect to the given config
+        /// </summary>
+        public void Connect(LocoIOConfig config)
+        {
+            this.config = config;
+            connector1.Connect(config.ConnectorA);
+            connector2.Connect(config.ConnectorB);
+        }
+
+        /// <summary>
         /// Read all settings
         /// </summary>
         internal void ReadAll(LocoBuffer lb, LocoNetAddress address)
         {
+            // Create a set of all SV's that are relevant
+            /*var configs = LocoIOConfig.GetAllSVs();
+
+            // Create the programmer
+            var programmer = new Programmer(lb, address);
+
+            // Read all SV's
+            programmer.Read(configs);
+
+            // Get all properly read configs
+            var validConfigs = configs.Where(x => x.Valid).ToArray();
+            */
+
+
+
         }
     }
 }

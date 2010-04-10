@@ -34,7 +34,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Create a response object if the given data is recognized.
         /// </summary>
-        internal static Response Decode(byte[] data)
+        internal static new Response Decode(byte[] data)
         {
             foreach (var decoder in DECODERS)
             {

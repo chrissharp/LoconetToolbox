@@ -36,6 +36,7 @@ namespace LocoNetToolBox.WinApp.Controls
         private readonly Label[] labels;
         private readonly NumericUpDown[] addresses;
         private readonly LocoIOPinConfigurationControl[] pins;
+        private ConnectorConfig config;
 
         /// <summary>
         /// Default ctor
@@ -52,13 +53,30 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 var tbAddr = addresses[i];
                 var pin = pins[i];
+                var index = i;
                 tbAddr.GotFocus += (s, x) => tbAddr.Select(0, tbAddr.Value.ToString().Length);
-                tbAddr.ValueChanged += (s, x) => OnAddressChanged(tbAddr, pin);
+                tbAddr.ValueChanged += (s, x) => OnAddressChanged(tbAddr, index);
             }
 
             this.FirstPin = 1;
             lvModes.Items.AddRange(ConnectorMode.All.Select(x => new ListViewItem(x.Name) { Tag = x }).ToArray());
             UpdateUI();
+        }
+
+        /// <summary>
+        /// Connect this control to the given configuration
+        /// </summary>
+        public void Connect(ConnectorConfig config)
+        {
+            this.config = config;
+            for (int i = 0; i < 8; i++)
+            {
+                var pinConfig = config.Pins[i];
+                var tbAddr = addresses[i];
+                tbAddr.Value = pinConfig.Address;
+                pins[i].Connect(pinConfig);
+                pinConfig.AddressChanged += (s, x) => tbAddr.Value = pinConfig.Address;
+            }
         }
 
         /// <summary>
@@ -100,9 +118,13 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Forward address to pin configuration
         /// </summary>
-        private void OnAddressChanged(NumericUpDown tbAddr, LocoIOPinConfigurationControl pin)
+        private void OnAddressChanged(NumericUpDown tbAddr, int index)
         {
-            pin.Address = (int)tbAddr.Value;
+            if (config != null)
+            {
+                var pinConfig = config.Pins[index];
+                pinConfig.Address = (int)tbAddr.Value;
+            }
         }
 
         /// <summary>

@@ -25,14 +25,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOConfigurationForm : Form
     {
-        private LocoBuffer lb;
-        private LocoNetAddress address;
+        private readonly LocoIOConfig config = new LocoIOConfig();
+        private Programmer programmer;
 
         /// <summary>
         /// Default ctor
@@ -40,6 +41,8 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOConfigurationForm()
         {
             InitializeComponent();
+            configurationControl.Connect(config);
+
             cmdReadAll.Enabled = false;
             cmdWriteAll.Enabled = false;
         }
@@ -49,12 +52,8 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         internal void Initialize(LocoBuffer lb, LocoNetAddress address)
         {
-            this.lb = lb;
-            this.address = address;
-            if (lb != null)
-            {
-                readWorker.RunWorkerAsync();
-            }
+            this.programmer = new Programmer(lb, address);
+            readWorker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void readWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            configurationControl.ReadAll(lb, address);
+            programmer.Read(config);
         }
 
         /// <summary>
@@ -72,6 +71,11 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             cmdReadAll.Enabled = true;
             cmdWriteAll.Enabled = true;
+        }
+
+        private void cmdReadAll_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

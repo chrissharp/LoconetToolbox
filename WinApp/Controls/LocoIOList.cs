@@ -26,6 +26,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
+using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
@@ -91,11 +92,11 @@ namespace LocoNetToolBox.WinApp.Controls
         /// Listen to loconet message.
         /// Use results of Query requests to generate a list of locoio modules.
         /// </summary>
-        private bool lb_PreviewMessage(byte[] message)
+        private bool lb_PreviewMessage(byte[] message, Message decoded)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new MessageHandler(lb_PreviewMessage), message);
+                BeginInvoke(new MessageHandler(lb_PreviewMessage), message, decoded);
             }
             else
             {

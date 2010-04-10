@@ -148,7 +148,15 @@ namespace LocoNetToolBox.Devices.LocoIO
             return v2 * 256 + v1;
         }
 
-        private static int valuesToAddress(int opcode, int sv, int v1, int v2)
+        /// <summary>
+        /// Gets the address from the given SV values
+        /// </summary>
+        public int GetAddress(int sv, int v1, int v2)
+        {
+            return valuesToAddress(Opcode, sv, v1, v2);
+        }
+
+        internal static int valuesToAddress(int opcode, int sv, int v1, int v2)
         {
             //int hi = 0;
             //int lo = 0;

@@ -52,7 +52,7 @@ namespace LocoNetToolBox.Protocol
                     {
                         var msg = lb.ReadMessage();
                         if (msg == null) { break; }
-                        lb.HandleMessage(msg);
+                        lb.HandleMessage(msg, Message.Decode(msg));
                     }
                     catch (TimeoutException)
                     {

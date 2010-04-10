@@ -32,6 +32,16 @@ namespace LocoNetToolBox.Protocol
         {
             return ((value & 0x80) == 0x80);
         }
+       
+        /// <summary>
+        /// Create a response object if the given data is recognized.
+        /// </summary>
+        internal static Message Decode(byte[] data)
+        {
+            // TODO Decode Requests also
+            Message result = Response.Decode(data);
+            return result;
+        }
 
         /// <summary>
         /// Convert message to string.

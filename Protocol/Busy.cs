@@ -30,7 +30,7 @@ namespace LocoNetToolBox.Protocol
     {
         internal override void Execute(LocoBuffer lb)
         {
-            lb.Send(0x81, 0);
+            lb.Send(this, 0x81, 0);
         }
     }
 }

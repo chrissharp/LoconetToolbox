@@ -23,7 +23,7 @@ using System.Text;
 
 namespace LocoNetToolBox.Protocol
 {
-    public class LocoNetAddress
+    public class LocoNetAddress : IEquatable<LocoNetAddress>
     {
         /// <summary>
         /// Default ctor

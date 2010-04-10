@@ -32,8 +32,8 @@
             this.cmdWriteAll = new System.Windows.Forms.Button();
             this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOConfigurationControl();
             this.cmdClose = new System.Windows.Forms.Button();
-            this.readWorker = new System.ComponentModel.BackgroundWorker();
             this.cmdReadAll = new System.Windows.Forms.Button();
+            this.readWorker = new System.ComponentModel.BackgroundWorker();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,12 +84,6 @@
             this.cmdClose.Text = "&Close";
             this.cmdClose.UseVisualStyleBackColor = true;
             // 
-            // readWorker
-            // 
-            this.readWorker.WorkerSupportsCancellation = true;
-            this.readWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.readWorker_DoWork);
-            this.readWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.readWorker_RunWorkerCompleted);
-            // 
             // cmdReadAll
             // 
             this.cmdReadAll.Location = new System.Drawing.Point(3, 262);
@@ -98,6 +92,13 @@
             this.cmdReadAll.TabIndex = 4;
             this.cmdReadAll.Text = "&Read all";
             this.cmdReadAll.UseVisualStyleBackColor = true;
+            this.cmdReadAll.Click += new System.EventHandler(this.cmdReadAll_Click);
+            // 
+            // readWorker
+            // 
+            this.readWorker.WorkerSupportsCancellation = true;
+            this.readWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.readWorker_DoWork);
+            this.readWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.readWorker_RunWorkerCompleted);
             // 
             // LocoIOConfigurationForm
             // 

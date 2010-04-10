@@ -67,11 +67,11 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Add message to log.
         /// </summary>
-        bool locoBuffer_PreviewMessage(byte[] message)
+        bool locoBuffer_PreviewMessage(byte[] message, Message decoded)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new MessageHandler(locoBuffer_PreviewMessage), message);
+                BeginInvoke(new MessageHandler(locoBuffer_PreviewMessage), message, decoded);
             }
             else
             {
@@ -85,11 +85,11 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Add send message to log.
         /// </summary>
-        bool locoBuffer_SendMessage(byte[] message)
+        bool locoBuffer_SendMessage(byte[] message, Message decoded)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new MessageHandler(locoBuffer_SendMessage), message);
+                BeginInvoke(new MessageHandler(locoBuffer_SendMessage), message, decoded);
             }
             else
             {

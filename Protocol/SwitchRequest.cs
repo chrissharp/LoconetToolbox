@@ -75,18 +75,7 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         internal override void Execute(LocoBuffer lb)
         {
-            using (var registration = lb.AddHandler(HandleMessage))
-            {
-                lb.Send(CreateMessage());
-            }
-        }
-
-        /// <summary>
-        /// Receive handler.
-        /// </summary>
-        private bool HandleMessage(byte[] msg)
-        {
-            return false;
+            lb.Send(this, CreateMessage());
         }
     }
 }
