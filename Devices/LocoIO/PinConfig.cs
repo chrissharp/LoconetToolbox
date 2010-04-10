@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
@@ -40,6 +41,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Mode of the pin.
         /// </summary>
+        [XmlIgnore]
         public PinMode Mode
         {
             get { return mode; }
@@ -49,6 +51,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Loconet address of this port.
         /// </summary>
+        [XmlIgnore]
         public int Address
         {
             get { return address; }
@@ -57,18 +60,27 @@ namespace LocoNetToolBox.Devices.LocoIO
 
         // SV values
 
+        /// <summary>
+        /// First SV for this pin.
+        /// </summary>
         public byte Config
         {
             get { return config; }
             set { config = value; UpdateFunctionalSettings(); }
         }
 
+        /// <summary>
+        /// Second SV for this pin.
+        /// </summary>
         public byte Value1
         {
             get { return value1; }
             set { value1 = value; UpdateFunctionalSettings(); }
         }
 
+        /// <summary>
+        /// Third SV for this pin.
+        /// </summary>
         public byte Value2
         {
             get { return value2; }

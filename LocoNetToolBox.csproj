@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Devices\LocoIO\ConnectorMode.cs" />
     <Compile Include="Devices\LocoIO\ConnectorMode.Statics.cs" />
+    <Compile Include="Devices\LocoIO\LocoIOConfig.cs" />
     <Compile Include="Devices\LocoIO\PinConfig.cs" />
     <Compile Include="Devices\LocoIO\PinMode.cs" />
     <Compile Include="Devices\LocoIO\PinMode.Statics.cs" />
