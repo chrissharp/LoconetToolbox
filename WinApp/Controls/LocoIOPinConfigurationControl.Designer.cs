@@ -29,36 +29,27 @@
         private void InitializeComponent()
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.rbInput = new System.Windows.Forms.RadioButton();
-            this.rbOutput = new System.Windows.Forms.RadioButton();
-            this.inputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinInputConfigControl();
-            this.outputControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinOutputConfigControl();
+            this.modeControl = new LocoNetToolBox.WinApp.Controls.LocoIOPinModeControl();
             this.tbConfig = new System.Windows.Forms.TextBox();
             this.tbValue1 = new System.Windows.Forms.TextBox();
             this.tbValue2 = new System.Windows.Forms.TextBox();
+            this.direction = new LocoNetToolBox.WinApp.Controls.DirectionControl();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
             // 
-            this.tlpMain.AutoSize = true;
-            this.tlpMain.ColumnCount = 7;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.ColumnCount = 5;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Controls.Add(this.rbInput, 0, 0);
-            this.tlpMain.Controls.Add(this.rbOutput, 1, 0);
-            this.tlpMain.Controls.Add(this.inputControl, 2, 0);
-            this.tlpMain.Controls.Add(this.outputControl, 3, 0);
-            this.tlpMain.Controls.Add(this.tbConfig, 4, 0);
-            this.tlpMain.Controls.Add(this.tbValue1, 5, 0);
-            this.tlpMain.Controls.Add(this.tbValue2, 6, 0);
+            this.tlpMain.Controls.Add(this.modeControl, 1, 0);
+            this.tlpMain.Controls.Add(this.tbConfig, 2, 0);
+            this.tlpMain.Controls.Add(this.tbValue1, 3, 0);
+            this.tlpMain.Controls.Add(this.tbValue2, 4, 0);
+            this.tlpMain.Controls.Add(this.direction, 0, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
@@ -67,51 +58,16 @@
             this.tlpMain.Size = new System.Drawing.Size(681, 27);
             this.tlpMain.TabIndex = 0;
             // 
-            // rbInput
+            // modeControl
             // 
-            this.rbInput.AutoSize = true;
-            this.rbInput.Location = new System.Drawing.Point(3, 3);
-            this.rbInput.Name = "rbInput";
-            this.rbInput.Size = new System.Drawing.Size(49, 17);
-            this.rbInput.TabIndex = 0;
-            this.rbInput.TabStop = true;
-            this.rbInput.Text = "Input";
-            this.rbInput.UseVisualStyleBackColor = true;
-            this.rbInput.CheckedChanged += new System.EventHandler(this.rbInput_CheckedChanged);
-            // 
-            // rbOutput
-            // 
-            this.rbOutput.AutoSize = true;
-            this.rbOutput.Location = new System.Drawing.Point(58, 3);
-            this.rbOutput.Name = "rbOutput";
-            this.rbOutput.Size = new System.Drawing.Size(57, 17);
-            this.rbOutput.TabIndex = 1;
-            this.rbOutput.TabStop = true;
-            this.rbOutput.Text = "Output";
-            this.rbOutput.UseVisualStyleBackColor = true;
-            this.rbOutput.CheckedChanged += new System.EventHandler(this.rbOutput_CheckedChanged);
-            // 
-            // inputControl
-            // 
-            this.inputControl.AutoSize = true;
-            this.inputControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.inputControl.Location = new System.Drawing.Point(121, 3);
-            this.inputControl.Mode = null;
-            this.inputControl.Name = "inputControl";
-            this.inputControl.Size = new System.Drawing.Size(227, 21);
-            this.inputControl.TabIndex = 7;
-            this.inputControl.Changed += new System.EventHandler(this.OnConfigChanged);
-            // 
-            // outputControl
-            // 
-            this.outputControl.AutoSize = true;
-            this.outputControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.outputControl.Location = new System.Drawing.Point(354, 3);
-            this.outputControl.Mode = null;
-            this.outputControl.Name = "outputControl";
-            this.outputControl.Size = new System.Drawing.Size(227, 21);
-            this.outputControl.TabIndex = 12;
-            this.outputControl.Changed += new System.EventHandler(this.OnConfigChanged);
+            this.modeControl.AutoSize = true;
+            this.modeControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modeControl.Location = new System.Drawing.Point(63, 3);
+            this.modeControl.Mode = null;
+            this.modeControl.Name = "modeControl";
+            this.modeControl.Size = new System.Drawing.Size(518, 21);
+            this.modeControl.TabIndex = 7;
+            this.modeControl.Changed += new System.EventHandler(this.OnConfigChanged);
             // 
             // tbConfig
             // 
@@ -137,6 +93,17 @@
             this.tbValue2.TabIndex = 11;
             this.tbValue2.Validated += new System.EventHandler(this.tbValue2_Validated);
             // 
+            // direction
+            // 
+            this.direction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.direction.IsInput = true;
+            this.direction.IsOutput = false;
+            this.direction.Location = new System.Drawing.Point(3, 3);
+            this.direction.Name = "direction";
+            this.direction.Size = new System.Drawing.Size(54, 21);
+            this.direction.TabIndex = 12;
+            this.direction.Changed += new System.EventHandler(this.OnConfigChanged);
+            // 
             // LocoIOPinConfigurationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,19 +115,16 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpMain;
-        private System.Windows.Forms.RadioButton rbInput;
-        private System.Windows.Forms.RadioButton rbOutput;
-        private LocoIOPinInputConfigControl inputControl;
-        private LocoIOPinOutputConfigControl outputControl;
+        private LocoIOPinModeControl modeControl;
         private System.Windows.Forms.TextBox tbValue2;
         private System.Windows.Forms.TextBox tbConfig;
         private System.Windows.Forms.TextBox tbValue1;
+        private DirectionControl direction;
     }
 }

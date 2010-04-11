@@ -68,11 +68,9 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             if (currentAddress != null)
             {
-                using (var dialog = new LocoIOConfigurationForm())
-                {
-                    dialog.Initialize(lb, currentAddress);
-                    dialog.ShowDialog(this);
-                }
+                var dialog = new LocoIOConfigurationForm();
+                dialog.Initialize(lb, currentAddress);
+                dialog.Show();
             }
         }
 

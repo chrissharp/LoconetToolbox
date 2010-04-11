@@ -61,6 +61,7 @@
     <Compile Include="Devices\LocoIO\SVConfig.cs" />
     <Compile Include="Devices\LocoIO\SVConfigEventArgs.cs" />
     <Compile Include="Devices\MgvServo\ServoProgrammer.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Protocol\Busy.cs" />
     <Compile Include="Protocol\Constants.cs" />
@@ -88,6 +89,18 @@
     <Compile Include="WinApp\Controls\AdvancedCommandControl.Designer.cs">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinApp\Controls\DirectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\DirectionControl.Designer.cs">
+      <DependentUpon>DirectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOPinModeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOPinModeControl.Designer.cs">
+      <DependentUpon>LocoIOPinModeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinApp\Controls\LocoIOConnectorConfigurationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,18 +118,6 @@
     </Compile>
     <Compile Include="WinApp\Controls\LocoIOPinConfigurationControl.Designer.cs">
       <DependentUpon>LocoIOPinConfigurationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinApp\Controls\LocoIOPinInputConfigControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinApp\Controls\LocoIOPinInputConfigControl.Designer.cs">
-      <DependentUpon>LocoIOPinInputConfigControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinApp\Controls\LocoIOPinOutputConfigControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinApp\Controls\LocoIOPinOutputConfigControl.Designer.cs">
-      <DependentUpon>LocoIOPinOutputConfigControl.cs</DependentUpon>
     </Compile>
     <Compile Include="WinApp\Controls\ServoProgrammerStep4.cs">
       <SubType>UserControl</SubType>
@@ -221,6 +222,12 @@
     <EmbeddedResource Include="WinApp\Controls\AdvancedCommandControl.resx">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\DirectionControl.resx">
+      <DependentUpon>DirectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\LocoIOPinModeControl.resx">
+      <DependentUpon>LocoIOPinModeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\LocoIOConnectorConfigurationControl.resx">
       <DependentUpon>LocoIOConnectorConfigurationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -230,12 +237,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\LocoIOPinConfigurationControl.resx">
       <DependentUpon>LocoIOPinConfigurationControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinApp\Controls\LocoIOPinInputConfigControl.resx">
-      <DependentUpon>LocoIOPinInputConfigControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinApp\Controls\LocoIOPinOutputConfigControl.resx">
-      <DependentUpon>LocoIOPinOutputConfigControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\ServoProgrammerStep4.resx">
       <DependentUpon>ServoProgrammerStep4.cs</DependentUpon>

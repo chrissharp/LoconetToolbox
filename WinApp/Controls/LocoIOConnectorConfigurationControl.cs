@@ -75,7 +75,7 @@ namespace LocoNetToolBox.WinApp.Controls
                 var tbAddr = addresses[i];
                 tbAddr.Value = pinConfig.Address;
                 pins[i].Connect(pinConfig);
-                pinConfig.AddressChanged += (s, x) => tbAddr.Value = pinConfig.Address;
+                pinConfig.AddressChanged += (s, x) => this.PostOnGuiThread(() => tbAddr.Value = pinConfig.Address);
             }
         }
 

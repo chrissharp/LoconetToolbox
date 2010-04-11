@@ -54,12 +54,12 @@
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(641, 290);
+            this.tlpMain.Size = new System.Drawing.Size(846, 345);
             this.tlpMain.TabIndex = 0;
             // 
             // cmdWriteAll
             // 
-            this.cmdWriteAll.Location = new System.Drawing.Point(102, 262);
+            this.cmdWriteAll.Location = new System.Drawing.Point(102, 317);
             this.cmdWriteAll.Name = "cmdWriteAll";
             this.cmdWriteAll.Size = new System.Drawing.Size(93, 25);
             this.cmdWriteAll.TabIndex = 2;
@@ -72,12 +72,12 @@
             this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.configurationControl.Location = new System.Drawing.Point(3, 3);
             this.configurationControl.Name = "configurationControl";
-            this.configurationControl.Size = new System.Drawing.Size(635, 253);
+            this.configurationControl.Size = new System.Drawing.Size(840, 308);
             this.configurationControl.TabIndex = 0;
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(545, 262);
+            this.cmdClose.Location = new System.Drawing.Point(750, 317);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(93, 25);
             this.cmdClose.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             // cmdReadAll
             // 
-            this.cmdReadAll.Location = new System.Drawing.Point(3, 262);
+            this.cmdReadAll.Location = new System.Drawing.Point(3, 317);
             this.cmdReadAll.Name = "cmdReadAll";
             this.cmdReadAll.Size = new System.Drawing.Size(93, 25);
             this.cmdReadAll.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 290);
+            this.ClientSize = new System.Drawing.Size(846, 345);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

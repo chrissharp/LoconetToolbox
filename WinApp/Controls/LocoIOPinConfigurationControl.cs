@@ -53,8 +53,8 @@ namespace LocoNetToolBox.WinApp.Controls
         public void Connect(PinConfig config)
         {
             this.config = config;
-            this.config.ModeChanged += (s, x) => UpdateFromConfig();
-            this.config.AddressChanged += (s, x) => UpdateUI();
+            this.config.ModeChanged += (s, x) => this.PostOnGuiThread(UpdateFromConfig);
+            this.config.AddressChanged += (s, x) => this.PostOnGuiThread(UpdateUI);
             UpdateFromConfig();
         }
 
@@ -68,10 +68,9 @@ namespace LocoNetToolBox.WinApp.Controls
                 this.initialized = false;
 
                 var mode = config.Mode;
-                rbInput.Checked = (mode != null) && mode.IsInput;
-                rbOutput.Checked = (mode != null) && mode.IsOutput;
-                inputControl.Mode = mode;
-                outputControl.Mode = mode;
+                direction.IsInput = (mode != null) && mode.IsInput;
+                direction.IsOutput = (mode != null) && mode.IsOutput;
+                modeControl.Mode = mode;
             }
             finally
             {
@@ -87,39 +86,11 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             if (initialized)
             {
-                inputControl.Visible = rbInput.Checked;
-                outputControl.Visible = rbOutput.Checked;
-
-                tlpMain.ColumnStyles[4] = new ColumnStyle(rbInput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
-                tlpMain.ColumnStyles[5] = new ColumnStyle(rbOutput.Checked ? SizeType.Percent : SizeType.AutoSize, 100);
-
                 var addr = config.Address;
                 var mode = config.Mode;
                 tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
                 tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;
                 tbValue2.Text = (mode != null) ? mode.GetValue2(addr).ToString() : string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Select input.
-        /// </summary>
-        private void rbInput_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbInput.Checked)
-            {
-                OnConfigChanged(sender, e);
-            }
-        }
-
-        /// <summary>
-        /// Select output
-        /// </summary>
-        private void rbOutput_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbOutput.Checked)
-            {
-                OnConfigChanged(sender, e);
             }
         }
 
@@ -138,14 +109,8 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             if ((config != null) && (initialized))
             {
-                if (rbInput.Checked)
-                {
-                    config.Mode = inputControl.Mode;
-                }
-                else if (rbOutput.Checked)
-                {
-                    config.Mode = outputControl.Mode;
-                }
+                modeControl.Input = direction.IsInput;
+                config.Mode = modeControl.Mode;
                 UpdateUI();
             }
         }

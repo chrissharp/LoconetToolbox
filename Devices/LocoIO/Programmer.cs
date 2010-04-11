@@ -23,7 +23,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         {
             this.lb = lb;
             this.address = address;
-            this.timeout = 4000;
+            this.timeout = 500;
         }
 
         /// <summary>

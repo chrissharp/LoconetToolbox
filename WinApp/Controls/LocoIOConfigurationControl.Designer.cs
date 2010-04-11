@@ -47,7 +47,7 @@
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 1;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(605, 215);
+            this.tlpMain.Size = new System.Drawing.Size(829, 290);
             this.tlpMain.TabIndex = 0;
             // 
             // connector1
@@ -57,7 +57,7 @@
             this.connector1.Dock = System.Windows.Forms.DockStyle.Top;
             this.connector1.Location = new System.Drawing.Point(3, 3);
             this.connector1.Name = "connector1";
-            this.connector1.Size = new System.Drawing.Size(296, 209);
+            this.connector1.Size = new System.Drawing.Size(408, 284);
             this.connector1.TabIndex = 0;
             // 
             // connector2
@@ -65,9 +65,9 @@
             this.connector2.Advanced = false;
             this.connector2.AutoSize = true;
             this.connector2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connector2.Location = new System.Drawing.Point(305, 3);
+            this.connector2.Location = new System.Drawing.Point(417, 3);
             this.connector2.Name = "connector2";
-            this.connector2.Size = new System.Drawing.Size(297, 209);
+            this.connector2.Size = new System.Drawing.Size(409, 284);
             this.connector2.TabIndex = 1;
             // 
             // LocoIOConfigurationControl
@@ -76,7 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tlpMain);
             this.Name = "LocoIOConfigurationControl";
-            this.Size = new System.Drawing.Size(605, 320);
+            this.Size = new System.Drawing.Size(829, 359);
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.ResumeLayout(false);
