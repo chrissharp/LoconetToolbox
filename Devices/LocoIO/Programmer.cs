@@ -41,7 +41,7 @@ namespace LocoNetToolBox.Devices.LocoIO
                     Command = PeerXferRequest.Commands.Read,
                     SvAddress = config.Index,
                     DestinationLow = address.Address,
-                    DestinationHigh = address.SubAddress,
+                    SubAddress = address.SubAddress,
                 };
 
                 config.Valid = false;
@@ -71,7 +71,7 @@ namespace LocoNetToolBox.Devices.LocoIO
                     Command = PeerXferRequest.Commands.Write,
                     SvAddress = config.Index,
                     DestinationLow = address.Address,
-                    DestinationHigh = address.SubAddress,
+                    SubAddress = address.SubAddress,
                     Data1 = (byte)config.Value,
                 };
                 cmd.Execute(lb);

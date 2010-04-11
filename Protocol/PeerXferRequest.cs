@@ -54,9 +54,14 @@ namespace LocoNetToolBox.Protocol
         public byte DestinationLow { get; set; }
 
         /// <summary>
-        /// High byte of destination address
+        /// High byte of destination address (typically 1)
         /// </summary>
         public byte DestinationHigh { get; set; }
+
+        /// <summary>
+        /// Sub address of LocoIO module
+        /// </summary>
+        public byte SubAddress { get; set; }
 
         /// <summary>
         /// Command to send

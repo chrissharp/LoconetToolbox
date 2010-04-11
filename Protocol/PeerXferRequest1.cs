@@ -35,9 +35,6 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         private byte[] CreateMessage()
         {
-            int sv_adrl = SvAddress & 0xFF;
-            int sv_adrh = (SvAddress >> 2) & 0xFF;
-
             var msg = new byte[16];
             msg[0] = 0xE5; // Opcode
             msg[1] = 0x10; // Message length
@@ -50,7 +47,7 @@ namespace LocoNetToolBox.Protocol
             msg[8] = 0;
             msg[9] = (byte)Data1;
             //msg[10] = pxct2;
-            msg[11] = 0;
+            msg[11] = (byte)SubAddress;
             msg[12] = 0;
             msg[13] = 0;
             msg[14] = 0;
