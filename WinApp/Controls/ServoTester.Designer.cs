@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.cmdStart = new System.Windows.Forms.Button();
+            this.cmdStop = new System.Windows.Forms.Button();
             this.cmdGoRight = new System.Windows.Forms.Button();
             this.lbAddress = new System.Windows.Forms.Label();
             this.udAddress = new System.Windows.Forms.NumericUpDown();
             this.cmdLeft = new System.Windows.Forms.Button();
+            this.testWorker = new System.ComponentModel.BackgroundWorker();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAddress)).BeginInit();
             this.SuspendLayout();
@@ -42,6 +45,8 @@
             this.tlpMain.ColumnCount = 2;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.Controls.Add(this.cmdStart, 0, 2);
+            this.tlpMain.Controls.Add(this.cmdStop, 0, 2);
             this.tlpMain.Controls.Add(this.cmdGoRight, 1, 1);
             this.tlpMain.Controls.Add(this.lbAddress, 0, 0);
             this.tlpMain.Controls.Add(this.udAddress, 1, 0);
@@ -49,18 +54,42 @@
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 2;
+            this.tlpMain.RowCount = 3;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.Size = new System.Drawing.Size(267, 128);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.Size = new System.Drawing.Size(267, 176);
             this.tlpMain.TabIndex = 0;
+            // 
+            // cmdStart
+            // 
+            this.cmdStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cmdStart.Location = new System.Drawing.Point(14, 121);
+            this.cmdStart.Name = "cmdStart";
+            this.cmdStart.Size = new System.Drawing.Size(104, 51);
+            this.cmdStart.TabIndex = 5;
+            this.cmdStart.Text = "Start duration test";
+            this.cmdStart.UseVisualStyleBackColor = true;
+            this.cmdStart.Click += new System.EventHandler(this.cmdStart_Click);
+            // 
+            // cmdStop
+            // 
+            this.cmdStop.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cmdStop.Enabled = false;
+            this.cmdStop.Location = new System.Drawing.Point(148, 121);
+            this.cmdStop.Name = "cmdStop";
+            this.cmdStop.Size = new System.Drawing.Size(104, 51);
+            this.cmdStop.TabIndex = 4;
+            this.cmdStop.Text = "Stop duration test";
+            this.cmdStop.UseVisualStyleBackColor = true;
+            this.cmdStop.Click += new System.EventHandler(this.cmdStop_Click);
             // 
             // cmdGoRight
             // 
             this.cmdGoRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cmdGoRight.Location = new System.Drawing.Point(148, 67);
+            this.cmdGoRight.Location = new System.Drawing.Point(148, 62);
             this.cmdGoRight.Name = "cmdGoRight";
-            this.cmdGoRight.Size = new System.Drawing.Size(104, 56);
+            this.cmdGoRight.Size = new System.Drawing.Size(104, 53);
             this.cmdGoRight.TabIndex = 3;
             this.cmdGoRight.Text = "Go Right";
             this.cmdGoRight.UseVisualStyleBackColor = true;
@@ -70,7 +99,7 @@
             // 
             this.lbAddress.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbAddress.AutoSize = true;
-            this.lbAddress.Location = new System.Drawing.Point(85, 25);
+            this.lbAddress.Location = new System.Drawing.Point(85, 23);
             this.lbAddress.Name = "lbAddress";
             this.lbAddress.Size = new System.Drawing.Size(45, 13);
             this.lbAddress.TabIndex = 0;
@@ -79,7 +108,7 @@
             // udAddress
             // 
             this.udAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.udAddress.Location = new System.Drawing.Point(136, 22);
+            this.udAddress.Location = new System.Drawing.Point(136, 19);
             this.udAddress.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -102,19 +131,25 @@
             // cmdLeft
             // 
             this.cmdLeft.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cmdLeft.Location = new System.Drawing.Point(14, 67);
+            this.cmdLeft.Location = new System.Drawing.Point(14, 62);
             this.cmdLeft.Name = "cmdLeft";
-            this.cmdLeft.Size = new System.Drawing.Size(104, 56);
+            this.cmdLeft.Size = new System.Drawing.Size(104, 53);
             this.cmdLeft.TabIndex = 2;
             this.cmdLeft.Text = "Go Left";
             this.cmdLeft.UseVisualStyleBackColor = true;
             this.cmdLeft.Click += new System.EventHandler(this.cmdLeft_Click);
             // 
+            // testWorker
+            // 
+            this.testWorker.WorkerSupportsCancellation = true;
+            this.testWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.testWorker_DoWork);
+            this.testWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.testWorker_RunWorkerCompleted);
+            // 
             // ServoTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 145);
+            this.ClientSize = new System.Drawing.Size(267, 193);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -135,5 +170,8 @@
         private System.Windows.Forms.Button cmdGoRight;
         private System.Windows.Forms.NumericUpDown udAddress;
         private System.Windows.Forms.Button cmdLeft;
+        private System.Windows.Forms.Button cmdStart;
+        private System.Windows.Forms.Button cmdStop;
+        private System.ComponentModel.BackgroundWorker testWorker;
     }
 }

@@ -23,6 +23,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
@@ -74,6 +75,55 @@ namespace LocoNetToolBox.WinApp.Controls
                 Direction = false,
                 Output = true
             });
+        }
+
+        /// <summary>
+        /// Start a duration test
+        /// </summary>
+        private void cmdStart_Click(object sender, EventArgs e)
+        {
+            cmdStart.Enabled = false;
+            cmdStop.Enabled = true;
+            testWorker.RunWorkerAsync((int) udAddress.Value);
+        }
+
+        /// <summary>
+        /// Stop the duration test
+        /// </summary>
+        private void cmdStop_Click(object sender, EventArgs e)
+        {
+            cmdStop.Enabled = false;
+            testWorker.CancelAsync();
+        }
+
+        /// <summary>
+        /// Run duration test
+        /// </summary>
+        private void testWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var address = (int) e.Argument;
+            var direction = true;
+            while (!testWorker.CancellationPending)
+            {
+                // Run the test
+                execute(new SwitchRequest()
+                {
+                    Address = address - 1,
+                    Direction = direction,
+                    Output = true
+                });
+                Thread.Sleep(7000);
+                direction = !direction;
+            }
+        }
+
+        /// <summary>
+        /// Test stopped
+        /// </summary>
+        private void testWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            cmdStart.Enabled = true;
+            cmdStop.Enabled = false;
         }
     }
 }
