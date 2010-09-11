@@ -24,7 +24,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.WinApp
@@ -32,6 +32,7 @@ namespace LocoNetToolBox.WinApp
     public partial class MainForm : Form
     {
         private readonly LocoBuffer lb;
+        private readonly LocoNetState lnState;
 
         /// <summary>
         /// Default ctor
@@ -41,8 +42,10 @@ namespace LocoNetToolBox.WinApp
             InitializeComponent();
 
             this.lb = new LocoBuffer();
+            lnState = new LocoNetState(lb);
             locoBufferView1.LocoBuffer = lb;
             commandControl1.LocoBuffer = lb;
+            commandControl1.LocoNetState = lnState;
             locoIOList1.LocoBuffer = lb;
 
             locoIOList1.SelectionChanged += new EventHandler(locoIOList1_SelectionChanged);
@@ -70,6 +73,7 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            lnState.Dispose();
             lb.Close();
             base.OnFormClosing(e);
         }

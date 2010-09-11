@@ -24,7 +24,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
 using Message = LocoNetToolBox.Protocol.Message;
 
@@ -34,6 +34,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         private LocoBuffer lb;
         private LocoNetAddress currentAddress;
+        private LocoNetState lnState;
 
         /// <summary>
         /// Default ctor
@@ -48,6 +49,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// Connect to locobuffer
         /// </summary>
         internal LocoBuffer LocoBuffer { set { lb = value; } }
+        internal LocoNetState LocoNetState  { set { lnState = value;}}
 
         /// <summary>
         /// Sets the current loconet address (null means no selection)
@@ -129,7 +131,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
         private void cmdServoTester_Click(object sender, EventArgs e)
         {
-            var dialog = new ServoTester(this.Execute);
+            var dialog = new ServoTester(this.Execute, lnState);
             dialog.Show();
         }
 

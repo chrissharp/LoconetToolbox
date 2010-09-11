@@ -63,6 +63,11 @@
     <Compile Include="Devices\MgvServo\ServoProgrammer.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
+    <Compile Include="Model\AddressState.cs" />
+    <Compile Include="Model\AddressStateMap.cs" />
+    <Compile Include="Model\LocoNetState.cs" />
+    <Compile Include="Model\StateMessage.cs" />
+    <Compile Include="Model\SwitchState.cs" />
     <Compile Include="Protocol\Busy.cs" />
     <Compile Include="Protocol\Constants.cs" />
     <Compile Include="Protocol\SwitchReport.cs" />

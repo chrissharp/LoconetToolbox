@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-
+using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
 using Message = LocoNetToolBox.Protocol.Message;
 
@@ -34,20 +34,22 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class ServoTester : Form
     {
         private readonly Action<Request> execute;
+        private readonly LocoNetState lnState;
 
         /// <summary>
         /// Designer ctor
         /// </summary>
-        public ServoTester() : this(null)
+        public ServoTester() : this(null, null)
         {
         }
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        public ServoTester(Action<Request> execute)
+        public ServoTester(Action<Request> execute, LocoNetState lnState)
         {
             this.execute = execute;
+            this.lnState = lnState;
             InitializeComponent();
         }
 
@@ -112,7 +114,12 @@ namespace LocoNetToolBox.WinApp.Controls
                     Direction = direction,
                     Output = true
                 });
-                Thread.Sleep(7000);
+                if (!lnState.WaitForSwitchDirection(address, !direction, 7000))
+                {
+                    return;
+                }
+
+                Thread.Sleep(500);
                 direction = !direction;
             }
         }
