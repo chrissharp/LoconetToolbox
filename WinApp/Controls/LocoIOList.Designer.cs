@@ -34,7 +34,10 @@
             this.chVersion = new System.Windows.Forms.ColumnHeader();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxProgram = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.cmdConfigureMgv50 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
+            this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbModules
@@ -45,14 +48,15 @@
             this.lbModules.ContextMenuStrip = this.contextMenuStrip1;
             this.lbModules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbModules.FullRowSelect = true;
-            this.lbModules.Location = new System.Drawing.Point(0, 0);
+            this.lbModules.Location = new System.Drawing.Point(3, 3);
             this.lbModules.Name = "lbModules";
-            this.lbModules.Size = new System.Drawing.Size(150, 150);
+            this.tlpMain.SetRowSpan(this.lbModules, 2);
+            this.lbModules.Size = new System.Drawing.Size(314, 404);
             this.lbModules.TabIndex = 0;
             this.lbModules.UseCompatibleStateImageBehavior = false;
             this.lbModules.View = System.Windows.Forms.View.Details;
-            this.lbModules.ItemActivate += new System.EventHandler(this.lbModules_ItemActivate);
-            this.lbModules.SelectedIndexChanged += new System.EventHandler(this.lbModules_SelectedIndexChanged);
+            this.lbModules.ItemActivate += new System.EventHandler(this.LbModulesItemActivate);
+            this.lbModules.SelectedIndexChanged += new System.EventHandler(this.LbModulesSelectedIndexChanged);
             // 
             // chAddress
             // 
@@ -67,21 +71,50 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxProgram});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 48);
             // 
             // ctxProgram
             // 
             this.ctxProgram.Name = "ctxProgram";
-            this.ctxProgram.Size = new System.Drawing.Size(120, 22);
-            this.ctxProgram.Text = "Program";
+            this.ctxProgram.Size = new System.Drawing.Size(168, 22);
+            this.ctxProgram.Text = "Configure MGV50";
+            this.ctxProgram.Click += new System.EventHandler(this.CmdConfigureMgv50Click);
+            // 
+            // tlpMain
+            // 
+            this.tlpMain.ColumnCount = 2;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpMain.Controls.Add(this.lbModules, 0, 0);
+            this.tlpMain.Controls.Add(this.cmdConfigureMgv50, 1, 0);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Location = new System.Drawing.Point(0, 0);
+            this.tlpMain.Name = "tlpMain";
+            this.tlpMain.RowCount = 2;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.Size = new System.Drawing.Size(450, 410);
+            this.tlpMain.TabIndex = 1;
+            // 
+            // cmdConfigureMgv50
+            // 
+            this.cmdConfigureMgv50.Location = new System.Drawing.Point(323, 3);
+            this.cmdConfigureMgv50.Name = "cmdConfigureMgv50";
+            this.cmdConfigureMgv50.Size = new System.Drawing.Size(124, 37);
+            this.cmdConfigureMgv50.TabIndex = 1;
+            this.cmdConfigureMgv50.Text = "&Configure MGV50";
+            this.cmdConfigureMgv50.UseVisualStyleBackColor = true;
+            this.cmdConfigureMgv50.Click += new System.EventHandler(this.CmdConfigureMgv50Click);
             // 
             // LocoIOList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lbModules);
+            this.Controls.Add(this.tlpMain);
             this.Name = "LocoIOList";
+            this.Size = new System.Drawing.Size(450, 410);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tlpMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -93,5 +126,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ctxProgram;
         private System.Windows.Forms.ListView lbModules;
+        private System.Windows.Forms.TableLayoutPanel tlpMain;
+        private System.Windows.Forms.Button cmdConfigureMgv50;
     }
 }

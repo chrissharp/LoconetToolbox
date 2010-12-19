@@ -41,9 +41,7 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             InitializeComponent();
             connector1.FirstPin = 1;
-            connector1.Advanced = true;
             connector2.FirstPin = 9;
-            connector2.Advanced = true;
         }
 
         /// <summary>

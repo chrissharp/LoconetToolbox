@@ -17,23 +17,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class CommandControl : UserControl
     {
         private LocoBuffer lb;
-        private LocoNetAddress currentAddress;
         private LocoNetState lnState;
 
         /// <summary>
@@ -42,7 +34,6 @@ namespace LocoNetToolBox.WinApp.Controls
         public CommandControl()
         {
             InitializeComponent();
-            UpdateUI();
         }
 
         /// <summary>
@@ -50,39 +41,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         internal LocoBuffer LocoBuffer { set { lb = value; } }
         internal LocoNetState LocoNetState  { set { lnState = value;}}
-
-        /// <summary>
-        /// Sets the current loconet address (null means no selection)
-        /// </summary>
-        internal LocoNetAddress CurrentAddress
-        {
-            set
-            {
-                currentAddress = value;
-                UpdateUI();
-            }
-        }
-
-        /// <summary>
-        /// Program LocoIO module
-        /// </summary>
-        internal void ProgramLocoIO()
-        {
-            if (currentAddress != null)
-            {
-                var dialog = new LocoIOConfigurationForm();
-                dialog.Initialize(lb, currentAddress);
-                dialog.Show();
-            }
-        }
-
-        /// <summary>
-        /// Update the controls
-        /// </summary>
-        private void UpdateUI()
-        {
-            cmdProgramLocoIO.Enabled = (currentAddress != null);
-        }
 
         /// <summary>
         /// Execute the given request.
@@ -141,14 +99,6 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 dialog.ShowDialog();
             }
-        }
-
-        /// <summary>
-        /// Program the LocoIO on the current address.
-        /// </summary>
-        private void cmdProgramLocoIO_Click(object sender, EventArgs e)
-        {
-            ProgramLocoIO();
         }
     }
 }

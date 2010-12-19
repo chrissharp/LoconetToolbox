@@ -1,41 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
     partial class ConnectorMode
     {
-        private static readonly ConnectorMode[] modes = new ConnectorMode[]
+        private static readonly ConnectorMode[] Modes = new ConnectorMode[]
         {
-            new ConnectorMode("None"),
-
-            new ConnectorMode("MGV93",
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay),
-
-            new ConnectorMode("MGV81 v1.0",
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff),
-
-            new ConnectorMode("MGV136, MGV84, MGV81 v1.2",
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff,
-                PinMode.SteadyStatePairedOff,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2),
+            new ConnectorModes.None(), 
+            new ConnectorModes.Mgv93(), 
+            new ConnectorModes.Mgv136(), 
+            new ConnectorModes.Mgv81V1(), 
         };
 
         /// <summary>
@@ -43,7 +17,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// </summary>
         public static IEnumerable<ConnectorMode> All
         {
-            get { return modes; }
+            get { return Modes; }
         }
     }
 }

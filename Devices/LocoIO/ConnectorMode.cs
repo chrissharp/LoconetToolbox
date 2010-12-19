@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
     /// <summary>
     /// Mode for a single connector (8 pins)
     /// </summary>
-    public sealed partial class ConnectorMode 
+    public abstract partial class ConnectorMode 
     {
         private readonly PinMode[] pins;
+        private readonly int addressCount;
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        private ConnectorMode(string name, params PinMode[] pins)
+        protected ConnectorMode(string name, int addressCount, params PinMode[] pins)
         {
             if (pins.Length > 8)
             {
                 throw new ArgumentException("Invalid number of pins");
             }
             this.pins = pins;
-            this.Name = name;
+            this.addressCount = addressCount;
+            Name = name;
         }
 
         /// <summary>
@@ -36,13 +35,18 @@ namespace LocoNetToolBox.Devices.LocoIO
         public int PinCount { get { return pins.Length; } }
 
         /// <summary>
-        /// Gets all pin modes.
+        /// Gets the number of port addresses used in this mode.
         /// </summary>
-        public IEnumerable<PinMode> Pins
-        {
-            get { return pins; }
-        }
+        public int AddressCount { get { return addressCount; } }
 
+        /// <summary>
+        /// Gets a pin mode by index.
+        /// </summary>
+        protected PinMode GetPin(int index)
+        {
+            return pins[index]; 
+        }
+        
         /// <summary>
         /// Gets the name
         /// </summary>
@@ -50,5 +54,29 @@ namespace LocoNetToolBox.Devices.LocoIO
         {
             return Name;
         }
+
+        /// <summary>
+        /// Use this mode to create a configuration using the
+        /// given addresses for the given connector.
+        /// </summary>
+        public ConnectorConfig CreateConfig(Connector connector, AddressList addresses)
+        {
+            var pinConfigs = new PinConfig[PinCount];
+            for (int i = 0; i < PinCount; i++)
+            {
+                var pin = i + 1;
+                if (connector == Connector.Second)
+                    pin += 8;
+                pinConfigs[i] = new PinConfig(pin);
+            }
+            var result = new ConnectorConfig(pinConfigs);
+            Configure(result, addresses);
+            return result;
+        }
+
+        /// <summary>
+        /// Use this mode to configure the given target.
+        /// </summary>
+        protected abstract void Configure(ConnectorConfig target, AddressList addresses);
     }
 }

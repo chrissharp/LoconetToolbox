@@ -77,5 +77,10 @@ namespace LocoNetToolBox.WinApp.Controls
         {
 
         }
+
+        private void cmdWriteAll_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

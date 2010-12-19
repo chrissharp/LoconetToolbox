@@ -17,12 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
@@ -37,11 +31,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         public event EventHandler SelectionChanged;
 
-        /// <summary>
-        /// Program the locoio on the selected address.
-        /// </summary>
-        public event EventHandler ProgramSelectedAddress;
-
         private LocoBuffer lb;
 
         /// <summary>
@@ -50,6 +39,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOList()
         {
             InitializeComponent();
+            UpdateUI();
         }
 
         /// <summary>
@@ -61,12 +51,12 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (lb != null)
                 {
-                    lb.PreviewMessage -= new MessageHandler(lb_PreviewMessage);
+                    lb.PreviewMessage -= LbPreviewMessage;
                 }
-                this.lb = value;
+                lb = value;
                 if (lb != null)
                 {
-                    lb.PreviewMessage += new MessageHandler(lb_PreviewMessage);
+                    lb.PreviewMessage += LbPreviewMessage;
                 }
             }
         }
@@ -92,11 +82,11 @@ namespace LocoNetToolBox.WinApp.Controls
         /// Listen to loconet message.
         /// Use results of Query requests to generate a list of locoio modules.
         /// </summary>
-        private bool lb_PreviewMessage(byte[] message, Message decoded)
+        private bool LbPreviewMessage(byte[] message, Message decoded)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new MessageHandler(lb_PreviewMessage), message, decoded);
+                BeginInvoke(new MessageHandler(LbPreviewMessage), message, decoded);
             }
             else
             {
@@ -127,17 +117,42 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Selection has changed
         /// </summary>
-        private void lbModules_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbModulesSelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateUI();
             SelectionChanged.Fire(this);
         }
 
         /// <summary>
         /// Program active address
         /// </summary>
-        private void lbModules_ItemActivate(object sender, EventArgs e)
+        private void LbModulesItemActivate(object sender, EventArgs e)
         {
-            ProgramSelectedAddress.Fire(this);
+            CmdConfigureMgv50Click(sender, e);
+        }
+
+        /// <summary>
+        /// Configure the selected MGV50.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdConfigureMgv50Click(object sender, EventArgs e)
+        {
+            var currentAddress = SelectedAddress;
+            if (currentAddress != null)
+            {
+                var dialog = new LocoIOConfigurationForm();
+                dialog.Initialize(lb, currentAddress);
+                dialog.Show();
+            }
+        }
+
+        /// <summary>
+        /// Update the controls
+        /// </summary>
+        private void UpdateUI()
+        {
+            cmdConfigureMgv50.Enabled = (SelectedAddress != null);
         }
     }
 }

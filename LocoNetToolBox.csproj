@@ -49,9 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Devices\LocoIO\AddressList.cs" />
+    <Compile Include="Devices\LocoIO\Connector.cs" />
     <Compile Include="Devices\LocoIO\ConnectorConfig.cs" />
     <Compile Include="Devices\LocoIO\ConnectorMode.cs" />
     <Compile Include="Devices\LocoIO\ConnectorMode.Statics.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv136.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv81v1.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\None.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv93.cs" />
     <Compile Include="Devices\LocoIO\PinConfigList.cs" />
     <Compile Include="Devices\LocoIO\LocoIOConfig.cs" />
     <Compile Include="Devices\LocoIO\PinConfig.cs" />

@@ -54,7 +54,8 @@
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(846, 345);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMain.Size = new System.Drawing.Size(631, 345);
             this.tlpMain.TabIndex = 0;
             // 
             // cmdWriteAll
@@ -65,6 +66,7 @@
             this.cmdWriteAll.TabIndex = 2;
             this.cmdWriteAll.Text = "&Write all";
             this.cmdWriteAll.UseVisualStyleBackColor = true;
+            this.cmdWriteAll.Click += new System.EventHandler(this.cmdWriteAll_Click);
             // 
             // configurationControl
             // 
@@ -72,12 +74,12 @@
             this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.configurationControl.Location = new System.Drawing.Point(3, 3);
             this.configurationControl.Name = "configurationControl";
-            this.configurationControl.Size = new System.Drawing.Size(840, 308);
+            this.configurationControl.Size = new System.Drawing.Size(625, 308);
             this.configurationControl.TabIndex = 0;
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(750, 317);
+            this.cmdClose.Location = new System.Drawing.Point(535, 317);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(93, 25);
             this.cmdClose.TabIndex = 3;
@@ -104,13 +106,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 345);
+            this.ClientSize = new System.Drawing.Size(631, 345);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LocoIOConfigurationForm";
-            this.Text = "LocoIOConfigurationForm";
+            this.Text = "MGV50 Configuration";
             this.tlpMain.ResumeLayout(false);
             this.ResumeLayout(false);
 

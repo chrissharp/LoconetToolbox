@@ -38,9 +38,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.locoBufferView1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.commandControl1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.locoIOList1, 2, 0);
@@ -49,7 +49,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(933, 366);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(737, 437);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // locoBufferView1
@@ -57,37 +57,39 @@
             this.locoBufferView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.locoBufferView1.Location = new System.Drawing.Point(3, 3);
             this.locoBufferView1.Name = "locoBufferView1";
-            this.locoBufferView1.Size = new System.Drawing.Size(367, 360);
+            this.locoBufferView1.Size = new System.Drawing.Size(287, 431);
             this.locoBufferView1.TabIndex = 0;
             this.locoBufferView1.LocoBufferChanged += new System.EventHandler(this.locoBufferView1_LocoBufferChanged);
             // 
             // commandControl1
             // 
+            this.commandControl1.AutoSize = true;
             this.commandControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.commandControl1.Location = new System.Drawing.Point(376, 3);
+            this.commandControl1.Location = new System.Drawing.Point(296, 3);
             this.commandControl1.Name = "commandControl1";
-            this.commandControl1.Size = new System.Drawing.Size(273, 360);
+            this.commandControl1.Size = new System.Drawing.Size(144, 431);
             this.commandControl1.TabIndex = 1;
             // 
             // locoIOList1
             // 
             this.locoIOList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.locoIOList1.Location = new System.Drawing.Point(655, 3);
+            this.locoIOList1.Location = new System.Drawing.Point(446, 3);
             this.locoIOList1.Name = "locoIOList1";
-            this.locoIOList1.Size = new System.Drawing.Size(275, 360);
+            this.locoIOList1.Size = new System.Drawing.Size(288, 431);
             this.locoIOList1.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 366);
+            this.ClientSize = new System.Drawing.Size(737, 437);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "MGV LocoNet ToolBox";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
