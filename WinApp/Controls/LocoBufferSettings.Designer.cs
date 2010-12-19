@@ -29,89 +29,75 @@
         private void InitializeComponent()
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.lbPort = new System.Windows.Forms.Label();
-            this.cbPort = new System.Windows.Forms.ComboBox();
-            this.lbBaudRate = new System.Windows.Forms.Label();
-            this.rbRate57K = new System.Windows.Forms.RadioButton();
-            this.rbRate19K = new System.Windows.Forms.RadioButton();
+            this.serialPortSettings = new LocoNetToolBox.WinApp.Controls.SerialPortLocoBufferSettings();
+            this.rbSerialPort = new System.Windows.Forms.RadioButton();
+            this.rbTcp = new System.Windows.Forms.RadioButton();
+            this.tcpSettings = new LocoNetToolBox.WinApp.Controls.TcpLocoBufferSettings();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
             // 
             this.tlpMain.AutoSize = true;
-            this.tlpMain.ColumnCount = 2;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.Controls.Add(this.lbPort, 0, 0);
-            this.tlpMain.Controls.Add(this.cbPort, 1, 0);
-            this.tlpMain.Controls.Add(this.lbBaudRate, 0, 1);
-            this.tlpMain.Controls.Add(this.rbRate57K, 1, 1);
-            this.tlpMain.Controls.Add(this.rbRate19K, 1, 2);
+            this.tlpMain.ColumnCount = 1;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.Controls.Add(this.serialPortSettings, 0, 2);
+            this.tlpMain.Controls.Add(this.rbSerialPort, 0, 0);
+            this.tlpMain.Controls.Add(this.rbTcp, 0, 1);
+            this.tlpMain.Controls.Add(this.tcpSettings, 0, 3);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 3;
+            this.tlpMain.RowCount = 4;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(299, 73);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.Size = new System.Drawing.Size(299, 183);
             this.tlpMain.TabIndex = 0;
             // 
-            // lbPort
+            // serialPortSettings
             // 
-            this.lbPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lbPort.AutoSize = true;
-            this.lbPort.Location = new System.Drawing.Point(3, 7);
-            this.lbPort.Name = "lbPort";
-            this.lbPort.Size = new System.Drawing.Size(26, 13);
-            this.lbPort.TabIndex = 0;
-            this.lbPort.Text = "Port";
+            this.serialPortSettings.AutoSize = true;
+            this.serialPortSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.serialPortSettings.Location = new System.Drawing.Point(3, 49);
+            this.serialPortSettings.Name = "serialPortSettings";
+            this.serialPortSettings.Size = new System.Drawing.Size(293, 73);
+            this.serialPortSettings.TabIndex = 0;
             // 
-            // cbPort
+            // rbSerialPort
             // 
-            this.cbPort.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPort.FormattingEnabled = true;
-            this.cbPort.Location = new System.Drawing.Point(59, 3);
-            this.cbPort.Name = "cbPort";
-            this.cbPort.Size = new System.Drawing.Size(237, 21);
-            this.cbPort.TabIndex = 1;
-            this.cbPort.SelectedIndexChanged += new System.EventHandler(this.cbPort_SelectedIndexChanged);
+            this.rbSerialPort.AutoSize = true;
+            this.rbSerialPort.Checked = true;
+            this.rbSerialPort.Location = new System.Drawing.Point(3, 3);
+            this.rbSerialPort.Name = "rbSerialPort";
+            this.rbSerialPort.Size = new System.Drawing.Size(72, 17);
+            this.rbSerialPort.TabIndex = 1;
+            this.rbSerialPort.TabStop = true;
+            this.rbSerialPort.Text = "Serial port";
+            this.rbSerialPort.UseVisualStyleBackColor = true;
+            this.rbSerialPort.CheckedChanged += new System.EventHandler(this.OnChangeLocoBufferType);
             // 
-            // lbBaudRate
+            // rbTcp
             // 
-            this.lbBaudRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lbBaudRate.AutoSize = true;
-            this.lbBaudRate.Location = new System.Drawing.Point(3, 32);
-            this.lbBaudRate.Name = "lbBaudRate";
-            this.lbBaudRate.Size = new System.Drawing.Size(50, 13);
-            this.lbBaudRate.TabIndex = 2;
-            this.lbBaudRate.Text = "Baudrate";
+            this.rbTcp.AutoSize = true;
+            this.rbTcp.Location = new System.Drawing.Point(3, 26);
+            this.rbTcp.Name = "rbTcp";
+            this.rbTcp.Size = new System.Drawing.Size(97, 17);
+            this.rbTcp.TabIndex = 2;
+            this.rbTcp.TabStop = true;
+            this.rbTcp.Text = "TCP (MGV101)";
+            this.rbTcp.UseVisualStyleBackColor = true;
+            this.rbTcp.CheckedChanged += new System.EventHandler(this.OnChangeLocoBufferType);
             // 
-            // rbRate57K
+            // tcpSettings
             // 
-            this.rbRate57K.AutoSize = true;
-            this.rbRate57K.Location = new System.Drawing.Point(59, 30);
-            this.rbRate57K.Name = "rbRate57K";
-            this.rbRate57K.Size = new System.Drawing.Size(50, 17);
-            this.rbRate57K.TabIndex = 3;
-            this.rbRate57K.TabStop = true;
-            this.rbRate57K.Text = "57K6";
-            this.rbRate57K.UseVisualStyleBackColor = true;
-            this.rbRate57K.CheckedChanged += new System.EventHandler(this.rbRate_CheckedChanged);
-            // 
-            // rbRate19K
-            // 
-            this.rbRate19K.AutoSize = true;
-            this.rbRate19K.Location = new System.Drawing.Point(59, 53);
-            this.rbRate19K.Name = "rbRate19K";
-            this.rbRate19K.Size = new System.Drawing.Size(50, 17);
-            this.rbRate19K.TabIndex = 4;
-            this.rbRate19K.TabStop = true;
-            this.rbRate19K.Text = "19K2";
-            this.rbRate19K.UseVisualStyleBackColor = true;
-            this.rbRate19K.CheckedChanged += new System.EventHandler(this.rbRate_CheckedChanged);
+            this.tcpSettings.AutoSize = true;
+            this.tcpSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tcpSettings.Location = new System.Drawing.Point(3, 128);
+            this.tcpSettings.Name = "tcpSettings";
+            this.tcpSettings.Size = new System.Drawing.Size(293, 52);
+            this.tcpSettings.TabIndex = 3;
             // 
             // LocoBufferSettings
             // 
@@ -131,10 +117,10 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpMain;
-        private System.Windows.Forms.Label lbPort;
-        private System.Windows.Forms.ComboBox cbPort;
-        private System.Windows.Forms.Label lbBaudRate;
-        private System.Windows.Forms.RadioButton rbRate57K;
-        private System.Windows.Forms.RadioButton rbRate19K;
+        private SerialPortLocoBufferSettings serialPortSettings;
+        private System.Windows.Forms.RadioButton rbSerialPort;
+        private System.Windows.Forms.RadioButton rbTcp;
+        private TcpLocoBufferSettings tcpSettings;
+
     }
 }

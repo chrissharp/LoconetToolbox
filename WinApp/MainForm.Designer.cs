@@ -59,6 +59,7 @@
             this.locoBufferView1.Name = "locoBufferView1";
             this.locoBufferView1.Size = new System.Drawing.Size(367, 360);
             this.locoBufferView1.TabIndex = 0;
+            this.locoBufferView1.LocoBufferChanged += new System.EventHandler(this.locoBufferView1_LocoBufferChanged);
             // 
             // commandControl1
             // 

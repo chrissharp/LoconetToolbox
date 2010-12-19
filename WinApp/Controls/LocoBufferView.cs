@@ -32,6 +32,8 @@ namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoBufferView : UserControl
     {
+        public event EventHandler LocoBufferChanged;
+
         private LocoBuffer locoBuffer;
 
         /// <summary>
@@ -47,6 +49,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         internal LocoBuffer LocoBuffer
         {
+            get { return locoBufferSettings.LocoBuffer; }
             set
             {
                 if (locoBuffer != null)
@@ -102,6 +105,15 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             lbLog.Items.Add(msg);
             lbLog.SelectedIndex = lbLog.Items.Count - 1;
+        }
+
+        /// <summary>
+        /// Locobuffer has changed.
+        /// Propagate the event.
+        /// </summary>
+        private void locoBufferSettings_LocoBufferChanged(object sender, EventArgs e)
+        {
+            LocoBufferChanged.Fire(this);
         }
     }
 }

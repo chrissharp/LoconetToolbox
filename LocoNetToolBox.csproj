@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D56CE7E3-4005-4D41-9022-B6FB9F66280A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -70,6 +70,8 @@
     <Compile Include="Model\SwitchState.cs" />
     <Compile Include="Protocol\Busy.cs" />
     <Compile Include="Protocol\Constants.cs" />
+    <Compile Include="Protocol\TcpLocoBuffer.cs" />
+    <Compile Include="Protocol\SerialPortLocoBuffer.cs" />
     <Compile Include="Protocol\SwitchReport.cs" />
     <Compile Include="Protocol\SwitchRequest.cs" />
     <Compile Include="Protocol\InputReport.cs" />
@@ -93,6 +95,18 @@
     </Compile>
     <Compile Include="WinApp\Controls\AdvancedCommandControl.Designer.cs">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\TcpLocoBufferSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\TcpLocoBufferSettings.Designer.cs">
+      <DependentUpon>TcpLocoBufferSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\SerialPortLocoBufferSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\SerialPortLocoBufferSettings.Designer.cs">
+      <DependentUpon>SerialPortLocoBufferSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="WinApp\Controls\DirectionControl.cs">
       <SubType>UserControl</SubType>
@@ -226,6 +240,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\AdvancedCommandControl.resx">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\TcpLocoBufferSettings.resx">
+      <DependentUpon>TcpLocoBufferSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\SerialPortLocoBufferSettings.resx">
+      <DependentUpon>SerialPortLocoBufferSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\DirectionControl.resx">
       <DependentUpon>DirectionControl.cs</DependentUpon>

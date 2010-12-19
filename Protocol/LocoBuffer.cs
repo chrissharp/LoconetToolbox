@@ -28,90 +28,38 @@ namespace LocoNetToolBox.Protocol
     /// <summary>
     /// LocoBuffer communication.
     /// </summary>
-    internal sealed partial class LocoBuffer : IDisposable
+    internal abstract partial class LocoBuffer : IDisposable
     {
-        private const int CTS_ATTEMPTS = 20;
-
         internal event MessageHandler SendMessage;
         internal event MessageHandler PreviewMessage;
         internal event EventHandler Opened;
         internal event EventHandler Closed;
 
-        private readonly object portLock = new object();
-        private SerialPort port;
         private ReceiveProcessor receiveProcessor;
         private readonly object handlersLock = new object();
         private readonly List<MessageHandler> handlers = new List<MessageHandler>();
 
         /// <summary>
-        /// Default ctor
+        /// Create a receive processor and fire the Opened event.
         /// </summary>
-        internal LocoBuffer()
+        protected void OnOpened()
         {
-            this.PortName = "COM1";
-            this.BaudRate = BaudRate.Rate57K;
-        }
-
-        /// <summary>
-        /// Name of the serial port (e.g. COM1)
-        /// </summary>
-        public string PortName { get; set; }
-
-        /// <summary>
-        /// Baud rate of the port
-        /// </summary>
-        public BaudRate BaudRate { get; set; }
-
-        /// <summary>
-        /// Open the connection (if needed)
-        /// </summary>
-        private SerialPort Open()
-        {
-            lock (portLock)
-            {
-                if (port == null)
-                {
-                    try
-                    {
-                        port = new SerialPort(PortName);
-                        port.BaudRate = (int)BaudRate;
-                        port.DtrEnable = false;
-                        port.RtsEnable = true;
-                        //port.Handshake = Handshake.RequestToSend;
-                        port.DataBits = 8;
-                        port.StopBits = StopBits.One;
-                        port.Parity = Parity.None;
-                        port.Open();
-                        port.DiscardInBuffer();
-                        port.DiscardOutBuffer();
-                        receiveProcessor = new ReceiveProcessor(this);
-                        if (Opened != null) { Opened(this, EventArgs.Empty); }
-                    }
-                    catch
-                    {
-                        port = null;
-                        throw;
-                    }
-                }
-                return port;
-            }
+            receiveProcessor = new ReceiveProcessor(this);
+            if (Opened != null) { Opened(this, EventArgs.Empty); }
         }
 
         /// <summary>
         /// Close the connection (if any)
         /// </summary>
-        internal void Close()
+        internal abstract void Close();
+
+        /// <summary>
+        /// Disconnect from the receive processor and fire the Closed event.
+        /// </summary>
+        protected void OnClosed()
         {
-            lock (portLock)
-            {
-                if (port != null)
-                {
-                    port.Close();
-                    port = null;
-                    receiveProcessor = null;
-                    if (Closed != null) { Closed(this, EventArgs.Empty); }
-                }
-            }
+            receiveProcessor = null;
+            if (Closed != null) { Closed(this, EventArgs.Empty); }
         }
 
         /// <summary>
@@ -121,15 +69,10 @@ namespace LocoNetToolBox.Protocol
         {
             Message.UpdateChecksum(msg, msg.Length);
             if (SendMessage != null) { SendMessage(msg, decoded); }
-            var port = Open();
             var length = Message.GetMessageLength(msg);
             try
             {
-                for (int i = 0; i < length; i++)
-                {
-                    WaitForCTS(port);
-                    port.Write(msg, i, 1);
-                }
+                Send(msg, length);
             }
             catch (InvalidOperationException)
             {
@@ -138,69 +81,12 @@ namespace LocoNetToolBox.Protocol
             }
         }
 
-        /// <summary>
-        /// Wait for CTS to be enabled.
-        /// </summary>
-        private static void WaitForCTS(SerialPort port)
-        {
-            int attempts = 0;
-            while (!port.CtsHolding)
-            {
-                Thread.Sleep(10);
-                attempts++;
-                if (attempts > CTS_ATTEMPTS)
-                {
-                    throw new InvalidOperationException("CTS timeout");
-                }
-            }
-        }
+        protected abstract void Send(byte[] msg, int length);
 
         /// <summary>
         /// Read a single message
         /// </summary>
-        private byte[] ReadMessage()
-        {
-            // Check for an open connection
-            var port = this.port;
-            if (port == null) { return null; }
-
-            // Try to read the message
-            var data = new byte[16];
-            while (true)
-            {
-                // Read a potential opcode
-                Read(port, data, 0, 1);
-                if (Message.IsOpcode(data[0]))
-                {
-                    break;
-                }
-            }
-
-            // Now read further data
-            Read(port, data, 1, 1); // Read at least the second byte
-
-            var length = Message.GetMessageLength(data);
-            if (length > 2)
-            {
-                // Read remaining data
-                Read(port, data, 2, length - 2);
-            }
-
-            return data;
-        }
-
-        private static void Read(SerialPort port, byte[] data, int offset, int count)
-        {
-            while (count > 0)
-            {
-                var read = port.Read(data, offset, count);
-                if (read > 0)
-                {
-                    count -= read;
-                    offset += read;
-                } 
-            }
-        }
+        protected abstract byte[] ReadMessage();
 
         /// <summary>
         /// Add a new handler to the handler queue.

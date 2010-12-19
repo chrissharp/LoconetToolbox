@@ -77,31 +77,32 @@
             this.locoBufferSettings.Location = new System.Drawing.Point(3, 16);
             this.locoBufferSettings.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.locoBufferSettings.Name = "locoBufferSettings";
-            this.locoBufferSettings.Size = new System.Drawing.Size(390, 73);
+            this.locoBufferSettings.Size = new System.Drawing.Size(390, 152);
             this.locoBufferSettings.TabIndex = 1;
+            this.locoBufferSettings.LocoBufferChanged += new System.EventHandler(this.locoBufferSettings_LocoBufferChanged);
             // 
             // lbLog
             // 
             this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbLog.FormattingEnabled = true;
-            this.lbLog.Location = new System.Drawing.Point(3, 226);
+            this.lbLog.Location = new System.Drawing.Point(3, 266);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(390, 82);
+            this.lbLog.Size = new System.Drawing.Size(390, 43);
             this.lbLog.TabIndex = 2;
             // 
             // lbInputs
             // 
             this.lbInputs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbInputs.Location = new System.Drawing.Point(3, 125);
+            this.lbInputs.Location = new System.Drawing.Point(3, 204);
             this.lbInputs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.lbInputs.Name = "lbInputs";
-            this.lbInputs.Size = new System.Drawing.Size(390, 65);
+            this.lbInputs.Size = new System.Drawing.Size(390, 26);
             this.lbInputs.TabIndex = 3;
             // 
             // lbTraffic
             // 
             this.lbTraffic.AutoSize = true;
-            this.lbTraffic.Location = new System.Drawing.Point(3, 210);
+            this.lbTraffic.Location = new System.Drawing.Point(3, 250);
             this.lbTraffic.Name = "lbTraffic";
             this.lbTraffic.Size = new System.Drawing.Size(134, 13);
             this.lbTraffic.TabIndex = 4;
@@ -110,7 +111,7 @@
             // lvFeedbacks
             // 
             this.lvFeedbacks.AutoSize = true;
-            this.lvFeedbacks.Location = new System.Drawing.Point(3, 109);
+            this.lvFeedbacks.Location = new System.Drawing.Point(3, 188);
             this.lvFeedbacks.Name = "lvFeedbacks";
             this.lvFeedbacks.Size = new System.Drawing.Size(140, 13);
             this.lvFeedbacks.TabIndex = 5;

@@ -31,8 +31,8 @@ namespace LocoNetToolBox.WinApp
 {
     public partial class MainForm : Form
     {
-        private readonly LocoBuffer lb;
-        private readonly LocoNetState lnState;
+        private LocoBuffer lb;
+        private LocoNetState lnState;
 
         /// <summary>
         /// Default ctor
@@ -40,13 +40,7 @@ namespace LocoNetToolBox.WinApp
         public MainForm()
         {
             InitializeComponent();
-
-            this.lb = new LocoBuffer();
-            lnState = new LocoNetState(lb);
-            locoBufferView1.LocoBuffer = lb;
-            commandControl1.LocoBuffer = lb;
-            commandControl1.LocoNetState = lnState;
-            locoIOList1.LocoBuffer = lb;
+            SetLocoBuffer(new SerialPortLocoBuffer());
 
             locoIOList1.SelectionChanged += new EventHandler(locoIOList1_SelectionChanged);
             locoIOList1.ProgramSelectedAddress += new EventHandler(locoIOList1_ProgramSelectedAddress);
@@ -76,6 +70,30 @@ namespace LocoNetToolBox.WinApp
             lnState.Dispose();
             lb.Close();
             base.OnFormClosing(e);
+        }
+
+        /// <summary>
+        /// Locobuffer has changed.
+        /// </summary>
+        private void locoBufferView1_LocoBufferChanged(object sender, EventArgs e)
+        {
+            SetLocoBuffer(locoBufferView1.LocoBuffer);
+        }
+
+        /// <summary>
+        /// Pass the given locobuffer on to all components.
+        /// </summary>
+        private void SetLocoBuffer(LocoBuffer lb)
+        {
+            if (this.lb != lb)
+            {
+                this.lb = lb;
+                lnState = new LocoNetState(lb);
+                locoBufferView1.LocoBuffer = lb;
+                commandControl1.LocoBuffer = lb;
+                commandControl1.LocoNetState = lnState;
+                locoIOList1.LocoBuffer = lb;
+            }
         }
     }
 }
