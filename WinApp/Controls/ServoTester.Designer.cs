@@ -70,7 +70,7 @@
             this.cmdStart.TabIndex = 5;
             this.cmdStart.Text = "Start duration test";
             this.cmdStart.UseVisualStyleBackColor = true;
-            this.cmdStart.Click += new System.EventHandler(this.cmdStart_Click);
+            this.cmdStart.Click += new System.EventHandler(this.CmdStartClick);
             // 
             // cmdStop
             // 
@@ -82,7 +82,7 @@
             this.cmdStop.TabIndex = 4;
             this.cmdStop.Text = "Stop duration test";
             this.cmdStop.UseVisualStyleBackColor = true;
-            this.cmdStop.Click += new System.EventHandler(this.cmdStop_Click);
+            this.cmdStop.Click += new System.EventHandler(this.CmdStopClick);
             // 
             // cmdGoRight
             // 
@@ -93,7 +93,7 @@
             this.cmdGoRight.TabIndex = 3;
             this.cmdGoRight.Text = "Go Right";
             this.cmdGoRight.UseVisualStyleBackColor = true;
-            this.cmdGoRight.Click += new System.EventHandler(this.button1_Click);
+            this.cmdGoRight.Click += new System.EventHandler(this.CmdRightClick);
             // 
             // lbAddress
             // 
@@ -137,13 +137,13 @@
             this.cmdLeft.TabIndex = 2;
             this.cmdLeft.Text = "Go Left";
             this.cmdLeft.UseVisualStyleBackColor = true;
-            this.cmdLeft.Click += new System.EventHandler(this.cmdLeft_Click);
+            this.cmdLeft.Click += new System.EventHandler(this.CmdLeftClick);
             // 
             // testWorker
             // 
             this.testWorker.WorkerSupportsCancellation = true;
-            this.testWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.testWorker_DoWork);
-            this.testWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.testWorker_RunWorkerCompleted);
+            this.testWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.TestWorkerDoWork);
+            this.testWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.TestWorkerRunWorkerCompleted);
             // 
             // ServoTester
             // 

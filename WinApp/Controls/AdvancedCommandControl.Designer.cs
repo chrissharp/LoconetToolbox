@@ -62,7 +62,7 @@
             this.cmdDiscover.TabIndex = 0;
             this.cmdDiscover.Text = "Discover";
             this.cmdDiscover.UseVisualStyleBackColor = true;
-            this.cmdDiscover.Click += new System.EventHandler(this.cmdDiscover_Click);
+            this.cmdDiscover.Click += new System.EventHandler(this.CmdDiscoverClick);
             // 
             // cmdRead
             // 
@@ -72,7 +72,7 @@
             this.cmdRead.TabIndex = 1;
             this.cmdRead.Text = "Read";
             this.cmdRead.UseVisualStyleBackColor = true;
-            this.cmdRead.Click += new System.EventHandler(this.cmdRead_Click);
+            this.cmdRead.Click += new System.EventHandler(this.CmdReadClick);
             // 
             // tbSvAddress
             // 
@@ -157,7 +157,7 @@
             this.cmdSwitchRequest.TabIndex = 12;
             this.cmdSwitchRequest.Text = "SW_REQ";
             this.cmdSwitchRequest.UseVisualStyleBackColor = true;
-            this.cmdSwitchRequest.Click += new System.EventHandler(this.cmdSwitchRequest_Click);
+            this.cmdSwitchRequest.Click += new System.EventHandler(this.CmdSwitchRequestClick);
             // 
             // cmdQuery
             // 
@@ -167,7 +167,7 @@
             this.cmdQuery.TabIndex = 11;
             this.cmdQuery.Text = "Query";
             this.cmdQuery.UseVisualStyleBackColor = true;
-            this.cmdQuery.Click += new System.EventHandler(this.cmdQuery_Click);
+            this.cmdQuery.Click += new System.EventHandler(this.CmdQueryClick);
             // 
             // lbDstL
             // 
@@ -219,7 +219,7 @@
             this.cmdGpOn.TabIndex = 8;
             this.cmdGpOn.Text = "GPON";
             this.cmdGpOn.UseVisualStyleBackColor = true;
-            this.cmdGpOn.Click += new System.EventHandler(this.cmdGpOn_Click);
+            this.cmdGpOn.Click += new System.EventHandler(this.CmdGpOnClick);
             // 
             // cmdGpOff
             // 
@@ -229,7 +229,7 @@
             this.cmdGpOff.TabIndex = 9;
             this.cmdGpOff.Text = "GPOFF";
             this.cmdGpOff.UseVisualStyleBackColor = true;
-            this.cmdGpOff.Click += new System.EventHandler(this.cmdGpOff_Click);
+            this.cmdGpOff.Click += new System.EventHandler(this.CmdGpOffClick);
             // 
             // cmdBusy
             // 
@@ -239,7 +239,7 @@
             this.cmdBusy.TabIndex = 10;
             this.cmdBusy.Text = "Busy";
             this.cmdBusy.UseVisualStyleBackColor = true;
-            this.cmdBusy.Click += new System.EventHandler(this.cmdBusy_Click);
+            this.cmdBusy.Click += new System.EventHandler(this.CmdBusyClick);
             // 
             // lbAddress
             // 
@@ -304,7 +304,7 @@
             this.cmdServoProgrammer.TabIndex = 17;
             this.cmdServoProgrammer.Text = "Servo Prog";
             this.cmdServoProgrammer.UseVisualStyleBackColor = true;
-            this.cmdServoProgrammer.Click += new System.EventHandler(this.cmdServoProgrammer_Click);
+            this.cmdServoProgrammer.Click += new System.EventHandler(this.CmdServoProgrammerClick);
             // 
             // CommandControl
             // 

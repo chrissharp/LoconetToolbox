@@ -20,6 +20,7 @@ using System;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
@@ -31,7 +32,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         public event EventHandler SelectionChanged;
 
-        private LocoBuffer lb;
+        private AsyncLocoBuffer lb;
 
         /// <summary>
         /// Default ctor
@@ -45,7 +46,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Attach to the given locobuffer.
         /// </summary>
-        internal LocoBuffer LocoBuffer
+        internal AsyncLocoBuffer LocoBuffer
         {
             set
             {
@@ -84,30 +85,24 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private bool LbPreviewMessage(byte[] message, Message decoded)
         {
-            if (InvokeRequired)
+            var response = Response.Decode(message) as PeerXferResponse;
+            if (response != null)
             {
-                BeginInvoke(new MessageHandler(LbPreviewMessage), message, decoded);
-            }
-            else
-            {
-                var response = Response.Decode(message) as PeerXferResponse;
-                if (response != null)
+                if (response.SvAddress == 0)
                 {
-                    if (response.SvAddress == 0)
+                    if (response.IsSourcePC)
                     {
-                        if (response.IsSourcePC)
-                        {
-                            // Query request
-                            lbModules.Items.Clear();
-                        }
-                        else
-                        {
-                            var item = new ListViewItem();
-                            item.Text = response.Source.ToString();
-                            item.Tag = response.Source;
-                            item.SubItems.Add(string.Format("{0}.{1}", response.LocoIOVersion / 100, response.LocoIOVersion % 100));
-                            lbModules.Items.Add(item);
-                        }
+                        // Query request
+                        lbModules.Items.Clear();
+                    }
+                    else
+                    {
+                        var item = new ListViewItem();
+                        item.Text = response.Source.ToString();
+                        item.Tag = response.Source;
+                        item.SubItems.Add(string.Format("{0}.{1}", response.LocoIOVersion/100,
+                                                        response.LocoIOVersion%100));
+                        lbModules.Items.Add(item);
                     }
                 }
             }

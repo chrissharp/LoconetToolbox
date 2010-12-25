@@ -17,15 +17,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
@@ -34,7 +29,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         public event EventHandler LocoBufferChanged;
 
-        private LocoBuffer locoBuffer;
+        private AsyncLocoBuffer locoBuffer;
 
         /// <summary>
         /// View on the locobuffer.
@@ -47,22 +42,29 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Connect to the locobuffer.
         /// </summary>
-        internal LocoBuffer LocoBuffer
+        internal LocoBuffer ConfiguredLocoBuffer
         {
             get { return locoBufferSettings.LocoBuffer; }
+            set { locoBufferSettings.LocoBuffer = value; }
+        }
+
+        /// <summary>
+        /// Connect to the locobuffer.
+        /// </summary>
+        internal AsyncLocoBuffer LocoBuffer
+        {
             set
             {
                 if (locoBuffer != null)
                 {
-                    locoBuffer.SendMessage -= new MessageHandler(locoBuffer_SendMessage);
-                    locoBuffer.PreviewMessage -= new MessageHandler(locoBuffer_PreviewMessage);
+                    locoBuffer.SendMessage -= LocoBufferSendMessage;
+                    locoBuffer.PreviewMessage -= LocoBufferPreviewMessage;
                 }
                 locoBuffer = value;
-                locoBufferSettings.LocoBuffer = value;
                 if (locoBuffer != null)
                 {
-                    locoBuffer.SendMessage += new MessageHandler(locoBuffer_SendMessage);
-                    locoBuffer.PreviewMessage += new MessageHandler(locoBuffer_PreviewMessage);
+                    locoBuffer.SendMessage += LocoBufferSendMessage;
+                    locoBuffer.PreviewMessage += LocoBufferPreviewMessage;
                 }
             }
         }
@@ -70,34 +72,20 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Add message to log.
         /// </summary>
-        bool locoBuffer_PreviewMessage(byte[] message, Message decoded)
+        bool LocoBufferPreviewMessage(byte[] message, Message decoded)
         {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new MessageHandler(locoBuffer_PreviewMessage), message, decoded);
-            }
-            else
-            {
-                var response = Response.Decode(message);
-                Log("<- " + response + " { " + Message.ToString(message) + " }");
-                lbInputs.ProcessResponse(response);
-            }
+            var response = Response.Decode(message);
+            Log("<- " + response + " { " + Message.ToString(message) + " }");
+            lbInputs.ProcessResponse(response);
             return false;
         }
 
         /// <summary>
         /// Add send message to log.
         /// </summary>
-        bool locoBuffer_SendMessage(byte[] message, Message decoded)
+        bool LocoBufferSendMessage(byte[] message, Message decoded)
         {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new MessageHandler(locoBuffer_SendMessage), message, decoded);
-            }
-            else
-            {
-                Log("-> " + Message.ToString(message));
-            }
+            Log("-> " + Message.ToString(message));
             return false;
         }
 

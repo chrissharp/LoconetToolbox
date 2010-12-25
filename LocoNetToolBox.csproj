@@ -90,6 +90,8 @@
     <Compile Include="Protocol\PeerXferRequest1.cs" />
     <Compile Include="Protocol\GlobalPowerOff.cs" />
     <Compile Include="Protocol\GlobalPowerOn.cs" />
+    <Compile Include="WinApp\Communications\AsyncLocoBuffer.cs" />
+    <Compile Include="WinApp\Communications\AsyncRequestCompletedEventArgs.cs" />
     <Compile Include="WinApp\Controls\CommandControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -17,23 +17,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
-using Message = LocoNetToolBox.Protocol.Message;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class AdvancedCommandControl : UserControl
     {
-        private LocoBuffer lb;
+        private AsyncLocoBuffer lb;
 
         /// <summary>
         /// Default ctor
@@ -46,30 +40,28 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Connect to locobuffer
         /// </summary>
-        internal LocoBuffer LocoBuffer { set { lb = value; } }
+        internal AsyncLocoBuffer LocoBuffer { set { lb = value; } }
 
         /// <summary>
         /// Execute the given request.
         /// </summary>
         private void Execute(Request request)
         {
-            try
-            {
-                request.Execute(lb);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            lb.BeginRequest(request, e => {
+                if (!e.HasError)
+                {
+                    MessageBox.Show(e.Error.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+                }
+            });
         }
 
         /// <summary>
         /// Cause all devices to identify themselves.
         /// </summary>
-        private void cmdDiscover_Click(object sender, EventArgs e)
+        private void CmdDiscoverClick(object sender, EventArgs e)
         {
-            var cmd = new PeerXferRequest1()
-            {
+            var cmd = new PeerXferRequest1
+                          {
                 Command = PeerXferRequest.Commands.Discover
             };
             Execute(cmd);
@@ -78,41 +70,42 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Read Single SV
         /// </summary>
-        private void cmdRead_Click(object sender, EventArgs e)
+        private void CmdReadClick(object sender, EventArgs e)
         {
-            var programmer = new Programmer(lb, new LocoNetAddress((byte)tbDstL.Value, (byte)tbDstH.Value));
-            var configs = new SVConfig[] { new SVConfig((int)tbSvAddress.Value) };
-            programmer.Read(configs);
+            var programmer = new Programmer(new LocoNetAddress((byte)tbDstL.Value, (byte)tbDstH.Value));
+            var configs = new[] { new SVConfig((int)tbSvAddress.Value) };
 
-            if (configs[0].Valid)
-            {
-                MessageBox.Show("Value = " + configs[0].Value);
-            }
-            else
-            {
-                MessageBox.Show("Cannot read SV");
-            }
+            lb.BeginRequest(x => programmer.Read(x, configs), x => {
+                if (configs[0].Valid)
+                {
+                    MessageBox.Show("Value = " + configs[0].Value);
+                }
+                else
+                {
+                    MessageBox.Show("Cannot read SV");
+                }                                                                      
+            });
         }
 
-        private void cmdGpOn_Click(object sender, EventArgs e)
+        private void CmdGpOnClick(object sender, EventArgs e)
         {
             Execute(new GlobalPowerOn());
         }
 
-        private void cmdGpOff_Click(object sender, EventArgs e)
+        private void CmdGpOffClick(object sender, EventArgs e)
         {
             Execute(new GlobalPowerOff());
         }
 
-        private void cmdBusy_Click(object sender, EventArgs e)
+        private void CmdBusyClick(object sender, EventArgs e)
         {
             Execute(new Busy());
         }
 
-        private void cmdQuery_Click(object sender, EventArgs e)
+        private void CmdQueryClick(object sender, EventArgs e)
         {
-            Execute(new PeerXferRequest1()
-            {
+            Execute(new PeerXferRequest1
+                        {
                 Command = PeerXferRequest.Commands.Read,
                 DestinationLow = 0,
                // DestinationHigh = 0,
@@ -120,10 +113,10 @@ namespace LocoNetToolBox.WinApp.Controls
             });
         }
 
-        private void cmdSwitchRequest_Click(object sender, EventArgs e)
+        private void CmdSwitchRequestClick(object sender, EventArgs e)
         {
-            Execute(new SwitchRequest()
-            {
+            Execute(new SwitchRequest
+                        {
                 Address = (int)tbAddress.Value - 1,
                 Direction = cbDirection.Checked,
                 Output = cbOutput.Checked
@@ -133,9 +126,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Open the servo programmer
         /// </summary>
-        private void cmdServoProgrammer_Click(object sender, EventArgs e)
+        private void CmdServoProgrammerClick(object sender, EventArgs e)
         {
-            var dialog = new ServoProgrammer(this.lb);
+            var dialog = new ServoProgrammer(lb);
             dialog.Show();
         }
     }

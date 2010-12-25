@@ -99,8 +99,6 @@
             // readWorker
             // 
             this.readWorker.WorkerSupportsCancellation = true;
-            this.readWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.readWorker_DoWork);
-            this.readWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.readWorker_RunWorkerCompleted);
             // 
             // LocoIOConfigurationForm
             // 

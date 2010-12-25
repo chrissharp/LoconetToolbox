@@ -17,16 +17,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
@@ -34,6 +29,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         private readonly LocoIOConfig config = new LocoIOConfig();
         private Programmer programmer;
+        private AsyncLocoBuffer lb;
 
         /// <summary>
         /// Default ctor
@@ -50,27 +46,11 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Initialize for a specific module
         /// </summary>
-        internal void Initialize(LocoBuffer lb, LocoNetAddress address)
+        internal void Initialize(AsyncLocoBuffer lb, LocoNetAddress address)
         {
-            this.programmer = new Programmer(lb, address);
+            this.lb = lb;
+            this.programmer = new Programmer(address);
             readWorker.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Read all settings.
-        /// </summary>
-        private void readWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            programmer.Read(config);
-        }
-
-        /// <summary>
-        /// Enable now.
-        /// </summary>
-        private void readWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            cmdReadAll.Enabled = true;
-            cmdWriteAll.Enabled = true;
         }
 
         private void cmdReadAll_Click(object sender, EventArgs e)

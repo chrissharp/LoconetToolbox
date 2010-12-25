@@ -17,21 +17,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp
 {
     public partial class MainForm : Form
     {
         private LocoBuffer lb;
+        private AsyncLocoBuffer asyncLb;
         private LocoNetState lnState;
 
         /// <summary>
@@ -48,17 +44,16 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            lnState.Dispose();
-            lb.Close();
+            CloseLb();
             base.OnFormClosing(e);
         }
 
         /// <summary>
         /// Locobuffer has changed.
         /// </summary>
-        private void locoBufferView1_LocoBufferChanged(object sender, EventArgs e)
+        private void LocoBufferView1LocoBufferChanged(object sender, EventArgs e)
         {
-            SetLocoBuffer(locoBufferView1.LocoBuffer);
+            SetLocoBuffer(locoBufferView1.ConfiguredLocoBuffer);
         }
 
         /// <summary>
@@ -68,12 +63,37 @@ namespace LocoNetToolBox.WinApp
         {
             if (this.lb != lb)
             {
+                CloseLb();
                 this.lb = lb;
+                asyncLb = new AsyncLocoBuffer(this, lb);
                 lnState = new LocoNetState(lb);
-                locoBufferView1.LocoBuffer = lb;
-                commandControl1.LocoBuffer = lb;
+                locoBufferView1.ConfiguredLocoBuffer = lb;
+                locoBufferView1.LocoBuffer = asyncLb;
+                commandControl1.LocoBuffer = asyncLb;
                 commandControl1.LocoNetState = lnState;
-                locoIOList1.LocoBuffer = lb;
+                locoIOList1.LocoBuffer = asyncLb;
+            }
+        }
+
+        /// <summary>
+        /// Close any active locobuffer connection
+        /// </summary>
+        private void CloseLb()
+        {
+            if (asyncLb != null)
+            {
+                asyncLb.Dispose();
+                asyncLb = null;
+            }
+            if (lnState != null)
+            {
+                lnState.Dispose();
+                lnState = null;
+            }
+            if (lb != null)
+            {
+                lb.Close();
+                lb = null;
             }
         }
     }

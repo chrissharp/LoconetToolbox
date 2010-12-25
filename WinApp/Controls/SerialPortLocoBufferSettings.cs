@@ -65,27 +65,41 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (this.locoBuffer != null)
                 {
-                    this.locoBuffer.Closed -= new EventHandler(locoBuffer_Closed);
-                    this.locoBuffer.Opened -= new EventHandler(locoBuffer_Opened);
+                    locoBuffer.Closed -= LocoBufferClosed;
+                    locoBuffer.Opened -= LocoBufferOpened;
                 }
-                this.locoBuffer = value;
+                locoBuffer = value;
                 Save();
-                if (this.locoBuffer != null)
+                if (locoBuffer != null)
                 {
-                    this.locoBuffer.Closed += new EventHandler(locoBuffer_Closed);
-                    this.locoBuffer.Opened += new EventHandler(locoBuffer_Opened);
+                    locoBuffer.Closed += LocoBufferClosed;
+                    locoBuffer.Opened += LocoBufferOpened;
                 }
             }
         }
 
-        void locoBuffer_Opened(object sender, EventArgs e)
+        void LocoBufferOpened(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(LocoBufferOpened), sender, e);
+            }
+            else
+            {
+                Enabled = false;
+            }
         }
 
-        void locoBuffer_Closed(object sender, EventArgs e)
+        void LocoBufferClosed(object sender, EventArgs e)
         {
-            this.Enabled = true;
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(LocoBufferClosed), sender, e);
+            }
+            else
+            {
+                Enabled = true;
+            }
         }
 
         /// <summary>

@@ -17,23 +17,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-
-using LocoNetToolBox.Protocol;
-using Message = LocoNetToolBox.Protocol.Message;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class ServoProgrammer : Form
     {
-        private LocoBuffer lb;
+        private AsyncLocoBuffer lb;
         private readonly Devices.MgvServo.ServoProgrammer programmer;
 
         /// <summary>
@@ -48,10 +39,10 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal ServoProgrammer(LocoBuffer lb)
+        internal ServoProgrammer(AsyncLocoBuffer lb)
         {
             this.lb = lb;
-            this.programmer = new Devices.MgvServo.ServoProgrammer(lb);
+            this.programmer = new Devices.MgvServo.ServoProgrammer(lb.LocoBuffer);
             InitializeComponent();
             step1.Initialize(programmer);
         }

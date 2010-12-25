@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.Devices.LocoIO
@@ -12,16 +9,14 @@ namespace LocoNetToolBox.Devices.LocoIO
     /// </summary>
     public class Programmer
     {
-        private readonly LocoBuffer lb;
         private readonly LocoNetAddress address;
         private readonly int timeout;
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal Programmer(LocoBuffer lb, LocoNetAddress address)
+        internal Programmer(LocoNetAddress address)
         {
-            this.lb = lb;
             this.address = address;
             this.timeout = 500;
         }
@@ -29,7 +24,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Read the given set of SV values into configs.
         /// </summary>
-        public void Read(IEnumerable<SVConfig> configs)
+        internal void Read(LocoBuffer lb, IEnumerable<SVConfig> configs)
         {
             var list = configs.ToList();
             list.Sort();
@@ -59,7 +54,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Write the given set of SV values
         /// </summary>
-        public void Write(IEnumerable<SVConfig> configs)
+        internal void Write(LocoBuffer lb, IEnumerable<SVConfig> configs)
         {
             var list = configs.ToList();
             list.Sort();

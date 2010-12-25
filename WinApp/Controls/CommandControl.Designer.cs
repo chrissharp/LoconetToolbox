@@ -78,7 +78,7 @@
             this.cmdQuery.TabIndex = 11;
             this.cmdQuery.Text = "Find all MGV50\'s";
             this.cmdQuery.UseVisualStyleBackColor = true;
-            this.cmdQuery.Click += new System.EventHandler(this.cmdQuery_Click);
+            this.cmdQuery.Click += new System.EventHandler(this.CmdQueryClick);
             // 
             // cmdGpOn
             // 
@@ -88,7 +88,7 @@
             this.cmdGpOn.TabIndex = 8;
             this.cmdGpOn.Text = "Global Power On";
             this.cmdGpOn.UseVisualStyleBackColor = true;
-            this.cmdGpOn.Click += new System.EventHandler(this.cmdGpOn_Click);
+            this.cmdGpOn.Click += new System.EventHandler(this.CmdGpOnClick);
             // 
             // cmdGpOff
             // 
@@ -98,7 +98,7 @@
             this.cmdGpOff.TabIndex = 9;
             this.cmdGpOff.Text = "Global Power Off";
             this.cmdGpOff.UseVisualStyleBackColor = true;
-            this.cmdGpOff.Click += new System.EventHandler(this.cmdGpOff_Click);
+            this.cmdGpOff.Click += new System.EventHandler(this.CmdGpOffClick);
             // 
             // lbFunctions
             // 
@@ -118,7 +118,7 @@
             this.cmdAdvanced.TabIndex = 19;
             this.cmdAdvanced.Text = "Advanced";
             this.cmdAdvanced.UseVisualStyleBackColor = true;
-            this.cmdAdvanced.Click += new System.EventHandler(this.cmdAdvanced_Click);
+            this.cmdAdvanced.Click += new System.EventHandler(CmdAdvancedClick);
             // 
             // cmdServoProgrammer
             // 
@@ -128,7 +128,7 @@
             this.cmdServoProgrammer.TabIndex = 17;
             this.cmdServoProgrammer.Text = "Servo Configurator";
             this.cmdServoProgrammer.UseVisualStyleBackColor = true;
-            this.cmdServoProgrammer.Click += new System.EventHandler(this.cmdServoProgrammer_Click);
+            this.cmdServoProgrammer.Click += new System.EventHandler(this.CmdServoProgrammerClick);
             // 
             // cmdServoTester
             // 
@@ -138,7 +138,7 @@
             this.cmdServoTester.TabIndex = 20;
             this.cmdServoTester.Text = "Servo Tester";
             this.cmdServoTester.UseVisualStyleBackColor = true;
-            this.cmdServoTester.Click += new System.EventHandler(this.cmdServoTester_Click);
+            this.cmdServoTester.Click += new System.EventHandler(this.CmdServoTesterClick);
             // 
             // CommandControl
             // 

@@ -17,23 +17,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using Message = LocoNetToolBox.Protocol.Message;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class ServoTester : Form
     {
-        private readonly Action<Request> execute;
+        private readonly AsyncLocoBuffer lb;
         private readonly LocoNetState lnState;
 
         /// <summary>
@@ -46,20 +41,34 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        public ServoTester(Action<Request> execute, LocoNetState lnState)
+        public ServoTester(AsyncLocoBuffer lb, LocoNetState lnState)
         {
-            this.execute = execute;
+            this.lb = lb;
             this.lnState = lnState;
             InitializeComponent();
         }
 
         /// <summary>
+        /// Execute the given request.
+        /// </summary>
+        private void Execute(Request request)
+        {
+            lb.BeginRequest(request, e =>
+            {
+                if (e.HasError)
+                {
+                    MessageBox.Show(e.Error.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            });
+        }
+
+        /// <summary>
         /// Go left.
         /// </summary>
-        private void cmdLeft_Click(object sender, EventArgs e)
+        private void CmdLeftClick(object sender, EventArgs e)
         {
-            execute(new SwitchRequest()
-            {
+            Execute(new SwitchRequest
+                        {
                 Address = (int)udAddress.Value - 1,
                 Direction = true,
                 Output = true
@@ -69,10 +78,10 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Go right
         /// </summary>
-        private void button1_Click(object sender, EventArgs e)
+        private void CmdRightClick(object sender, EventArgs e)
         {
-            execute(new SwitchRequest()
-            {
+            Execute(new SwitchRequest
+                        {
                 Address = (int)udAddress.Value - 1,
                 Direction = false,
                 Output = true
@@ -82,7 +91,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Start a duration test
         /// </summary>
-        private void cmdStart_Click(object sender, EventArgs e)
+        private void CmdStartClick(object sender, EventArgs e)
         {
             cmdStart.Enabled = false;
             cmdStop.Enabled = true;
@@ -92,7 +101,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Stop the duration test
         /// </summary>
-        private void cmdStop_Click(object sender, EventArgs e)
+        private void CmdStopClick(object sender, EventArgs e)
         {
             cmdStop.Enabled = false;
             testWorker.CancelAsync();
@@ -101,15 +110,15 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Run duration test
         /// </summary>
-        private void testWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void TestWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             var address = (int) e.Argument;
             var direction = true;
             while (!testWorker.CancellationPending)
             {
                 // Run the test
-                execute(new SwitchRequest()
-                {
+                Execute(new SwitchRequest
+                            {
                     Address = address - 1,
                     Direction = direction,
                     Output = true
@@ -127,7 +136,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Test stopped
         /// </summary>
-        private void testWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void TestWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             cmdStart.Enabled = true;
             cmdStop.Enabled = false;
