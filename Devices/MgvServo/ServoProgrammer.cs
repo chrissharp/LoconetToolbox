@@ -17,9 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 using LocoNetToolBox.Protocol;
@@ -31,17 +28,8 @@ namespace LocoNetToolBox.Devices.MgvServo
     /// </summary>
     public sealed class ServoProgrammer
     {
-        private readonly LocoBuffer lb;
-        private bool programmingMode = false;
-        private static readonly int[] SPEED_MASKS = { 0x01, 0x05, 0x0D, 0x0F };
-
-        /// <summary>
-        /// Default ctor
-        /// </summary>
-        internal ServoProgrammer(LocoBuffer lb)
-        {
-            this.lb = lb;
-        }
+        private bool programmingMode;
+        private static readonly int[] SpeedMasks = { 0x01, 0x05, 0x0D, 0x0F };
 
         /// <summary>
         /// Address of first bit
@@ -71,58 +59,55 @@ namespace LocoNetToolBox.Devices.MgvServo
         /// <summary>
         /// Set all bits to 0.
         /// </summary>
-        public void BitsToZero()
+        internal void BitsToZero(LocoBuffer lb)
         {
             if (programmingMode)
             {
                 throw new InvalidOperationException("Only valid in normal mode");
             }
-            else
-            {
-                SetB4(false);
-                SetB3(false);
-                SetB2(false);
-                SetB1(false);
-            }
+            SetB4(lb, false);
+            SetB3(lb, false);
+            SetB2(lb, false);
+            SetB1(lb, false);
         }
 
         /// <summary>
         /// Go into programming mode.
         /// </summary>
-        public void EnterProgrammingMode()
+        internal void EnterProgrammingMode(LocoBuffer lb)
         {
             if (!programmingMode)
             {
                 // Turn all bits off
-                SetB4(false);
-                SetB3(false);
-                SetB2(false);
-                SetB1(false);
+                SetB4(lb, false);
+                SetB3(lb, false);
+                SetB2(lb, false);
+                SetB1(lb, false);
                 Thread.Sleep(1000);
 
                 // Turn bit 1 on
-                SetB1(true);
+                SetB1(lb, true);
                 Thread.Sleep(6);
                 // Turn bit 2 on
-                SetB2(true);
+                SetB2(lb, true);
                 Thread.Sleep(6);
                 // Turn bit 3 on
-                SetB3(true);
+                SetB3(lb, true);
                 Thread.Sleep(6);
                 // Turn bit 4 on
-                SetB4(true);
+                SetB4(lb, true);
                 Thread.Sleep(6);
                 // Turn bit 1 off
-                SetB1(false);
+                SetB1(lb, false);
                 Thread.Sleep(6);
                 // Turn bit 2 off
-                SetB2(false);
+                SetB2(lb, false);
                 Thread.Sleep(6);
                 // Turn bit 3 off
-                SetB3(false);
+                SetB3(lb, false);
                 Thread.Sleep(6);
                 // Turn bit 4 off
-                SetB4(false);
+                SetB4(lb, false);
                 Thread.Sleep(6);
 
                 programmingMode = true;
@@ -132,125 +117,125 @@ namespace LocoNetToolBox.Devices.MgvServo
         /// <summary>
         /// Set the target turnout
         /// </summary>
-        public void SetTarget()
+        internal void SetTarget(LocoBuffer lb)
         {
-            EnterProgrammingMode();
+            EnterProgrammingMode(lb);
 
-            SendNibble(0x01); // Command
-            SendNibble(Turnout - 1); // Turnout encoded as 0-3
+            SendNibble(lb, 0x01); // Command
+            SendNibble(lb, Turnout - 1); // Turnout encoded as 0-3
         }
 
         /// <summary>
         /// Set the left edge position in degrees
         /// </summary>
         /// <param name="value">Maximum left position (in time units) from 1 - 100</param>
-        public void SetLeftDegrees(int value)
+        internal void SetLeftDegrees(LocoBuffer lb, int value)
         {
-            EnterProgrammingMode();
+            EnterProgrammingMode(lb);
 
-            SendNibble(0x02); // Command
-            SendNibble((value >> 1) & 0x07); // value bit 4,3,2
-            SendNibble((value >> 4) & 0x07); // value bit 7,6,5
+            SendNibble(lb, 0x02); // Command
+            SendNibble(lb, (value >> 1) & 0x07); // value bit 4,3,2
+            SendNibble(lb, (value >> 4) & 0x07); // value bit 7,6,5
         }
 
         /// <summary>
         /// Set the right edge position in degrees
         /// </summary>
         /// <param name="value">Maximum right position (in time units) from 1 - 100</param>
-        public void SetRightDegrees(int value)
+        internal void SetRightDegrees(LocoBuffer lb, int value)
         {
-            EnterProgrammingMode();
+            EnterProgrammingMode(lb);
 
-            SendNibble(0x03); // Command
-            SendNibble((value >> 1) & 0x07); // value bit 4,3,2
-            SendNibble((value >> 4) & 0x07); // value bit 7,6,5
+            SendNibble(lb, 0x03); // Command
+            SendNibble(lb, (value >> 1) & 0x07); // value bit 4,3,2
+            SendNibble(lb, (value >> 4) & 0x07); // value bit 7,6,5
         }
 
         /// <summary>
         /// Set the direction of the relays. 
         /// </summary>
         /// <param name="leftLsb">If true, left is the LSB and right is MSB, otherwise left is MSB and right is LSB</param>
-        public void SetRelaisPosition(bool leftLsb)
+        internal void SetRelaisPosition(LocoBuffer lb, bool leftLsb)
         {
-            EnterProgrammingMode();
+            EnterProgrammingMode(lb);
 
-            SendNibble(0x04); // Command
-            SendNibble(leftLsb ? 0 : 1);
+            SendNibble(lb, 0x04); // Command
+            SendNibble(lb, leftLsb ? 0 : 1);
         }
 
         /// <summary>
         /// Set the speed of a switch.
         /// </summary>
         /// <param name="value">Between 1 and 4</param>
-        public void SetSpeed(int value)
+        internal void SetSpeed(LocoBuffer lb, int value)
         {
             if ((value < 1) || (value > 4))
             {
                 throw new ArgumentException("Value must be between 1 and 4");
             }
 
-            EnterProgrammingMode();
+            EnterProgrammingMode(lb);
 
-            SendNibble(0x05); // Command
-            SendNibble(SPEED_MASKS[value - 1] & 0x07); // LSB
-            SendNibble((SPEED_MASKS[value - 1] >> 3) & 0x07); // MSB
+            SendNibble(lb, 0x05); // Command
+            SendNibble(lb, SpeedMasks[value - 1] & 0x07); // LSB
+            SendNibble(lb, (SpeedMasks[value - 1] >> 3) & 0x07); // MSB
         }
 
         /// <summary>
         /// Set the duration from left to right
         /// </summary>
-        public void ExitProgrammingMode()
+        internal void ExitProgrammingMode(LocoBuffer lb)
         {
             if (programmingMode)
             {
-                SendNibble(0x07); // Command
+                SendNibble(lb, 0x07); // Command
                 programmingMode = false;
 
                 // Reset all 4 bits
-                SetB4(false);
-                SetB3(false);
-                SetB2(false);
-                SetB1(false);
+                SetB4(lb, false);
+                SetB3(lb, false);
+                SetB2(lb, false);
+                SetB1(lb, false);
             }
         }
 
         /// <summary>
         /// Send a 3-bits nibble.
         /// </summary>
-        private void SendNibble(int value)
+        private void SendNibble(LocoBuffer lb, int value)
         {
             // Lower b4 first
-            SetB4(false);
+            SetB4(lb, false);
 
             // Set b1
-            SetB1((value & 0x01) != 0);
+            SetB1(lb, (value & 0x01) != 0);
             // Set b2
-            SetB2((value & 0x02) != 0);
+            SetB2(lb, (value & 0x02) != 0);
             // Set b3
-            SetB3((value & 0x04) != 0);
+            SetB3(lb, (value & 0x04) != 0);
 
             // Raise B4 to transmit
-            SetB4(true);
+            SetB4(lb, true);
 
             // Wait a while
             Thread.Sleep(20);
 
             // Lower B4 to avoid duplication
-            SetB4(false);
+            SetB4(lb, false);
 
             // Wait a while
             Thread.Sleep(5);
         }
 
-        private void SetB1(bool on) { Execute(new SwitchRequest() { Address = Address1, Direction = on, Output = true }); }
-        private void SetB2(bool on) { Execute(new SwitchRequest() { Address = Address2, Direction = on, Output = true }); }
-        private void SetB3(bool on) { Execute(new SwitchRequest() { Address = Address3, Direction = on, Output = true }); }
-        private void SetB4(bool on) { Execute(new SwitchRequest() { Address = Address4, Direction = on, Output = true }); }
+        private void SetB1(LocoBuffer lb, bool on) { Execute(lb, new SwitchRequest { Address = Address1, Direction = on, Output = true }); }
+        private void SetB2(LocoBuffer lb, bool on) { Execute(lb, new SwitchRequest { Address = Address2, Direction = on, Output = true }); }
+        private void SetB3(LocoBuffer lb, bool on) { Execute(lb, new SwitchRequest { Address = Address3, Direction = on, Output = true }); }
+        private void SetB4(LocoBuffer lb, bool on) { Execute(lb, new SwitchRequest { Address = Address4, Direction = on, Output = true }); }
 
         /// <summary>
         /// Execute the given request.
         /// </summary>
-        private void Execute(Request request)
+        private static void Execute(LocoBuffer lb, Request request)
         {
             request.Execute(lb);
         }

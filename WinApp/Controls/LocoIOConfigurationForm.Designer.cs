@@ -30,10 +30,10 @@
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdWriteAll = new System.Windows.Forms.Button();
-            this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOConfigurationControl();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdReadAll = new System.Windows.Forms.Button();
             this.readWorker = new System.ComponentModel.BackgroundWorker();
+            this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOConfigurationControl();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,16 +66,6 @@
             this.cmdWriteAll.TabIndex = 2;
             this.cmdWriteAll.Text = "&Write all";
             this.cmdWriteAll.UseVisualStyleBackColor = true;
-            this.cmdWriteAll.Click += new System.EventHandler(this.cmdWriteAll_Click);
-            // 
-            // configurationControl
-            // 
-            this.tlpMain.SetColumnSpan(this.configurationControl, 4);
-            this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.configurationControl.Location = new System.Drawing.Point(3, 3);
-            this.configurationControl.Name = "configurationControl";
-            this.configurationControl.Size = new System.Drawing.Size(625, 308);
-            this.configurationControl.TabIndex = 0;
             // 
             // cmdClose
             // 
@@ -85,6 +75,7 @@
             this.cmdClose.TabIndex = 3;
             this.cmdClose.Text = "&Close";
             this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.CmdCloseClick);
             // 
             // cmdReadAll
             // 
@@ -94,11 +85,20 @@
             this.cmdReadAll.TabIndex = 4;
             this.cmdReadAll.Text = "&Read all";
             this.cmdReadAll.UseVisualStyleBackColor = true;
-            this.cmdReadAll.Click += new System.EventHandler(this.cmdReadAll_Click);
             // 
             // readWorker
             // 
             this.readWorker.WorkerSupportsCancellation = true;
+            // 
+            // configurationControl
+            // 
+            this.tlpMain.SetColumnSpan(this.configurationControl, 4);
+            this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.configurationControl.Location = new System.Drawing.Point(3, 3);
+            this.configurationControl.Name = "configurationControl";
+            this.configurationControl.Size = new System.Drawing.Size(625, 308);
+            this.configurationControl.TabIndex = 0;
+            this.configurationControl.BusyChanged += new System.EventHandler(this.ConfigurationControlBusyChanged);
             // 
             // LocoIOConfigurationForm
             // 

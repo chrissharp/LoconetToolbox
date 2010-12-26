@@ -50,17 +50,33 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             this.lb = lb;
             this.programmer = new Programmer(address);
-            readWorker.RunWorkerAsync();
+            configurationControl.Initialize(lb, programmer);
         }
 
-        private void cmdReadAll_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Form is about to close.
+        /// </summary>
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-
+            base.OnFormClosing(e);
+            if (configurationControl.Busy)
+                e.Cancel = true;
         }
 
-        private void cmdWriteAll_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Close me.
+        /// </summary>
+        private void CmdCloseClick(object sender, EventArgs e)
         {
+            Close();
+        }
 
+        /// <summary>
+        /// Programmer busy?
+        /// </summary>
+        private void ConfigurationControlBusyChanged(object sender, EventArgs e)
+        {
+            cmdClose.Enabled = !configurationControl.Busy;
         }
     }
 }

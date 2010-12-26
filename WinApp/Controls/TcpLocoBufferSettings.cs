@@ -17,17 +17,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.IO.Ports;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Windows.Forms;
-
-using LocoNetToolBox.WinApp.Preferences;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
@@ -54,34 +46,48 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             set
             {
-                if (this.locoBuffer != null)
+                if (locoBuffer != null)
                 {
-                    this.locoBuffer.Closed -= new EventHandler(locoBuffer_Closed);
-                    this.locoBuffer.Opened -= new EventHandler(locoBuffer_Opened);
+                    locoBuffer.Closed -= LocoBufferClosed;
+                    locoBuffer.Opened -= LocoBufferOpened;
                 }
-                this.locoBuffer = value;
+                locoBuffer = value;
                 if (value != null)
                 {
                     tbIpAddress.Text = value.IpAddress;
                     tbPort.Text = value.Port.ToString();
                 }
                 Save();
-                if (this.locoBuffer != null)
+                if (locoBuffer != null)
                 {
-                    this.locoBuffer.Closed += new EventHandler(locoBuffer_Closed);
-                    this.locoBuffer.Opened += new EventHandler(locoBuffer_Opened);
+                    locoBuffer.Closed += LocoBufferClosed;
+                    locoBuffer.Opened += LocoBufferOpened;
                 }
             }
         }
 
-        void locoBuffer_Opened(object sender, EventArgs e)
+        void LocoBufferOpened(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(LocoBufferOpened), sender, e);
+            }
+            else
+            {
+                Enabled = false;
+            }
         }
 
-        void locoBuffer_Closed(object sender, EventArgs e)
+        void LocoBufferClosed(object sender, EventArgs e)
         {
-            this.Enabled = true;
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(LocoBufferClosed), sender, e);
+            }
+            else
+            {
+                Enabled = true;
+            }
         }
 
         /// <summary>
@@ -89,7 +95,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void Save()
         {
-            var lb = this.locoBuffer;
+            var lb = locoBuffer;
             if (lb != null) {
                 // Close first
                 lb.Close();

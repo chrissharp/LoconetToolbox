@@ -17,23 +17,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-
-using LocoNetToolBox.Protocol;
-using Message = LocoNetToolBox.Protocol.Message;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class ServoProgrammerStep4 : UserControl
     {
         private Devices.MgvServo.ServoProgrammer programmer;
+        private AsyncLocoBuffer lb;
 
         /// <summary>
         /// Default ctor
@@ -46,8 +38,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal void Initialize(Devices.MgvServo.ServoProgrammer programmer)
+        internal void Initialize(AsyncLocoBuffer lb, Devices.MgvServo.ServoProgrammer programmer)
         {
+            this.lb = lb;
             this.programmer = programmer;
             programmer.Turnout = turnoutSelection.Turnout;
         }
@@ -57,7 +50,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void cmdSetLeft_Click(object sender, EventArgs e)
         {
-            programmer.SetLeftDegrees((int)udLeft.Value);
+            lb.BeginRequest(
+                x => programmer.SetLeftDegrees(x, (int)udLeft.Value), 
+                CompletedHandler);
         }
 
         /// <summary>
@@ -65,7 +60,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void cmdSetRight_Click(object sender, EventArgs e)
         {
-            programmer.SetRightDegrees((int)udRight.Value);
+            lb.BeginRequest(
+                x => programmer.SetRightDegrees(x, (int) udRight.Value),
+                CompletedHandler);
         }
 
         /// <summary>
@@ -73,8 +70,13 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void turnoutSelection_TurnoutChanged(object sender, EventArgs e)
         {
-            programmer.Turnout = turnoutSelection.Turnout;
-            programmer.SetTarget();
+            lb.BeginRequest(
+                x =>
+                    {
+                        programmer.Turnout = turnoutSelection.Turnout;
+                        programmer.SetTarget(x);
+                    },
+                CompletedHandler);
         }
 
         /// <summary>
@@ -82,12 +84,24 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void cmdSetSpeed_Click(object sender, EventArgs e)
         {
-            programmer.SetSpeed((int)udSpeed.Value);
+            lb.BeginRequest(
+                x => programmer.SetSpeed(x, (int) udSpeed.Value),
+                CompletedHandler);
         }
 
         private void cmdSetRelay_Click(object sender, EventArgs e)
         {
-            programmer.SetRelaisPosition(cbLeftLSB.Checked);
+            lb.BeginRequest(
+                x => programmer.SetRelaisPosition(x, cbLeftLSB.Checked),
+                CompletedHandler);
+        }
+
+        private static void CompletedHandler(AsyncRequestCompletedEventArgs e)
+        {
+            if (e.HasError)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
         }
     }
 }

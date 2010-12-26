@@ -18,7 +18,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         internal Programmer(LocoNetAddress address)
         {
             this.address = address;
-            this.timeout = 500;
+            timeout = 500;
         }
 
         /// <summary>
@@ -29,10 +29,11 @@ namespace LocoNetToolBox.Devices.LocoIO
             var list = configs.ToList();
             list.Sort();
 
-            foreach (var config in configs)
+            foreach (var iterator in configs)
             {
-                var cmd = new PeerXferRequest1()
-                {
+                var config = iterator;
+                var cmd = new PeerXferRequest1
+                              {
                     Command = PeerXferRequest.Commands.Read,
                     SvAddress = config.Index,
                     DestinationLow = address.Address,
@@ -40,9 +41,10 @@ namespace LocoNetToolBox.Devices.LocoIO
                 };
 
                 config.Valid = false;
-                var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(lb, x => {
-                    return (address.Equals(x.Source) && x.SvAddress == config.Index);
-                }, timeout);
+                var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
+                    lb, 
+                    x => (address.Equals(x.Source) && x.SvAddress == config.Index),
+                    timeout);
                 if (result != null)
                 {
                     config.Value = result.Data1;
@@ -61,13 +63,13 @@ namespace LocoNetToolBox.Devices.LocoIO
 
             foreach (var config in configs)
             {
-                var cmd = new PeerXferRequest1()
-                {
+                var cmd = new PeerXferRequest1
+                              {
                     Command = PeerXferRequest.Commands.Write,
                     SvAddress = config.Index,
                     DestinationLow = address.Address,
                     SubAddress = address.SubAddress,
-                    Data1 = (byte)config.Value,
+                    Data1 = config.Value,
                 };
                 cmd.Execute(lb);
             }

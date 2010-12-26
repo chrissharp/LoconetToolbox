@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using System.Threading;
 
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
@@ -36,6 +37,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public event EventHandler Continue;
 
         private Devices.MgvServo.ServoProgrammer programmer;
+        private AsyncLocoBuffer lb;
 
         /// <summary>
         /// Default ctor
@@ -48,8 +50,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal void Initialize(Devices.MgvServo.ServoProgrammer programmer)
+        internal void Initialize(AsyncLocoBuffer lb, Devices.MgvServo.ServoProgrammer programmer)
         {
+            this.lb = lb;
             this.programmer = programmer;
             address_AddressChanged(null, null);
         }
@@ -70,11 +73,15 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void cmdReset_Click(object sender, EventArgs e)
         {
-            programmer.BitsToZero();
-            if (Continue != null)
-            {
-                Continue(this, EventArgs.Empty);
-            }
+            lb.BeginRequest(
+                x => programmer.BitsToZero(x),
+                x =>
+                    {
+                        if (Continue != null)
+                        {
+                            Continue(this, EventArgs.Empty);
+                        }
+                    });
         }
     }
 }

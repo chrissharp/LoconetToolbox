@@ -17,22 +17,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoIOConfigurationControl : UserControl
     {
+        public event EventHandler BusyChanged;
+
         private LocoIOConfig config;
+        private AsyncLocoBuffer lb;
+        private Programmer programmer;
+        private int busy;
 
         /// <summary>
         /// Default ctor
@@ -40,8 +40,35 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOConfigurationControl()
         {
             InitializeComponent();
-            connector1.FirstPin = 1;
-            connector2.FirstPin = 9;
+            connector1.Connector = Connector.First;
+            connector2.Connector = Connector.Second;
+        }
+
+        /// <summary>
+        /// Is a read/write action busy?
+        /// </summary>
+        internal bool Busy
+        {
+            get { return (busy > 0); }
+            set
+            {
+                var oldValue = Busy;
+                if (value) { busy++; }
+                else { busy--; }
+                if (oldValue != Busy) 
+                {
+                   BusyChanged.Fire(this); 
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initialize for a specific module
+        /// </summary>
+        internal void Initialize(AsyncLocoBuffer lb, Programmer programmer)
+        {
+            this.lb = lb;
+            this.programmer = programmer;
         }
 
         /// <summary>
@@ -71,9 +98,42 @@ namespace LocoNetToolBox.WinApp.Controls
             // Get all properly read configs
             var validConfigs = configs.Where(x => x.Valid).ToArray();
             */
+        }
 
+        private void Write(LocoIOConnectorConfigurationControl connector, Button cmdWrite)
+        {
+            Busy = true;
+            var settings = connector.CreateConfig();
+            connector.Enabled = false;
+            cmdWrite.Enabled = false;
+            lb.BeginRequest(
+                x => programmer.Write(x, settings),
+                x =>
+                {
+                    connector.Enabled = true;
+                    cmdWrite.Enabled = true;
+                    Busy = false;
+                    if (x.HasError)
+                    {
+                        MessageBox.Show(x.Error.Message);
+                    }
+                });            
+        }
 
+        /// <summary>
+        /// Write to the first connector
+        /// </summary>
+        private void CmdWrite1Click(object sender, EventArgs e)
+        {
+            Write(connector1, cmdWrite1);
+        }
 
+        /// <summary>
+        /// Write to the second connector
+        /// </summary>
+        private void CmdWrite2Click(object sender, EventArgs e)
+        {
+            Write(connector2, cmdWrite2);
         }
     }
 }

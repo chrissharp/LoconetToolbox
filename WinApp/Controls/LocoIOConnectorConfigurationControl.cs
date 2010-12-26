@@ -29,6 +29,8 @@ namespace LocoNetToolBox.WinApp.Controls
         private readonly Label[] labels;
         private readonly NumericUpDown[] addressControls;
         private readonly AddressList addresses;
+        private Connector connector;
+        private int oldAddress;
 
         /// <summary>
         /// Default ctor
@@ -46,13 +48,35 @@ namespace LocoNetToolBox.WinApp.Controls
                 var tbAddr = addressControls[i];
                 tbAddr.Value = addresses[i];
                 var index = i;
-                tbAddr.GotFocus += (s, x) => tbAddr.Select(0, tbAddr.Value.ToString().Length);
-                tbAddr.ValueChanged += (s, x) => addresses[index] = (int)tbAddr.Value;
+                tbAddr.GotFocus += (s, x) => { 
+                    tbAddr.Select(0, tbAddr.Value.ToString().Length);
+                    oldAddress = (int)tbAddr.Value;
+                };
+                tbAddr.ValueChanged += (s, x) => {
+                    addresses[index] = (int) tbAddr.Value;
+                    var newAddress = (int)tbAddr.Value;
+                    var tbNextAddr = (index + 1 < 8) ? addressControls[index + 1] : null;
+                    if ((tbNextAddr != null) && (tbNextAddr.Value == oldAddress +1))
+                    {
+                        // Adjust next address
+                        oldAddress = (int)tbNextAddr.Value;
+                        tbNextAddr.Value = newAddress + 1;
+                    }
+                };
             }
 
-            FirstPin = 1;
+            Connector = Connector.First;
             lvModes.Items.AddRange(ConnectorMode.All.Select(x => new ListViewItem(x.Name) { Tag = x }).ToArray());
             UpdateUI();
+        }
+
+        /// <summary>
+        /// Create a configuration from the settings found in this control.
+        /// </summary>
+        public ConnectorConfig CreateConfig()
+        {
+            var mode = SelectedMode ?? ConnectorMode.None;
+            return mode.CreateConfig(connector, addresses);
         }
 
         /// <summary>
@@ -63,15 +87,16 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Sets the pin number of the first pin.
+        /// Sets the connector, used to set the pins.
         /// </summary>
-        public int FirstPin
+        public Connector Connector
         {
             set
             {
+                var firstPin = (value == Connector.First) ? 1 : 9;
                 for (int i = 0; i < 8; i++)
                 {
-                    labels[i].Text = (value + i).ToString();
+                    labels[i].Text = (firstPin + i).ToString();
                 }
             }
         }

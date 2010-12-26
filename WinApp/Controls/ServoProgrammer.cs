@@ -42,9 +42,9 @@ namespace LocoNetToolBox.WinApp.Controls
         internal ServoProgrammer(AsyncLocoBuffer lb)
         {
             this.lb = lb;
-            this.programmer = new Devices.MgvServo.ServoProgrammer(lb.LocoBuffer);
+            this.programmer = new Devices.MgvServo.ServoProgrammer();
             InitializeComponent();
-            step1.Initialize(programmer);
+            step1.Initialize(lb, programmer);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            programmer.ExitProgrammingMode();
+            programmer.ExitProgrammingMode(lb.LocoBuffer);
             base.OnFormClosing(e);
         }
 
@@ -61,7 +61,7 @@ namespace LocoNetToolBox.WinApp.Controls
             this.SuspendLayout();
             step1.Visible = false;
             step2.Visible = true;
-            step2.Initialize(programmer);
+            step2.Initialize(lb, programmer);
             lbStep.Text = "Step 2/4";
             this.ResumeLayout(true);
         }
@@ -80,7 +80,7 @@ namespace LocoNetToolBox.WinApp.Controls
             this.SuspendLayout();
             step3.Visible = false;
             step4.Visible = true;
-            step4.Initialize(programmer);
+            step4.Initialize(lb, programmer);
             lbStep.Text = "Step 4/4";
             this.ResumeLayout(true);
         }

@@ -30,11 +30,11 @@
         {
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdWrite2 = new System.Windows.Forms.Button();
-            this.connector1 = new LocoNetToolBox.WinApp.Controls.LocoIOConnectorConfigurationControl();
-            this.connector2 = new LocoNetToolBox.WinApp.Controls.LocoIOConnectorConfigurationControl();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmdWrite1 = new System.Windows.Forms.Button();
+            this.connector1 = new LocoNetToolBox.WinApp.Controls.LocoIOConnectorConfigurationControl();
+            this.connector2 = new LocoNetToolBox.WinApp.Controls.LocoIOConnectorConfigurationControl();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,24 +68,7 @@
             this.cmdWrite2.TabIndex = 5;
             this.cmdWrite2.Text = "Write";
             this.cmdWrite2.UseVisualStyleBackColor = true;
-            // 
-            // connector1
-            // 
-            this.connector1.AutoSize = true;
-            this.connector1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connector1.Location = new System.Drawing.Point(3, 23);
-            this.connector1.Name = "connector1";
-            this.connector1.Size = new System.Drawing.Size(314, 221);
-            this.connector1.TabIndex = 0;
-            // 
-            // connector2
-            // 
-            this.connector2.AutoSize = true;
-            this.connector2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connector2.Location = new System.Drawing.Point(323, 23);
-            this.connector2.Name = "connector2";
-            this.connector2.Size = new System.Drawing.Size(314, 221);
-            this.connector2.TabIndex = 1;
+            this.cmdWrite2.Click += new System.EventHandler(this.CmdWrite2Click);
             // 
             // label1
             // 
@@ -116,6 +99,25 @@
             this.cmdWrite1.TabIndex = 4;
             this.cmdWrite1.Text = "Write";
             this.cmdWrite1.UseVisualStyleBackColor = true;
+            this.cmdWrite1.Click += new System.EventHandler(this.CmdWrite1Click);
+            // 
+            // connector1
+            // 
+            this.connector1.AutoSize = true;
+            this.connector1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.connector1.Location = new System.Drawing.Point(3, 23);
+            this.connector1.Name = "connector1";
+            this.connector1.Size = new System.Drawing.Size(314, 221);
+            this.connector1.TabIndex = 0;
+            // 
+            // connector2
+            // 
+            this.connector2.AutoSize = true;
+            this.connector2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.connector2.Location = new System.Drawing.Point(323, 23);
+            this.connector2.Name = "connector2";
+            this.connector2.Size = new System.Drawing.Size(314, 221);
+            this.connector2.TabIndex = 1;
             // 
             // LocoIOConfigurationControl
             // 
