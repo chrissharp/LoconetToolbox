@@ -31,34 +31,26 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.lbHeader = new System.Windows.Forms.Label();
             this.locoBufferSettings = new LocoNetToolBox.WinApp.Controls.LocoBufferSettings();
-            this.lbLog = new System.Windows.Forms.ListBox();
-            this.lbInputs = new LocoNetToolBox.WinApp.Controls.InputStateView();
-            this.lbTraffic = new System.Windows.Forms.Label();
-            this.lvFeedbacks = new System.Windows.Forms.Label();
+            this.powerCommandControl1 = new LocoNetToolBox.WinApp.Controls.PowerCommandControl();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
             // 
+            this.tlpMain.AutoSize = true;
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.Controls.Add(this.lbHeader, 0, 0);
             this.tlpMain.Controls.Add(this.locoBufferSettings, 0, 1);
-            this.tlpMain.Controls.Add(this.lbLog, 0, 5);
-            this.tlpMain.Controls.Add(this.lbInputs, 0, 3);
-            this.tlpMain.Controls.Add(this.lbTraffic, 0, 4);
-            this.tlpMain.Controls.Add(this.lvFeedbacks, 0, 2);
-            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Controls.Add(this.powerCommandControl1, 0, 2);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 6;
+            this.tlpMain.RowCount = 3;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMain.Size = new System.Drawing.Size(396, 312);
+            this.tlpMain.Size = new System.Drawing.Size(396, 106);
             this.tlpMain.TabIndex = 0;
             // 
             // lbHeader
@@ -75,47 +67,19 @@
             this.locoBufferSettings.AutoSize = true;
             this.locoBufferSettings.Dock = System.Windows.Forms.DockStyle.Top;
             this.locoBufferSettings.Location = new System.Drawing.Point(3, 16);
-            this.locoBufferSettings.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.locoBufferSettings.Name = "locoBufferSettings";
-            this.locoBufferSettings.Size = new System.Drawing.Size(390, 152);
+            this.locoBufferSettings.Size = new System.Drawing.Size(390, 46);
             this.locoBufferSettings.TabIndex = 1;
-            this.locoBufferSettings.LocoBufferChanged += new System.EventHandler(this.locoBufferSettings_LocoBufferChanged);
+            this.locoBufferSettings.LocoBufferChanged += new System.EventHandler(this.LocoBufferSettingsLocoBufferChanged);
             // 
-            // lbLog
+            // powerCommandControl1
             // 
-            this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLog.FormattingEnabled = true;
-            this.lbLog.Location = new System.Drawing.Point(3, 266);
-            this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(390, 43);
-            this.lbLog.TabIndex = 2;
-            // 
-            // lbInputs
-            // 
-            this.lbInputs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbInputs.Location = new System.Drawing.Point(3, 204);
-            this.lbInputs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
-            this.lbInputs.Name = "lbInputs";
-            this.lbInputs.Size = new System.Drawing.Size(390, 26);
-            this.lbInputs.TabIndex = 3;
-            // 
-            // lbTraffic
-            // 
-            this.lbTraffic.AutoSize = true;
-            this.lbTraffic.Location = new System.Drawing.Point(3, 250);
-            this.lbTraffic.Name = "lbTraffic";
-            this.lbTraffic.Size = new System.Drawing.Size(134, 13);
-            this.lbTraffic.TabIndex = 4;
-            this.lbTraffic.Text = "LocoNet traffic (advanced)";
-            // 
-            // lvFeedbacks
-            // 
-            this.lvFeedbacks.AutoSize = true;
-            this.lvFeedbacks.Location = new System.Drawing.Point(3, 188);
-            this.lvFeedbacks.Name = "lvFeedbacks";
-            this.lvFeedbacks.Size = new System.Drawing.Size(140, 13);
-            this.lvFeedbacks.TabIndex = 5;
-            this.lvFeedbacks.Text = "LocoNet Address Feedback";
+            this.powerCommandControl1.AutoSize = true;
+            this.powerCommandControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.powerCommandControl1.Location = new System.Drawing.Point(3, 68);
+            this.powerCommandControl1.Name = "powerCommandControl1";
+            this.powerCommandControl1.Size = new System.Drawing.Size(390, 35);
+            this.powerCommandControl1.TabIndex = 2;
             // 
             // LocoBufferView
             // 
@@ -127,6 +91,7 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -135,9 +100,6 @@
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.Label lbHeader;
         private LocoBufferSettings locoBufferSettings;
-        private System.Windows.Forms.ListBox lbLog;
-        private InputStateView lbInputs;
-        private System.Windows.Forms.Label lbTraffic;
-        private System.Windows.Forms.Label lvFeedbacks;
+        private PowerCommandControl powerCommandControl1;
     }
 }

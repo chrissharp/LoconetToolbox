@@ -59,19 +59,33 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Command to send
         /// </summary>
-        public override PeerXferRequest.Commands OriginalCommand { get { return (PeerXferRequest.Commands)data[6]; } }
+        public override PeerXferRequest.Commands OriginalCommand
+        {
+            get { return (PeerXferRequest.Commands)D1; }
+        }
 
         /// <summary>
         /// 16-bit EEPROM address for read/write
         /// </summary>
-        public override int SvAddress { get { return data[7]; } }
+        public override int SvAddress { get { return D2; } }
 
-        public override int LocoIOVersion { get { return GetSplitValue(data[8], data[5], 2); }}
+        public override int LocoIOVersion { get { return D3; }}
 
         /// <summary>
         /// D1
         /// </summary>
-        public override byte Data1 { get { return GetSplitValue(data[12], data[10], 2); } }
+        public override byte Data1
+        {
+            get
+            {
+                if (IsSourcePC)
+                    return D4;
+                if (OriginalCommand == PeerXferRequest.Commands.Write)
+                    return D8;
+                else
+                    return D6;
+            }
+        }
 
         /// <summary>
         /// D2
@@ -82,5 +96,14 @@ namespace LocoNetToolBox.Protocol
         /// D3
         /// </summary>
         public override byte Data3 { get { return GetSplitValue(data[14], data[10], 0); } }
+
+        private byte D1 { get { return GetSplitValue(data[6], data[5], 0); } }
+        private byte D2 { get { return GetSplitValue(data[7], data[5], 1); } }
+        private byte D3 { get { return GetSplitValue(data[8], data[5], 2); } }
+        private byte D4 { get { return GetSplitValue(data[9], data[5], 3); } }
+        private byte D5 { get { return GetSplitValue(data[11], data[10], 0); } }
+        private byte D6 { get { return GetSplitValue(data[12], data[10], 1); } }
+        private byte D7 { get { return GetSplitValue(data[13], data[10], 2); } }
+        private byte D8 { get { return GetSplitValue(data[14], data[10], 3); } }
     }
 }

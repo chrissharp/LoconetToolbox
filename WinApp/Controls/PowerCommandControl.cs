@@ -24,15 +24,14 @@ using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
-    public partial class CommandControl : UserControl
+    public partial class PowerCommandControl : UserControl
     {
         private AsyncLocoBuffer lb;
-        private LocoNetState lnState;
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        public CommandControl()
+        public PowerCommandControl()
         {
             InitializeComponent();
         }
@@ -41,7 +40,6 @@ namespace LocoNetToolBox.WinApp.Controls
         /// Connect to locobuffer
         /// </summary>
         internal AsyncLocoBuffer LocoBuffer { set { lb = value; } }
-        internal LocoNetState LocoNetState  { set { lnState = value;}}
 
         /// <summary>
         /// Execute the given request.
@@ -56,38 +54,14 @@ namespace LocoNetToolBox.WinApp.Controls
             });
         }
 
-        private void CmdQueryClick(object sender, EventArgs e)
+        private void CmdGpOnClick(object sender, EventArgs e)
         {
-            Execute(new PeerXferRequest1
-                        {
-                Command = PeerXferRequest.Commands.Read,
-                DestinationLow = 0,
-               // DestinationHigh = 0,
-                SvAddress = 0
-            });
+            Execute(new GlobalPowerOn());
         }
 
-        /// <summary>
-        /// Open the servo programmer
-        /// </summary>
-        private void CmdServoProgrammerClick(object sender, EventArgs e)
+        private void CmdGpOffClick(object sender, EventArgs e)
         {
-            var dialog = new ServoProgrammer(lb);
-            dialog.Show();
-        }
-
-        private void CmdServoTesterClick(object sender, EventArgs e)
-        {
-            var dialog = new ServoTester(lb, lnState);
-            dialog.Show();
-        }
-
-        private void cmdAdvanced_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new LocoIODebugForm())
-            {
-                dialog.ShowDialog();
-            }
+            Execute(new GlobalPowerOff());
         }
     }
 }

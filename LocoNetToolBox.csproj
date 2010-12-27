@@ -63,6 +63,7 @@
     <Compile Include="Devices\LocoIO\PinConfig.cs" />
     <Compile Include="Devices\LocoIO\PinMode.cs" />
     <Compile Include="Devices\LocoIO\PinMode.Statics.cs" />
+    <Compile Include="Devices\LocoIO\ProgramException.cs" />
     <Compile Include="Devices\LocoIO\Programmer.cs" />
     <Compile Include="Devices\LocoIO\SVConfig.cs" />
     <Compile Include="Devices\LocoIO\SVConfigEventArgs.cs" />
@@ -103,6 +104,18 @@
     </Compile>
     <Compile Include="WinApp\Controls\AdvancedCommandControl.Designer.cs">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\PowerCommandControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\PowerCommandControl.Designer.cs">
+      <DependentUpon>PowerCommandControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoNetMonitor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoNetMonitor.Designer.cs">
+      <DependentUpon>LocoNetMonitor.cs</DependentUpon>
     </Compile>
     <Compile Include="WinApp\Controls\TcpLocoBufferSettings.cs">
       <SubType>UserControl</SubType>
@@ -248,6 +261,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\AdvancedCommandControl.resx">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\PowerCommandControl.resx">
+      <DependentUpon>PowerCommandControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\LocoNetMonitor.resx">
+      <DependentUpon>LocoNetMonitor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\TcpLocoBufferSettings.resx">
       <DependentUpon>TcpLocoBufferSettings.cs</DependentUpon>

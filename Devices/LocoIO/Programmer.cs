@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.Devices.LocoIO
@@ -9,6 +10,7 @@ namespace LocoNetToolBox.Devices.LocoIO
     /// </summary>
     public class Programmer
     {
+        private const int ATTEMPTS = 1;
         private readonly LocoNetAddress address;
         private readonly int timeout;
 
@@ -22,6 +24,52 @@ namespace LocoNetToolBox.Devices.LocoIO
         }
 
         /// <summary>
+        /// Read a single SV variable at the given index.
+        /// </summary>
+        internal bool TryReadSV(LocoBuffer lb, int index, out byte value)
+        {
+            var cmd = new PeerXferRequest1
+                          {
+                              Command = PeerXferRequest.Commands.Read,
+                              SvAddress = index,
+                              DestinationLow = address.Address,
+                              SubAddress = address.SubAddress,
+                          };
+
+            var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
+                lb,
+                x => (address.Equals(x.Source) && (x.SvAddress == index) && (x.OriginalCommand == PeerXferRequest.Commands.Read)),
+                timeout);
+            if (result != null)
+            {
+                value = result.Data1;
+                return true;
+            }
+            value = 0;
+            return false;
+        }
+
+        /// <summary>
+        /// Write a single SV variable at the given index with the given value.
+        /// </summary>
+        internal bool WriteSV(LocoBuffer lb, int index, byte value)
+        {
+            var cmd = new PeerXferRequest1
+            {
+                Command = PeerXferRequest.Commands.Write,
+                SvAddress = index,
+                DestinationLow = address.Address,
+                SubAddress = address.SubAddress,
+                Data1 = value,
+            };
+            var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
+                lb,
+                x => (address.Equals(x.Source) && (x.SvAddress == index) && (x.OriginalCommand == PeerXferRequest.Commands.Write)),
+                timeout);
+            return (result != null) && (result.Data1 == value);
+        }
+
+        /// <summary>
         /// Read the given set of SV values into configs.
         /// </summary>
         internal void Read(LocoBuffer lb, IEnumerable<SVConfig> configs)
@@ -32,24 +80,9 @@ namespace LocoNetToolBox.Devices.LocoIO
             foreach (var iterator in configs)
             {
                 var config = iterator;
-                var cmd = new PeerXferRequest1
-                              {
-                    Command = PeerXferRequest.Commands.Read,
-                    SvAddress = config.Index,
-                    DestinationLow = address.Address,
-                    SubAddress = address.SubAddress,
-                };
-
-                config.Valid = false;
-                var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
-                    lb, 
-                    x => (address.Equals(x.Source) && x.SvAddress == config.Index),
-                    timeout);
-                if (result != null)
-                {
-                    config.Value = result.Data1;
-                    config.Valid = true;
-                }
+                byte value;
+                config.Valid = TryReadSV(lb, config.Index, out value);
+                config.Value = value;
             }
         }
 
@@ -63,15 +96,22 @@ namespace LocoNetToolBox.Devices.LocoIO
 
             foreach (var config in configs)
             {
-                var cmd = new PeerXferRequest1
-                              {
-                    Command = PeerXferRequest.Commands.Write,
-                    SvAddress = config.Index,
-                    DestinationLow = address.Address,
-                    SubAddress = address.SubAddress,
-                    Data1 = config.Value,
-                };
-                cmd.Execute(lb);
+                var ok = false;
+                for (int attempt = 0; !ok && (attempt < ATTEMPTS); attempt++)
+                {
+                    // Write
+                    ok = WriteSV(lb, config.Index, config.Value);
+
+                    // Wait a while
+                    if (!ok)
+                    {
+                        Thread.Sleep(100);
+                    }
+                }
+                if (!ok)
+                {
+                    throw new ProgramException(string.Format("Failed to write SV {0}", config.Index));
+                }
             }
         }
     }

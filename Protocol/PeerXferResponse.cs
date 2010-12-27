@@ -117,7 +117,7 @@ namespace LocoNetToolBox.Protocol
 
         public override string ToString()
         {
-            return string.Format("PEER_XFER src:{0} dst:{1} cmd:{2} sv:{3} ver:{4} data:{5},{6},{7}",
+            return string.Format("PEER_XFER src:{0} dst:{1} cmd:{2} sv:{3} ver:{4:000} data:{5},{6},{7}",
                 Source, Destination, OriginalCommand, SvAddress, LocoIOVersion, Data1, Data2, Data3);
         }
     }

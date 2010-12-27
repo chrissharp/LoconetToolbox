@@ -93,6 +93,7 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             set
             {
+                connector = value;
                 var firstPin = (value == Connector.First) ? 1 : 9;
                 for (int i = 0; i < 8; i++)
                 {

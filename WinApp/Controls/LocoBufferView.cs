@@ -21,15 +21,12 @@ using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
 using LocoNetToolBox.WinApp.Communications;
-using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoBufferView : UserControl
     {
         public event EventHandler LocoBufferChanged;
-
-        private AsyncLocoBuffer locoBuffer;
 
         /// <summary>
         /// View on the locobuffer.
@@ -53,53 +50,14 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         internal AsyncLocoBuffer LocoBuffer
         {
-            set
-            {
-                if (locoBuffer != null)
-                {
-                    locoBuffer.SendMessage -= LocoBufferSendMessage;
-                    locoBuffer.PreviewMessage -= LocoBufferPreviewMessage;
-                }
-                locoBuffer = value;
-                if (locoBuffer != null)
-                {
-                    locoBuffer.SendMessage += LocoBufferSendMessage;
-                    locoBuffer.PreviewMessage += LocoBufferPreviewMessage;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add message to log.
-        /// </summary>
-        bool LocoBufferPreviewMessage(byte[] message, Message decoded)
-        {
-            var response = Response.Decode(message);
-            Log("<- " + response + " { " + Message.ToString(message) + " }");
-            lbInputs.ProcessResponse(response);
-            return false;
-        }
-
-        /// <summary>
-        /// Add send message to log.
-        /// </summary>
-        bool LocoBufferSendMessage(byte[] message, Message decoded)
-        {
-            Log("-> " + Message.ToString(message));
-            return false;
-        }
-
-        private void Log(string msg)
-        {
-            lbLog.Items.Add(msg);
-            lbLog.SelectedIndex = lbLog.Items.Count - 1;
+            set { powerCommandControl1.LocoBuffer = value; }
         }
 
         /// <summary>
         /// Locobuffer has changed.
         /// Propagate the event.
         /// </summary>
-        private void locoBufferSettings_LocoBufferChanged(object sender, EventArgs e)
+        private void LocoBufferSettingsLocoBufferChanged(object sender, EventArgs e)
         {
             LocoBufferChanged.Fire(this);
         }

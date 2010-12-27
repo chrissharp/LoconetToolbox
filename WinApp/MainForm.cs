@@ -48,6 +48,12 @@ namespace LocoNetToolBox.WinApp
             base.OnFormClosing(e);
         }
 
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            AdjustSizes();
+        }
+
         /// <summary>
         /// Locobuffer has changed.
         /// </summary>
@@ -72,6 +78,7 @@ namespace LocoNetToolBox.WinApp
                 commandControl1.LocoBuffer = asyncLb;
                 commandControl1.LocoNetState = lnState;
                 locoIOList1.LocoBuffer = asyncLb;
+                locoNetMonitor.LocoBuffer = asyncLb;
             }
         }
 
@@ -95,6 +102,12 @@ namespace LocoNetToolBox.WinApp
                 lb.Close();
                 lb = null;
             }
+        }
+
+        private void AdjustSizes()
+        {
+            var height = Math.Max(locoBufferView1.Height, commandControl1.Height);
+            locoIOList1.Height = height;
         }
     }
 }
