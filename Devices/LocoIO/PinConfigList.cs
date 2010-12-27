@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
@@ -50,6 +48,14 @@ namespace LocoNetToolBox.Devices.LocoIO
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Enumerate SV's of pins on this connector
+        /// </summary>
+        public IEnumerable<SVConfig> GetSVConfigs()
+        {
+            return pins.SelectMany(pin => pin);
         }
     }
 }

@@ -143,11 +143,27 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
+        /// Advanced MGV50 configuration
+        /// </summary>
+        private void CmdConfigMgv50AdvancedClick(object sender, EventArgs e)
+        {
+            var currentAddress = SelectedAddress;
+            if (currentAddress != null)
+            {
+                var dialog = new LocoIOAdvancedConfigurationForm();
+                dialog.Initialize(lb, currentAddress);
+                dialog.Show();
+            }
+        }
+
+        /// <summary>
         /// Update the controls
         /// </summary>
         private void UpdateUI()
         {
-            cmdConfigureMgv50.Enabled = (SelectedAddress != null);
+            var hasAddress = (SelectedAddress != null);
+            cmdConfigureMgv50.Enabled = hasAddress;
+            cmdConfigMgv50Advanced.Enabled = hasAddress;
         }
     }
 }

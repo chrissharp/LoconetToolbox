@@ -107,6 +107,18 @@
     <Compile Include="WinApp\Controls\AdvancedCommandControl.Designer.cs">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinApp\Controls\LocoIOAdvancedConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOAdvancedConfigurationForm.Designer.cs">
+      <DependentUpon>LocoIOAdvancedConfigurationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOAdvancedConfigurationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOAdvancedConfigurationControl.Designer.cs">
+      <DependentUpon>LocoIOAdvancedConfigurationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinApp\Controls\PowerCommandControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,6 +275,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\AdvancedCommandControl.resx">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\LocoIOAdvancedConfigurationForm.resx">
+      <DependentUpon>LocoIOAdvancedConfigurationForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\LocoIOAdvancedConfigurationControl.resx">
+      <DependentUpon>LocoIOAdvancedConfigurationControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\PowerCommandControl.resx">
       <DependentUpon>PowerCommandControl.cs</DependentUpon>

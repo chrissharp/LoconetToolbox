@@ -17,16 +17,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Devices.LocoIO;
-using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
@@ -35,8 +28,7 @@ namespace LocoNetToolBox.WinApp.Controls
     /// </summary>
     public partial class LocoIOPinConfigurationControl : UserControl
     {
-        private bool initialized = false;
-        private PinConfig config;
+        private bool initialized;
 
         /// <summary>
         /// Default ctor
@@ -44,39 +36,43 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOPinConfigurationControl()
         {
             InitializeComponent();
+            Pin = 1;
             initialized = true;
         }
 
         /// <summary>
-        /// Connect this control to the given config.
+        /// My pin number (1..16)
         /// </summary>
-        public void Connect(PinConfig config)
-        {
-            this.config = config;
-            this.config.ModeChanged += (s, x) => this.PostOnGuiThread(UpdateFromConfig);
-            this.config.AddressChanged += (s, x) => this.PostOnGuiThread(UpdateUI);
-            UpdateFromConfig();
-        }
+        public int Pin { get; set; }
 
         /// <summary>
-        /// Update UI from config.
+        /// Connect this control to the given config.
         /// </summary>
-        public void UpdateFromConfig()
+        public void LoadFrom(PinConfig config)
         {
             try
             {
-                this.initialized = false;
-
-                var mode = config.Mode;
-                direction.IsInput = (mode != null) && mode.IsInput;
-                direction.IsOutput = (mode != null) && mode.IsOutput;
-                modeControl.Mode = mode;
+                initialized = false;
+                tbAddr.Value = config.Address;
+                modeControl.Mode = config.Mode;
             }
             finally
             {
-                this.initialized = true;
+                initialized = true;
                 UpdateUI();
             }
+        }
+
+        /// <summary>
+        /// Create a configuration
+        /// </summary>
+        /// <returns></returns>
+        public PinConfig CreateConfig()
+        {
+            var config = new PinConfig(Pin);
+            config.Address = (int)tbAddr.Value;
+            config.Mode = modeControl.Mode;
+            return config;
         }
 
         /// <summary>
@@ -86,8 +82,8 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             if (initialized)
             {
-                var addr = config.Address;
-                var mode = config.Mode;
+                var addr = (int)tbAddr.Value;
+                var mode = modeControl.Mode;
                 tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
                 tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;
                 tbValue2.Text = (mode != null) ? mode.GetValue2(addr).ToString() : string.Empty;
@@ -97,9 +93,12 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Store address.
         /// </summary>
-        private void tbAddress_ValueChanged_(object sender, EventArgs e)
+        private void TbAddressValueChanged(object sender, EventArgs e)
         {
-            UpdateUI();
+            if (initialized)
+            {
+                UpdateUI();
+            }
         }
 
         /// <summary>
@@ -107,43 +106,9 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void OnConfigChanged(object sender, EventArgs e)
         {
-            if ((config != null) && (initialized))
+            if (initialized)
             {
-                modeControl.Input = direction.IsInput;
-                config.Mode = modeControl.Mode;
                 UpdateUI();
-            }
-        }
-
-        private void tbConfig_Validated(object sender, EventArgs e)
-        {
-            SetModeFromValues();
-        }
-
-        private void tbValue1_Validated(object sender, EventArgs e)
-        {
-            SetModeFromValues();
-        }
-
-        private void tbValue2_Validated(object sender, EventArgs e)
-        {
-            SetModeFromValues();
-        }
-
-        private void SetModeFromValues()
-        {
-            if ((this.config != null) && (initialized))
-            {
-                int config;
-                int value1;
-                int value2;
-
-                if (int.TryParse(tbConfig.Text.Trim(), out config) &&
-                    int.TryParse(tbValue1.Text.Trim(), out value1) &&
-                    int.TryParse(tbValue2.Text.Trim(), out value2))
-                {
-                    this.config.Mode = PinMode.Find(config, value1, value2);
-                }
             }
         }
     }

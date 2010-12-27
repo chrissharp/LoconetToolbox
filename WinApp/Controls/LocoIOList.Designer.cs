@@ -36,6 +36,7 @@
             this.ctxProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdConfigureMgv50 = new System.Windows.Forms.Button();
+            this.cmdConfigMgv50Advanced = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,7 @@
             this.lbModules.FullRowSelect = true;
             this.lbModules.Location = new System.Drawing.Point(3, 3);
             this.lbModules.Name = "lbModules";
-            this.tlpMain.SetRowSpan(this.lbModules, 2);
+            this.tlpMain.SetRowSpan(this.lbModules, 3);
             this.lbModules.Size = new System.Drawing.Size(314, 404);
             this.lbModules.TabIndex = 0;
             this.lbModules.UseCompatibleStateImageBehavior = false;
@@ -71,7 +72,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxProgram});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 26);
             // 
             // ctxProgram
             // 
@@ -87,10 +88,12 @@
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.Controls.Add(this.lbModules, 0, 0);
             this.tlpMain.Controls.Add(this.cmdConfigureMgv50, 1, 0);
+            this.tlpMain.Controls.Add(this.cmdConfigMgv50Advanced, 1, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 2;
+            this.tlpMain.RowCount = 3;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMain.Size = new System.Drawing.Size(450, 410);
@@ -105,6 +108,16 @@
             this.cmdConfigureMgv50.Text = "&Configure MGV50";
             this.cmdConfigureMgv50.UseVisualStyleBackColor = true;
             this.cmdConfigureMgv50.Click += new System.EventHandler(this.CmdConfigureMgv50Click);
+            // 
+            // cmdConfigMgv50Advanced
+            // 
+            this.cmdConfigMgv50Advanced.Location = new System.Drawing.Point(323, 46);
+            this.cmdConfigMgv50Advanced.Name = "cmdConfigMgv50Advanced";
+            this.cmdConfigMgv50Advanced.Size = new System.Drawing.Size(124, 37);
+            this.cmdConfigMgv50Advanced.TabIndex = 2;
+            this.cmdConfigMgv50Advanced.Text = "&Advanced MGV50 configuration";
+            this.cmdConfigMgv50Advanced.UseVisualStyleBackColor = true;
+            this.cmdConfigMgv50Advanced.Click += new System.EventHandler(this.CmdConfigMgv50AdvancedClick);
             // 
             // LocoIOList
             // 
@@ -128,5 +141,6 @@
         private System.Windows.Forms.ListView lbModules;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.Button cmdConfigureMgv50;
+        private System.Windows.Forms.Button cmdConfigMgv50Advanced;
     }
 }
