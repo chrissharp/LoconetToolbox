@@ -10,7 +10,7 @@ namespace LocoNetToolBox.Devices.LocoIO
     /// </summary>
     public class Programmer
     {
-        private const int ATTEMPTS = 1;
+        private const int ATTEMPTS = 3;
         private readonly LocoNetAddress address;
         private readonly int timeout;
 
@@ -20,7 +20,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         internal Programmer(LocoNetAddress address)
         {
             this.address = address;
-            timeout = 500;
+            timeout = 2000;
         }
 
         /// <summary>
