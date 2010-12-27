@@ -64,7 +64,7 @@
             // 
             this.tlpMain.AutoSize = true;
             this.tlpMain.ColumnCount = 3;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.Controls.Add(this.lbPin4, 1, 4);
@@ -107,7 +107,7 @@
             // 
             this.lbPin4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin4.AutoSize = true;
-            this.lbPin4.Location = new System.Drawing.Point(215, 97);
+            this.lbPin4.Location = new System.Drawing.Point(504, 97);
             this.lbPin4.Name = "lbPin4";
             this.lbPin4.Size = new System.Drawing.Size(31, 13);
             this.lbPin4.TabIndex = 22;
@@ -117,7 +117,7 @@
             // 
             this.lbPin2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin2.AutoSize = true;
-            this.lbPin2.Location = new System.Drawing.Point(215, 45);
+            this.lbPin2.Location = new System.Drawing.Point(504, 45);
             this.lbPin2.Name = "lbPin2";
             this.lbPin2.Size = new System.Drawing.Size(31, 13);
             this.lbPin2.TabIndex = 18;
@@ -126,7 +126,7 @@
             // tbAddr8
             // 
             this.tbAddr8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr8.Location = new System.Drawing.Point(252, 198);
+            this.tbAddr8.Location = new System.Drawing.Point(541, 198);
             this.tbAddr8.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -144,7 +144,7 @@
             // tbAddr7
             // 
             this.tbAddr7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr7.Location = new System.Drawing.Point(252, 172);
+            this.tbAddr7.Location = new System.Drawing.Point(541, 172);
             this.tbAddr7.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -162,7 +162,7 @@
             // tbAddr6
             // 
             this.tbAddr6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr6.Location = new System.Drawing.Point(252, 146);
+            this.tbAddr6.Location = new System.Drawing.Point(541, 146);
             this.tbAddr6.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -180,7 +180,7 @@
             // tbAddr5
             // 
             this.tbAddr5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr5.Location = new System.Drawing.Point(252, 120);
+            this.tbAddr5.Location = new System.Drawing.Point(541, 120);
             this.tbAddr5.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -198,7 +198,7 @@
             // tbAddr4
             // 
             this.tbAddr4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr4.Location = new System.Drawing.Point(252, 94);
+            this.tbAddr4.Location = new System.Drawing.Point(541, 94);
             this.tbAddr4.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -216,7 +216,7 @@
             // tbAddr3
             // 
             this.tbAddr3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr3.Location = new System.Drawing.Point(252, 68);
+            this.tbAddr3.Location = new System.Drawing.Point(541, 68);
             this.tbAddr3.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -234,7 +234,7 @@
             // tbAddr2
             // 
             this.tbAddr2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr2.Location = new System.Drawing.Point(252, 42);
+            this.tbAddr2.Location = new System.Drawing.Point(541, 42);
             this.tbAddr2.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -252,7 +252,7 @@
             // tbAddr1
             // 
             this.tbAddr1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbAddr1.Location = new System.Drawing.Point(252, 16);
+            this.tbAddr1.Location = new System.Drawing.Point(541, 16);
             this.tbAddr1.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -271,7 +271,7 @@
             // 
             this.lbPin1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin1.AutoSize = true;
-            this.lbPin1.Location = new System.Drawing.Point(215, 19);
+            this.lbPin1.Location = new System.Drawing.Point(504, 19);
             this.lbPin1.Name = "lbPin1";
             this.lbPin1.Size = new System.Drawing.Size(31, 13);
             this.lbPin1.TabIndex = 17;
@@ -281,7 +281,7 @@
             // 
             this.lbPin3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin3.AutoSize = true;
-            this.lbPin3.Location = new System.Drawing.Point(215, 71);
+            this.lbPin3.Location = new System.Drawing.Point(504, 71);
             this.lbPin3.Name = "lbPin3";
             this.lbPin3.Size = new System.Drawing.Size(31, 13);
             this.lbPin3.TabIndex = 19;
@@ -291,7 +291,7 @@
             // 
             this.lbPin5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin5.AutoSize = true;
-            this.lbPin5.Location = new System.Drawing.Point(215, 123);
+            this.lbPin5.Location = new System.Drawing.Point(504, 123);
             this.lbPin5.Name = "lbPin5";
             this.lbPin5.Size = new System.Drawing.Size(31, 13);
             this.lbPin5.TabIndex = 20;
@@ -301,7 +301,7 @@
             // 
             this.lbPin6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin6.AutoSize = true;
-            this.lbPin6.Location = new System.Drawing.Point(215, 149);
+            this.lbPin6.Location = new System.Drawing.Point(504, 149);
             this.lbPin6.Name = "lbPin6";
             this.lbPin6.Size = new System.Drawing.Size(31, 13);
             this.lbPin6.TabIndex = 21;
@@ -311,7 +311,7 @@
             // 
             this.lbPin7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin7.AutoSize = true;
-            this.lbPin7.Location = new System.Drawing.Point(215, 175);
+            this.lbPin7.Location = new System.Drawing.Point(504, 175);
             this.lbPin7.Name = "lbPin7";
             this.lbPin7.Size = new System.Drawing.Size(31, 13);
             this.lbPin7.TabIndex = 23;
@@ -321,7 +321,7 @@
             // 
             this.lbPin8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbPin8.AutoSize = true;
-            this.lbPin8.Location = new System.Drawing.Point(215, 201);
+            this.lbPin8.Location = new System.Drawing.Point(504, 201);
             this.lbPin8.Name = "lbPin8";
             this.lbPin8.Size = new System.Drawing.Size(31, 13);
             this.lbPin8.TabIndex = 24;
@@ -338,7 +338,7 @@
             this.lvModes.MultiSelect = false;
             this.lvModes.Name = "lvModes";
             this.tlpMain.SetRowSpan(this.lvModes, 8);
-            this.lvModes.Size = new System.Drawing.Size(206, 202);
+            this.lvModes.Size = new System.Drawing.Size(495, 202);
             this.lvModes.TabIndex = 25;
             this.lvModes.UseCompatibleStateImageBehavior = false;
             this.lvModes.View = System.Windows.Forms.View.List;
@@ -347,7 +347,7 @@
             // lbPinCaption
             // 
             this.lbPinCaption.AutoSize = true;
-            this.lbPinCaption.Location = new System.Drawing.Point(215, 0);
+            this.lbPinCaption.Location = new System.Drawing.Point(504, 0);
             this.lbPinCaption.Name = "lbPinCaption";
             this.lbPinCaption.Size = new System.Drawing.Size(22, 13);
             this.lbPinCaption.TabIndex = 26;
@@ -356,7 +356,7 @@
             // lbAddressCaption
             // 
             this.lbAddressCaption.AutoSize = true;
-            this.lbAddressCaption.Location = new System.Drawing.Point(252, 0);
+            this.lbAddressCaption.Location = new System.Drawing.Point(541, 0);
             this.lbAddressCaption.Name = "lbAddressCaption";
             this.lbAddressCaption.Size = new System.Drawing.Size(45, 13);
             this.lbAddressCaption.TabIndex = 27;

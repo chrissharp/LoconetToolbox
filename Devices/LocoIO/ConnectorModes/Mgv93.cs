@@ -11,6 +11,16 @@
         public Mgv93()
             : base("MGV93",
                 8,
+                new[] {
+                    "Feedback 1",
+                    "Feedback 2",
+                    "Feedback 3",
+                    "Feedback 4",
+                    "Feedback 5",
+                    "Feedback 6",
+                    "Feedback 7",
+                    "Feedback 8",
+                },
                 PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,

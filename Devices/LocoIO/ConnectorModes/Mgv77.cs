@@ -11,6 +11,12 @@
         public Mgv77()
             : base("MGV77",
                 4,
+                new[] {
+                    "Switch 1",
+                    "Switch 2",
+                    "Switch 3",
+                    "Switch 4",
+                },
                 PinMode.PulseFirmwareSingle,
                 PinMode.PulseFirmwarePaired,
                 PinMode.PulseFirmwareSingle,

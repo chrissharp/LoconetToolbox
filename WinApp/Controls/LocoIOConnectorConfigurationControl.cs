@@ -121,13 +121,33 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void UpdateUI()
         {
-            var selection = SelectedMode;
-            var addressCount = (selection != null) ? selection.AddressCount : 0;
-            for (int i = 0; i < 8; i++ )
+            SuspendLayout();
+            tlpMain.SuspendLayout();
+            try
             {
-                var visible = (i < addressCount);
-                labels[i].Enabled = visible;
-                addressControls[i].Enabled = visible;
+                var selection = SelectedMode;
+                var addressCount = (selection != null) ? selection.AddressCount : 0;
+                var firstPin = (connector == Connector.First) ? 1 : 9;
+
+                for (int i = 0; i < 8; i++)
+                {
+                    var visible = (i < addressCount);
+                    labels[i].Enabled = visible;
+                    addressControls[i].Enabled = visible;
+
+                    var text = (firstPin + i).ToString();
+                    if (visible && (selection != null))
+                    {
+                        text = selection.GetAddressName(i);
+                    }
+                    labels[i].Text = text;
+                }
+            }
+            finally
+            {
+                tlpMain.PerformLayout();
+                tlpMain.ResumeLayout(true);
+                ResumeLayout(true);
             }
         }
 

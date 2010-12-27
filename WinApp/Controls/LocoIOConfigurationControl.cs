@@ -28,6 +28,7 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class LocoIOConfigurationControl : UserControl
     {
         public event EventHandler BusyChanged;
+        public event EventHandler WriteSucceeded;
 
         private LocoIOConfig config;
         private AsyncLocoBuffer lb;
@@ -116,6 +117,10 @@ namespace LocoNetToolBox.WinApp.Controls
                     if (x.HasError)
                     {
                         MessageBox.Show(x.Error.Message);
+                    }
+                    else
+                    {
+                        WriteSucceeded.Fire(this);
                     }
                 });            
         }

@@ -10,7 +10,16 @@
         /// </summary>
         public Mgv102()
             : base("MGV102",
-                5,
+                6,
+                new[] {
+                    "Feedback X",
+                    "Feedback Y",
+                    "Feedback A",
+                    "Feedback B",
+                    "Feedback C",
+                    "Conflict",
+                },
+                PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,
                 PinMode.BlockActiveLowDelay,

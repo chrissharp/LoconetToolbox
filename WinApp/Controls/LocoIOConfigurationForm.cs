@@ -41,6 +41,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
             cmdReadAll.Enabled = false;
             cmdWriteAll.Enabled = false;
+            lbResetWarning.Visible = false;
         }
 
         /// <summary>
@@ -76,7 +77,18 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void ConfigurationControlBusyChanged(object sender, EventArgs e)
         {
-            cmdClose.Enabled = !configurationControl.Busy;
+            var busy = configurationControl.Busy;
+            cmdClose.Enabled = !busy;
+            if (busy)
+                lbResetWarning.Visible = false;
+        }
+
+        /// <summary>
+        /// Writing of locoIO has succeeded.
+        /// </summary>
+        private void configurationControl_WriteSucceeded(object sender, EventArgs e)
+        {
+            lbResetWarning.Visible = true;
         }
     }
 }

@@ -9,18 +9,24 @@ namespace LocoNetToolBox.Devices.LocoIO
     {
         private readonly PinMode[] pins;
         private readonly int addressCount;
+        private readonly string[] addressNames;
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        protected ConnectorMode(string name, int addressCount, params PinMode[] pins)
+        protected ConnectorMode(string name, int addressCount, string[] addressNames, params PinMode[] pins)
         {
             if (pins.Length > 8)
             {
                 throw new ArgumentException("Invalid number of pins");
             }
+            if (addressCount != addressNames.Length)
+            {
+                throw new ArgumentException("Invalid number of address names");
+            }
             this.pins = pins;
             this.addressCount = addressCount;
+            this.addressNames = addressNames;
             Name = name;
         }
 
@@ -38,6 +44,14 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// Gets the number of port addresses used in this mode.
         /// </summary>
         public int AddressCount { get { return addressCount; } }
+
+        /// <summary>
+        /// Gets the name of an address at the given index (0..AddressCount-1)
+        /// </summary>
+        public string GetAddressName(int index)
+        {
+            return addressNames[index];
+        }
 
         /// <summary>
         /// Gets a pin mode by index.

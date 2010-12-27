@@ -11,6 +11,12 @@
         public Mgv136()
             : base("MGV136, MGV84, MGV81 v1.2",
                 4,
+                new[] {
+                    "Servo 1",
+                    "Servo 2",
+                    "Servo 3",
+                    "Servo 4",
+                },
                 PinMode.SteadyStatePairedOff,
                 PinMode.SteadyStatePairedOff,
                 PinMode.SteadyStatePairedOff,

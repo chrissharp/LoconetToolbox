@@ -10,7 +10,7 @@
         /// </summary>
         public None()
             : base("None",
-                0)
+                0, new string[0])
         {
         }
 
