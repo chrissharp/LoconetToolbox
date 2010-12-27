@@ -194,7 +194,8 @@ namespace LocoNetToolBox.Devices.LocoIO
 
         public override string ToString()
         {
-            return Name;
+            var prefix = IsInput ? "[in] " : "[out] ";
+            return prefix + Name;
         }
     }
 }

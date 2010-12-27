@@ -51,6 +51,9 @@ namespace LocoNetToolBox.WinApp.Controls
             for (int i = 0; i < 16; i++)
             {
                 labels[i].Text = (1 + i).ToString();
+                pinControls[i].Pin = 1 + i;
+                pinControls[i].Read += ReadPin;
+                pinControls[i].Write += WritePin;
             }
         }
 
@@ -135,6 +138,58 @@ namespace LocoNetToolBox.WinApp.Controls
                 x =>
                 {
                     Enabled = true;
+                    Busy = false;
+                    if (x.HasError)
+                    {
+                        MessageBox.Show(x.Error.Message);
+                    }
+                    else
+                    {
+                        WriteSucceeded.Fire(this);
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Read a single pin.
+        /// </summary>
+        private void ReadPin(object sender, EventArgs e)
+        {
+            Busy = true;
+            var control = (LocoIOPinConfigurationControl) sender;
+            var config = control.CreateConfig();
+            control.Enabled = false;
+            lb.BeginRequest(
+                x => programmer.Read(x, config),
+                x =>
+                {
+                    control.Enabled = true;
+                    Busy = false;
+                    if (x.HasError)
+                    {
+                        MessageBox.Show(x.Error.Message);
+                    }
+                    else
+                    {
+                        control.LoadFrom(config);
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Write a single pin
+        /// </summary>
+        internal void WritePin(object sender, EventArgs e)
+        {
+            Busy = true;
+            var control = (LocoIOPinConfigurationControl)sender;
+            var config = control.CreateConfig();
+            control.Enabled = false;
+            lb.BeginRequest(
+                x => programmer.Write(x, config),
+                x =>
+                {
+                    control.Enabled = true;
                     Busy = false;
                     if (x.HasError)
                     {

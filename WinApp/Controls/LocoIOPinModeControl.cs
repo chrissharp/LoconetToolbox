@@ -40,8 +40,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public LocoIOPinModeControl()
         {
             InitializeComponent();
-            cbModes.Items.AddRange(PinMode.Inputs.ToArray());
-            cbModes.Items.AddRange(PinMode.Outputs.ToArray());
+            cbModes.Items.AddRange(PinMode.All.ToArray());
         }
 
         /// <summary>

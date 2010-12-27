@@ -28,6 +28,9 @@ namespace LocoNetToolBox.WinApp.Controls
     /// </summary>
     public partial class LocoIOPinConfigurationControl : UserControl
     {
+        public event EventHandler Read;
+        public event EventHandler Write;
+
         private bool initialized;
 
         /// <summary>
@@ -110,6 +113,16 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 UpdateUI();
             }
+        }
+
+        private void cmdRead_Click(object sender, EventArgs e)
+        {
+            Read.Fire(this);
+        }
+
+        private void cmdWrite_Click(object sender, EventArgs e)
+        {
+            Write.Fire(this);
         }
     }
 }
