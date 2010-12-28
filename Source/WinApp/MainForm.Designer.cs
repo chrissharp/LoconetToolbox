@@ -34,7 +34,10 @@
             this.commandControl1 = new LocoNetToolBox.WinApp.Controls.CommandControl();
             this.locoIOList1 = new LocoNetToolBox.WinApp.Controls.LocoIOList();
             this.locoNetMonitor = new LocoNetToolBox.WinApp.Controls.LocoNetMonitor();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.lbVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlpMain.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -53,7 +56,7 @@
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Size = new System.Drawing.Size(737, 437);
+            this.tlpMain.Size = new System.Drawing.Size(897, 489);
             this.tlpMain.TabIndex = 0;
             // 
             // locoBufferView1
@@ -62,7 +65,7 @@
             this.locoBufferView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.locoBufferView1.Location = new System.Drawing.Point(3, 3);
             this.locoBufferView1.Name = "locoBufferView1";
-            this.locoBufferView1.Size = new System.Drawing.Size(287, 106);
+            this.locoBufferView1.Size = new System.Drawing.Size(367, 106);
             this.locoBufferView1.TabIndex = 0;
             this.locoBufferView1.LocoBufferChanged += new System.EventHandler(this.LocoBufferView1LocoBufferChanged);
             // 
@@ -70,7 +73,7 @@
             // 
             this.commandControl1.AutoSize = true;
             this.commandControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.commandControl1.Location = new System.Drawing.Point(296, 3);
+            this.commandControl1.Location = new System.Drawing.Point(376, 3);
             this.commandControl1.Name = "commandControl1";
             this.commandControl1.Size = new System.Drawing.Size(144, 223);
             this.commandControl1.TabIndex = 1;
@@ -78,9 +81,9 @@
             // locoIOList1
             // 
             this.locoIOList1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.locoIOList1.Location = new System.Drawing.Point(446, 3);
+            this.locoIOList1.Location = new System.Drawing.Point(526, 3);
             this.locoIOList1.Name = "locoIOList1";
-            this.locoIOList1.Size = new System.Drawing.Size(288, 331);
+            this.locoIOList1.Size = new System.Drawing.Size(368, 331);
             this.locoIOList1.TabIndex = 2;
             // 
             // locoNetMonitor
@@ -89,15 +92,31 @@
             this.locoNetMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.locoNetMonitor.Location = new System.Drawing.Point(3, 340);
             this.locoNetMonitor.Name = "locoNetMonitor";
-            this.locoNetMonitor.Size = new System.Drawing.Size(731, 94);
+            this.locoNetMonitor.Size = new System.Drawing.Size(891, 146);
             this.locoNetMonitor.TabIndex = 3;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lbVersion});
+            this.statusStrip.Location = new System.Drawing.Point(0, 489);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(897, 22);
+            this.statusStrip.TabIndex = 1;
+            // 
+            // lbVersion
+            // 
+            this.lbVersion.Name = "lbVersion";
+            this.lbVersion.Size = new System.Drawing.Size(57, 17);
+            this.lbVersion.Text = "Version: ?";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 437);
+            this.ClientSize = new System.Drawing.Size(897, 511);
             this.Controls.Add(this.tlpMain);
+            this.Controls.Add(this.statusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -105,7 +124,10 @@
             this.Text = "MGV LocoNet ToolBox";
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -116,6 +138,8 @@
         private LocoNetToolBox.WinApp.Controls.CommandControl commandControl1;
         private LocoNetToolBox.WinApp.Controls.LocoIOList locoIOList1;
         private LocoNetToolBox.WinApp.Controls.LocoNetMonitor locoNetMonitor;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel lbVersion;
     }
 }
 

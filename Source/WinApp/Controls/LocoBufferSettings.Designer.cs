@@ -39,28 +39,30 @@
             // tlpMain
             // 
             this.tlpMain.AutoSize = true;
-            this.tlpMain.ColumnCount = 1;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Controls.Add(this.serialPortSettings, 0, 2);
+            this.tlpMain.ColumnCount = 2;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMain.Controls.Add(this.serialPortSettings, 0, 1);
             this.tlpMain.Controls.Add(this.rbSerialPort, 0, 0);
-            this.tlpMain.Controls.Add(this.rbTcp, 0, 1);
-            this.tlpMain.Controls.Add(this.tcpSettings, 0, 3);
+            this.tlpMain.Controls.Add(this.rbTcp, 1, 0);
+            this.tlpMain.Controls.Add(this.tcpSettings, 0, 2);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 4;
+            this.tlpMain.RowCount = 3;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(299, 183);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMain.Size = new System.Drawing.Size(299, 160);
             this.tlpMain.TabIndex = 0;
             // 
             // serialPortSettings
             // 
             this.serialPortSettings.AutoSize = true;
+            this.tlpMain.SetColumnSpan(this.serialPortSettings, 2);
             this.serialPortSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.serialPortSettings.Location = new System.Drawing.Point(3, 49);
+            this.serialPortSettings.Location = new System.Drawing.Point(3, 26);
             this.serialPortSettings.Name = "serialPortSettings";
             this.serialPortSettings.Size = new System.Drawing.Size(293, 73);
             this.serialPortSettings.TabIndex = 0;
@@ -81,7 +83,7 @@
             // rbTcp
             // 
             this.rbTcp.AutoSize = true;
-            this.rbTcp.Location = new System.Drawing.Point(3, 26);
+            this.rbTcp.Location = new System.Drawing.Point(81, 3);
             this.rbTcp.Name = "rbTcp";
             this.rbTcp.Size = new System.Drawing.Size(97, 17);
             this.rbTcp.TabIndex = 2;
@@ -93,8 +95,9 @@
             // tcpSettings
             // 
             this.tcpSettings.AutoSize = true;
+            this.tlpMain.SetColumnSpan(this.tcpSettings, 2);
             this.tcpSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tcpSettings.Location = new System.Drawing.Point(3, 128);
+            this.tcpSettings.Location = new System.Drawing.Point(3, 105);
             this.tcpSettings.Name = "tcpSettings";
             this.tcpSettings.Size = new System.Drawing.Size(293, 52);
             this.tcpSettings.TabIndex = 3;

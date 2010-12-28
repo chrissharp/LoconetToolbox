@@ -36,6 +36,7 @@ namespace LocoNetToolBox.WinApp
         public MainForm()
         {
             InitializeComponent();
+            lbVersion.Text = string.Format("Version: {0}", GetType().Assembly.GetName().Version);
             SetLocoBuffer(new SerialPortLocoBuffer());
         }
 
