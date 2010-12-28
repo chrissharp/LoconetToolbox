@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServoProgrammer));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.step1 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep1();
-            this.step2 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep2();
-            this.step3 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep3();
             this.step4 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep4();
+            this.step3 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep3();
+            this.step2 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep2();
+            this.step1 = new LocoNetToolBox.WinApp.Controls.ServoProgrammerStep1();
             this.lbStep = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
@@ -59,28 +60,16 @@
             this.tlpMain.Size = new System.Drawing.Size(728, 392);
             this.tlpMain.TabIndex = 4;
             // 
-            // step1
+            // step4
             // 
-            this.step1.AutoSize = true;
-            this.step1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.step1.Location = new System.Drawing.Point(3, 29);
-            this.step1.MinimumSize = new System.Drawing.Size(500, 38);
-            this.step1.Name = "step1";
-            this.step1.Size = new System.Drawing.Size(722, 110);
-            this.step1.TabIndex = 1;
-            this.step1.Continue += new System.EventHandler(this.step1_Continue);
-            // 
-            // step2
-            // 
-            this.step2.AutoSize = true;
-            this.step2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.step2.Location = new System.Drawing.Point(3, 145);
-            this.step2.MinimumSize = new System.Drawing.Size(500, 38);
-            this.step2.Name = "step2";
-            this.step2.Size = new System.Drawing.Size(722, 47);
-            this.step2.TabIndex = 2;
-            this.step2.Visible = false;
-            this.step2.Continue += new System.EventHandler(this.step2_Continue);
+            this.step4.AutoSize = true;
+            this.step4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.step4.Location = new System.Drawing.Point(3, 251);
+            this.step4.MinimumSize = new System.Drawing.Size(500, 38);
+            this.step4.Name = "step4";
+            this.step4.Size = new System.Drawing.Size(722, 236);
+            this.step4.TabIndex = 4;
+            this.step4.Visible = false;
             // 
             // step3
             // 
@@ -94,16 +83,28 @@
             this.step3.Visible = false;
             this.step3.Continue += new System.EventHandler(this.step3_Continue);
             // 
-            // step4
+            // step2
             // 
-            this.step4.AutoSize = true;
-            this.step4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.step4.Location = new System.Drawing.Point(3, 251);
-            this.step4.MinimumSize = new System.Drawing.Size(500, 38);
-            this.step4.Name = "step4";
-            this.step4.Size = new System.Drawing.Size(722, 236);
-            this.step4.TabIndex = 4;
-            this.step4.Visible = false;
+            this.step2.AutoSize = true;
+            this.step2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.step2.Location = new System.Drawing.Point(3, 145);
+            this.step2.MinimumSize = new System.Drawing.Size(500, 38);
+            this.step2.Name = "step2";
+            this.step2.Size = new System.Drawing.Size(722, 47);
+            this.step2.TabIndex = 2;
+            this.step2.Visible = false;
+            this.step2.Continue += new System.EventHandler(this.step2_Continue);
+            // 
+            // step1
+            // 
+            this.step1.AutoSize = true;
+            this.step1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.step1.Location = new System.Drawing.Point(3, 29);
+            this.step1.MinimumSize = new System.Drawing.Size(500, 38);
+            this.step1.Name = "step1";
+            this.step1.Size = new System.Drawing.Size(722, 110);
+            this.step1.TabIndex = 1;
+            this.step1.Continue += new System.EventHandler(this.step1_Continue);
             // 
             // lbStep
             // 
@@ -121,6 +122,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 392);
             this.Controls.Add(this.tlpMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 38);

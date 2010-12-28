@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LocoIOConfigurationForm));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdWriteAll = new System.Windows.Forms.Button();
             this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOConfigurationControl();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdReadAll = new System.Windows.Forms.Button();
-            this.readWorker = new System.ComponentModel.BackgroundWorker();
             this.lbResetWarning = new System.Windows.Forms.Label();
+            this.readWorker = new System.ComponentModel.BackgroundWorker();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,10 +101,6 @@
             this.cmdReadAll.Text = "&Read all";
             this.cmdReadAll.UseVisualStyleBackColor = true;
             // 
-            // readWorker
-            // 
-            this.readWorker.WorkerSupportsCancellation = true;
-            // 
             // lbResetWarning
             // 
             this.lbResetWarning.AutoSize = true;
@@ -115,6 +112,10 @@
             this.lbResetWarning.TabIndex = 5;
             this.lbResetWarning.Text = "Don\'t forget to reset the MGV50 now!";
             // 
+            // readWorker
+            // 
+            this.readWorker.WorkerSupportsCancellation = true;
+            // 
             // LocoIOConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,6 +123,7 @@
             this.ClientSize = new System.Drawing.Size(681, 358);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LocoIOConfigurationForm";

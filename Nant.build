@@ -1,0 +1,30 @@
+﻿<?xml version="1.0"?>
+<project name="MGV-LocoNetToolbox" default="all" basedir=".">
+
+	<property name="nant.settings.currentframework" value="net-3.5"/>
+
+	<property name="basedir" value="${project::get-base-directory()}"/>
+
+	<target name="clean" description="Clean">
+		<delete>
+			<fileset basedir="${basedir}">
+				<include name="**/obj/**" />
+				<include name="**/bin/**" />
+				<include name="**/out/**" />
+				<include name="**/*.user" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" description="Build tests"> 
+		<msbuild project="${basedir}\Source\LocoNetToolbox.sln" target="Rebuild">
+			<property name="Configuration" value="Debug"/>
+		</msbuild>
+	</target>
+
+	<target name="build" description="Build tests" depends="clean, compile"> 
+	</target>
+
+	<target name="all" description="Build all" depends="build"> 
+	</target>
+</project>

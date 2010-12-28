@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LocoIOAdvancedConfigurationForm));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmdWriteAll = new System.Windows.Forms.Button();
             this.configurationControl = new LocoNetToolBox.WinApp.Controls.LocoIOAdvancedConfigurationControl();
@@ -119,6 +120,7 @@
             this.ClientSize = new System.Drawing.Size(681, 613);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LocoIOAdvancedConfigurationForm";
