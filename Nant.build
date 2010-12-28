@@ -4,6 +4,7 @@
 	<property name="nant.settings.currentframework" value="net-3.5"/>
 
 	<property name="basedir" value="${project::get-base-directory()}"/>
+	<property name="iscc" value="${environment::get-folder-path('ProgramFiles')}\Inno Setup 5\iscc.exe"/>
 
 	<target name="clean" description="Clean">
 		<delete>
@@ -16,15 +17,21 @@
 		</delete>
 	</target>
 
-	<target name="compile" description="Build tests"> 
+	<target name="compile" description="Build program"> 
 		<msbuild project="${basedir}\Source\LocoNetToolbox.sln" target="Rebuild">
 			<property name="Configuration" value="Debug"/>
 		</msbuild>
 	</target>
 
+	<target name="compile-setup" description="Build setup"> 
+		<exec program="${iscc}">
+			<arg value="${basedir}\Setup\Setup.iss"/>
+		</exec>
+	</target>
+
 	<target name="build" description="Build tests" depends="clean, compile"> 
 	</target>
 
-	<target name="all" description="Build all" depends="build"> 
+	<target name="all" description="Build all" depends="build, compile-setup"> 
 	</target>
 </project>
