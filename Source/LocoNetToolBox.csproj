@@ -50,7 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationItemLoader.cs" />
+    <Compile Include="Configuration\ConfigurationItemLoader.Static.cs" />
+    <Compile Include="Configuration\LocoIOConfigMap.cs" />
+    <Compile Include="Configuration\IConfigurationItem.cs" />
+    <Compile Include="Configuration\LocoNetConfiguration.cs" />
+    <Compile Include="Configuration\XmlExtensions.cs" />
     <Compile Include="Devices\LocoIO\AddressList.cs" />
+    <Compile Include="Devices\LocoIO\LocoIOConfigLoader.cs" />
     <Compile Include="Devices\LocoIO\Connector.cs" />
     <Compile Include="Devices\LocoIO\ConnectorConfig.cs" />
     <Compile Include="Devices\LocoIO\ConnectorMode.cs" />
