@@ -18,16 +18,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Windows.Forms;
-using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class CommandControl : UserControl
     {
-        private AsyncLocoBuffer lb;
-        private LocoNetState lnState;
+        private AppState appState;
 
         /// <summary>
         /// Default ctor
@@ -40,14 +37,14 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Connect to locobuffer
         /// </summary>
-        internal AsyncLocoBuffer LocoBuffer { set { lb = value; } }
-        internal LocoNetState LocoNetState  { set { lnState = value;}}
+        internal AppState AppState { set { appState = value; } }
 
         /// <summary>
         /// Execute the given request.
         /// </summary>
         private void Execute(Request request)
         {
+            var lb = appState.LocoBuffer;
             lb.BeginRequest(request, e => {
                 if (e.HasError)
                 {
@@ -72,13 +69,13 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void CmdServoProgrammerClick(object sender, EventArgs e)
         {
-            var dialog = new ServoProgrammer(lb);
+            var dialog = new ServoProgrammer(appState.LocoBuffer);
             dialog.Show();
         }
 
         private void CmdServoTesterClick(object sender, EventArgs e)
         {
-            var dialog = new ServoTester(lb, lnState);
+            var dialog = new ServoTester(appState.LocoBuffer, appState.LocoNetState);
             dialog.Show();
         }
 

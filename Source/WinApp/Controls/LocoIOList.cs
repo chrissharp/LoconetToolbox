@@ -32,6 +32,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         public event EventHandler SelectionChanged;
 
+        private AppState appState;
         private AsyncLocoBuffer lb;
 
         /// <summary>
@@ -44,21 +45,35 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Attach to the given locobuffer.
+        /// Attach to the given application.
         /// </summary>
-        internal AsyncLocoBuffer LocoBuffer
+        internal AppState AppState
         {
             set
             {
-                if (lb != null)
+                if (appState != null)
                 {
-                    lb.PreviewMessage -= LbPreviewMessage;
+                    appState.LocoBufferChanged -= AppStateLocoBufferChanged;
                 }
-                lb = value;
-                if (lb != null)
+                appState = value;
+                if (appState != null)
                 {
-                    lb.PreviewMessage += LbPreviewMessage;
+                    appState.LocoBufferChanged += AppStateLocoBufferChanged;
                 }
+                AppStateLocoBufferChanged(null, null);
+            }
+        }
+
+        private void AppStateLocoBufferChanged(object sender, EventArgs e)
+        {
+            if (lb != null)
+            {
+                lb.PreviewMessage -= LbPreviewMessage;
+            }
+            lb = (appState != null) ? appState.LocoBuffer : null;
+            if (lb != null)
+            {
+                lb.PreviewMessage += LbPreviewMessage;
             }
         }
 

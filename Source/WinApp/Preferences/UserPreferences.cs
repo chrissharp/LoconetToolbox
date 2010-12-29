@@ -81,6 +81,16 @@ namespace LocoNetToolBox.WinApp.Preferences
             set { this["PortName"] = value; }
         }
 
+        /// <summary>
+        /// Path of LocoNetConfiguration file.
+        /// </summary>
+        [UserScopedSetting(),
+        DefaultSettingValue("")]
+        public string LocoNetConfigurationPath
+        {
+            get { return (string)this["LocoNetConfigurationPath"]; }
+            set { this["LocoNetConfigurationPath"] = value; }
+        }
 
         /// <summary>
         /// Settings provider for user prefs.

@@ -28,6 +28,8 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         public event EventHandler LocoBufferChanged;
 
+        private AppState appState;
+
         /// <summary>
         /// View on the locobuffer.
         /// </summary>
@@ -42,15 +44,32 @@ namespace LocoNetToolBox.WinApp.Controls
         internal LocoBuffer ConfiguredLocoBuffer
         {
             get { return locoBufferSettings.LocoBuffer; }
-            set { locoBufferSettings.LocoBuffer = value; }
         }
 
         /// <summary>
-        /// Connect to the locobuffer.
+        /// Attach to the given application.
         /// </summary>
-        internal AsyncLocoBuffer LocoBuffer
+        internal AppState AppState
         {
-            set { powerCommandControl1.LocoBuffer = value; }
+            set
+            {
+                if (appState != null)
+                {
+                    appState.LocoBufferChanged -= AppStateLocoBufferChanged;
+                }
+                appState = value;
+                if (appState != null)
+                {
+                    appState.LocoBufferChanged += AppStateLocoBufferChanged;
+                }
+                powerCommandControl1.AppState = value;
+                AppStateLocoBufferChanged(null, null);
+            }
+        }
+
+        private void AppStateLocoBufferChanged(object sender, EventArgs e)
+        {
+            locoBufferSettings.LocoBuffer = (appState != null) ? appState.ConfiguredLocoBuffer : null;
         }
 
         /// <summary>

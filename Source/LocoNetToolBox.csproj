@@ -102,8 +102,10 @@
     <Compile Include="Protocol\GlobalPowerOff.cs" />
     <Compile Include="Protocol\GlobalPowerOn.cs" />
     <Compile Include="Version.cs" />
+    <Compile Include="WinApp\AppState.cs" />
     <Compile Include="WinApp\Communications\AsyncLocoBuffer.cs" />
     <Compile Include="WinApp\Communications\AsyncRequestCompletedEventArgs.cs" />
+    <Compile Include="WinApp\Constants.cs" />
     <Compile Include="WinApp\Controls\CommandControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

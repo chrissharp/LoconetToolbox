@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Protocol;
@@ -10,6 +11,7 @@ namespace LocoNetToolBox.Configuration
     /// </summary>
     public class LocoIOConfigMap : IEnumerable<LocoIOConfig>
     {
+        public event EventHandler Modified;
         private readonly Dictionary<LocoNetAddress, LocoIOConfig> locoIOs = new Dictionary<LocoNetAddress, LocoIOConfig>();
 
         /// <summary>
@@ -29,11 +31,15 @@ namespace LocoNetToolBox.Configuration
             {
                 if (value == null)
                 {
-                    locoIOs.Remove(index);
+                    Remove(index);
                 }
                 else
                 {
-                    locoIOs[index] = value;
+                    if (this[index] != value)
+                    {
+                        locoIOs[index] = value;
+                        Modified.Fire(this);
+                    }
                 }
             }
         }
@@ -51,7 +57,10 @@ namespace LocoNetToolBox.Configuration
         /// </summary>
         public bool Remove(LocoNetAddress index)
         {
-            return locoIOs.Remove(index);
+            if (!locoIOs.Remove(index))
+                return false;
+            Modified.Fire(this);
+            return true;
         }
 
         /// <summary>

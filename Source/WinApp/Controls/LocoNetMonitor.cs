@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+using System;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
@@ -26,6 +27,7 @@ namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class LocoNetMonitor : UserControl
     {
+        private AppState appState;
         private AsyncLocoBuffer locoBuffer;
 
         /// <summary>
@@ -37,23 +39,37 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Connect to the locobuffer.
+        /// Attach to the given application.
         /// </summary>
-        internal AsyncLocoBuffer LocoBuffer
+        internal AppState AppState
         {
             set
             {
-                if (locoBuffer != null)
+                if (appState != null)
                 {
-                    locoBuffer.SendMessage -= LocoBufferSendMessage;
-                    locoBuffer.PreviewMessage -= LocoBufferPreviewMessage;
+                    appState.LocoBufferChanged -= AppStateLocoBufferChanged;
                 }
-                locoBuffer = value;
-                if (locoBuffer != null)
+                appState = value;
+                if (appState != null)
                 {
-                    locoBuffer.SendMessage += LocoBufferSendMessage;
-                    locoBuffer.PreviewMessage += LocoBufferPreviewMessage;
+                    appState.LocoBufferChanged += AppStateLocoBufferChanged;
                 }
+                AppStateLocoBufferChanged(null, null);
+            }
+        }
+
+        private void AppStateLocoBufferChanged(object sender, EventArgs e)
+        {
+            if (locoBuffer != null)
+            {
+                locoBuffer.SendMessage -= LocoBufferSendMessage;
+                locoBuffer.PreviewMessage -= LocoBufferPreviewMessage;
+            }
+            locoBuffer = (appState != null) ? appState.LocoBuffer : null;
+            if (locoBuffer != null)
+            {
+                locoBuffer.SendMessage += LocoBufferSendMessage;
+                locoBuffer.PreviewMessage += LocoBufferPreviewMessage;
             }
         }
 

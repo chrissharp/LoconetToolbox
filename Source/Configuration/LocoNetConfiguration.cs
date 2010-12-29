@@ -14,12 +14,14 @@ namespace LocoNetToolBox.Configuration
         private const string VersionName = "version";
 
         private readonly LocoIOConfigMap locoIOs = new LocoIOConfigMap();
+        private bool dirty;
 
         /// <summary>
         /// Default ctor
         /// </summary>
         public LocoNetConfiguration()
-        {            
+        {
+            locoIOs.Modified += (_, x) => SetDirty();
         }
 
         /// <summary>
@@ -44,6 +46,27 @@ namespace LocoNetToolBox.Configuration
         }
 
         /// <summary>
+        /// Path of config on disk (can be null).
+        /// </summary>
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Is my state different then the state on disk?
+        /// </summary>
+        public bool Dirty
+        {
+            get { return dirty; }
+        }
+
+        /// <summary>
+        /// Mark this configuration dirty (my state is different from the state on disk).
+        /// </summary>
+        public void SetDirty()
+        {
+            dirty = true;
+        }
+
+        /// <summary>
         /// Save myself to XML
         /// </summary>
         public XElement ToXml()
@@ -62,11 +85,13 @@ namespace LocoNetToolBox.Configuration
         /// </summary>
         public void Save(string path)
         {
-            var folder = Path.GetDirectoryName(path);
+            var folder = System.IO.Path.GetDirectoryName(path);
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
             var xml = ToXml();
             xml.Save(path, SaveOptions.None);
+            Path = path;
+            dirty = false;
         }
 
         /// <summary>
@@ -75,7 +100,7 @@ namespace LocoNetToolBox.Configuration
         public static LocoNetConfiguration Load(string path)
         {
             var doc = XDocument.Load(path);
-            return new LocoNetConfiguration(doc.Root);
+            return new LocoNetConfiguration(doc.Root) { Path = path };
         }
     }
 }

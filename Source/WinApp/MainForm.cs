@@ -18,26 +18,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Windows.Forms;
-using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using LocoNetToolBox.WinApp.Communications;
+using LocoNetToolBox.WinApp.Preferences;
 
 namespace LocoNetToolBox.WinApp
 {
     public partial class MainForm : Form
     {
-        private LocoBuffer lb;
-        private AsyncLocoBuffer asyncLb;
-        private LocoNetState lnState;
+        private readonly AppState state;
 
         /// <summary>
         /// Default ctor
         /// </summary>
         public MainForm()
         {
+            state = new AppState(this);
             InitializeComponent();
             lbVersion.Text = string.Format("Version: {0}", GetType().Assembly.GetName().Version);
-            SetLocoBuffer(new SerialPortLocoBuffer());
+            state.SetLocoBuffer(new SerialPortLocoBuffer());
+
+            locoBufferView1.AppState = state;
+            commandControl1.AppState = state;
+            locoIOList1.AppState = state;
+            locoNetMonitor.AppState = state;
+        }
+
+        /// <summary>
+        /// Load time initialization
+        /// </summary>
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            var prefs = UserPreferences.Preferences;
+            var path = prefs.LocoNetConfigurationPath;
+            if (!string.IsNullOrEmpty(path))
+            {
+                state.OpenConfiguration(path);
+            }
         }
 
         /// <summary>
@@ -45,7 +63,12 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            CloseLb();
+            if (!state.SaveConfigurationIfDirty())
+            {
+                e.Cancel = true;
+                return;
+            }
+            state.Dispose();
             base.OnFormClosing(e);
         }
 
@@ -60,55 +83,49 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         private void LocoBufferView1LocoBufferChanged(object sender, EventArgs e)
         {
-            SetLocoBuffer(locoBufferView1.ConfiguredLocoBuffer);
+            state.SetLocoBuffer(locoBufferView1.ConfiguredLocoBuffer);
         }
 
         /// <summary>
-        /// Pass the given locobuffer on to all components.
+        /// Fix size of controls
         /// </summary>
-        private void SetLocoBuffer(LocoBuffer lb)
-        {
-            if (this.lb != lb)
-            {
-                CloseLb();
-                this.lb = lb;
-                asyncLb = new AsyncLocoBuffer(this, lb);
-                lnState = new LocoNetState(lb);
-                locoBufferView1.ConfiguredLocoBuffer = lb;
-                locoBufferView1.LocoBuffer = asyncLb;
-                commandControl1.LocoBuffer = asyncLb;
-                commandControl1.LocoNetState = lnState;
-                locoIOList1.LocoBuffer = asyncLb;
-                locoNetMonitor.LocoBuffer = asyncLb;
-            }
-        }
-
-        /// <summary>
-        /// Close any active locobuffer connection
-        /// </summary>
-        private void CloseLb()
-        {
-            if (asyncLb != null)
-            {
-                asyncLb.Dispose();
-                asyncLb = null;
-            }
-            if (lnState != null)
-            {
-                lnState.Dispose();
-                lnState = null;
-            }
-            if (lb != null)
-            {
-                lb.Close();
-                lb = null;
-            }
-        }
-
         private void AdjustSizes()
         {
             var height = Math.Max(locoBufferView1.Height, commandControl1.Height);
             locoIOList1.Height = height;
+        }
+
+        /// <summary>
+        /// Open a new configuration.
+        /// </summary>
+        private void miOpen_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Title = "Open loconet configuration";
+                dialog.DefaultExt = Constants.LocoNetConfigurationExt;
+                dialog.Filter = Constants.LocoNetConfigurationFilter;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    state.OpenConfiguration(dialog.FileName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save configuration now.
+        /// </summary>
+        private void miSave_Click(object sender, EventArgs e)
+        {
+            state.SaveConfiguration();
+        }
+
+        /// <summary>
+        /// Save configuration using different filename
+        /// </summary>
+        private void miSaveAs_Click(object sender, EventArgs e)
+        {
+            state.SaveConfigurationAs();
         }
     }
 }

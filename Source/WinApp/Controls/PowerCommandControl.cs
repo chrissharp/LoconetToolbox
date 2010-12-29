@@ -18,15 +18,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Windows.Forms;
-using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using LocoNetToolBox.WinApp.Communications;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
     public partial class PowerCommandControl : UserControl
     {
-        private AsyncLocoBuffer lb;
+        private AppState appState;
 
         /// <summary>
         /// Default ctor
@@ -37,15 +35,16 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Connect to locobuffer
+        /// Connect to the application
         /// </summary>
-        internal AsyncLocoBuffer LocoBuffer { set { lb = value; } }
+        internal AppState AppState { set { appState = value; } }
 
         /// <summary>
         /// Execute the given request.
         /// </summary>
         private void Execute(Request request)
         {
+            var lb = appState.LocoBuffer;
             lb.BeginRequest(request, e => {
                 if (e.HasError)
                 {
