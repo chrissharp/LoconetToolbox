@@ -17,6 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
+using System.IO;
 using System.Windows.Forms;
 using LocoNetToolBox.Protocol;
 using LocoNetToolBox.WinApp.Preferences;
@@ -25,6 +26,7 @@ namespace LocoNetToolBox.WinApp
 {
     public partial class MainForm : Form
     {
+        private const string Title = "MGV LocoNet ToolBox";
         private readonly AppState state;
 
         /// <summary>
@@ -41,6 +43,8 @@ namespace LocoNetToolBox.WinApp
             commandControl1.AppState = state;
             locoIOList1.AppState = state;
             locoNetMonitor.AppState = state;
+            state.PathChanged += (_, x) => UpdateTitle();
+            UpdateTitle();
         }
 
         /// <summary>
@@ -126,6 +130,16 @@ namespace LocoNetToolBox.WinApp
         private void miSaveAs_Click(object sender, EventArgs e)
         {
             state.SaveConfigurationAs();
+        }
+
+        /// <summary>
+        /// Update the title of this form
+        /// </summary>
+        private void UpdateTitle()
+        {
+            var path = state.Configuration.Path;
+            path = string.IsNullOrEmpty(path) ? "New" : Path.GetFileNameWithoutExtension(path);
+            Text = string.Format("{0} - {1}", path, Title);
         }
     }
 }

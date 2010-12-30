@@ -14,6 +14,7 @@ namespace LocoNetToolBox.WinApp
     internal sealed class AppState : IDisposable
     {
         public event EventHandler LocoBufferChanged;
+        public event EventHandler PathChanged;
 
         private readonly Control ui;
         private LocoNetConfiguration configuration = new LocoNetConfiguration();
@@ -102,6 +103,7 @@ namespace LocoNetToolBox.WinApp
                     configuration = tmp;
                     UserPreferences.Preferences.LocoNetConfigurationPath = configuration.Path;
                     UserPreferences.SaveNow();
+                    PathChanged.Fire(this);
                 }
             }
             catch (Exception ex)
@@ -143,6 +145,7 @@ namespace LocoNetToolBox.WinApp
                 configuration.Save(configuration.Path);
                 UserPreferences.Preferences.LocoNetConfigurationPath = configuration.Path;
                 UserPreferences.SaveNow();
+                PathChanged.Fire(this);
                 return true;
             }
             catch (Exception ex)
