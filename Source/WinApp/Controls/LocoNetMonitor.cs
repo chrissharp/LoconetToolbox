@@ -16,11 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-using System;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
-using LocoNetToolBox.WinApp.Communications;
 using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
@@ -28,7 +26,6 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class LocoNetMonitor : UserControl
     {
         private AppState appState;
-        private AsyncLocoBuffer locoBuffer;
 
         /// <summary>
         /// View on the locobuffer.
@@ -47,29 +44,15 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (appState != null)
                 {
-                    appState.LocoNetChanged -= AppStateLocoNetChanged;
+                    appState.SendMessage -= LocoBufferSendMessage;
+                    appState.PreviewMessage -= LocoBufferPreviewMessage;
                 }
                 appState = value;
                 if (appState != null)
                 {
-                    appState.LocoNetChanged += AppStateLocoNetChanged;
+                    appState.SendMessage += LocoBufferSendMessage;
+                    appState.PreviewMessage += LocoBufferPreviewMessage;
                 }
-                AppStateLocoNetChanged(null, null);
-            }
-        }
-
-        private void AppStateLocoNetChanged(object sender, EventArgs e)
-        {
-            if (locoBuffer != null)
-            {
-                locoBuffer.SendMessage -= LocoBufferSendMessage;
-                locoBuffer.PreviewMessage -= LocoBufferPreviewMessage;
-            }
-            locoBuffer = (appState != null) ? appState.LocoBuffer : null;
-            if (locoBuffer != null)
-            {
-                locoBuffer.SendMessage += LocoBufferSendMessage;
-                locoBuffer.PreviewMessage += LocoBufferPreviewMessage;
             }
         }
 

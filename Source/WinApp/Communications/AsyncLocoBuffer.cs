@@ -13,9 +13,6 @@ namespace LocoNetToolBox.WinApp.Communications
     /// </summary>
     public class AsyncLocoBuffer : IDisposable
     {
-        internal event MessageHandler SendMessage;
-        internal event MessageHandler PreviewMessage;
-
         private readonly Control ui;
         private readonly LocoBuffer lb;
         private readonly List<RequestItem> requests = new List<RequestItem>();
@@ -29,8 +26,6 @@ namespace LocoNetToolBox.WinApp.Communications
         {
             this.ui = ui;
             this.lb = lb;
-            lb.SendMessage += LbForwardSendMessage;
-            lb.PreviewMessage += LbForwardPreviewMessage;
             var thread = new Thread(Run);
             thread.Start();
         }
@@ -41,38 +36,6 @@ namespace LocoNetToolBox.WinApp.Communications
         internal LocoBuffer LocoBuffer
         {
             get { return lb; }
-        }
-
-        /// <summary>
-        /// Forward the PreviewMessage event on the UI thread.
-        /// </summary>
-        private bool LbForwardPreviewMessage(byte[] message, Protocol.Message decoded)
-        {
-            if (PreviewMessage != null)
-            {
-                if (ui.InvokeRequired)
-                {
-                    return (bool)ui.Invoke(PreviewMessage, message, decoded);
-                }
-                return PreviewMessage(message, decoded);
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Forward the SendMessage event on the UI thread.
-        /// </summary>
-        private bool LbForwardSendMessage(byte[] message, Protocol.Message decoded)
-        {
-            if (SendMessage != null)
-            {
-                if (ui.InvokeRequired)
-                {
-                    return (bool)ui.Invoke(SendMessage, message, decoded);
-                }
-                return SendMessage(message, decoded);
-            }
-            return false;
         }
 
         /// <summary>
@@ -107,8 +70,6 @@ namespace LocoNetToolBox.WinApp.Communications
             if (disposed)
                 return;
             disposed = true;
-            lb.SendMessage -= LbForwardSendMessage;
-            lb.PreviewMessage -= LbForwardPreviewMessage;
             lock (requestsLock)
             {
                 requests.Clear();

@@ -111,7 +111,6 @@
     <Compile Include="WinApp\AppState.cs" />
     <Compile Include="WinApp\Communications\AsyncLocoBuffer.cs" />
     <Compile Include="WinApp\Communications\AsyncRequestCompletedEventArgs.cs" />
-    <Compile Include="WinApp\Communications\SyncLocoNetState.cs" />
     <Compile Include="WinApp\Constants.cs" />
     <Compile Include="WinApp\Controls\CommandControl.cs">
       <SubType>UserControl</SubType>

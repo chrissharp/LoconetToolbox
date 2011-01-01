@@ -31,7 +31,6 @@ namespace LocoNetToolBox.WinApp.Controls
         public event EventHandler SelectionChanged;
 
         private AppState appState;
-        private ILocoNetState lnState;
 
         /// <summary>
         /// Default ctor
@@ -51,30 +50,16 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (appState != null)
                 {
-                    appState.LocoNetChanged -= AppStateLocoNetChanged;
+                    appState.LocoIOQuery -= LnStateLocoIoQuery;
+                    appState.LocoIOFound -= LnStateLocoIoFound;
                 }
                 appState = value;
+                lbModules.Items.Clear();
                 if (appState != null)
                 {
-                    appState.LocoNetChanged += AppStateLocoNetChanged;
+                    appState.LocoIOQuery += LnStateLocoIoQuery;
+                    appState.LocoIOFound += LnStateLocoIoFound;
                 }
-                AppStateLocoNetChanged(null, null);
-            }
-        }
-
-        private void AppStateLocoNetChanged(object sender, EventArgs e)
-        {
-            if (lnState != null)
-            {
-                lnState.LocoIOQuery -= LnStateLocoIoQuery;
-                lnState.LocoIOFound -= LnStateLocoIoFound;
-            }
-            lnState = (appState != null) ? appState.LocoNetState : null;
-            lbModules.Items.Clear();
-            if (lnState != null)
-            {
-                lnState.LocoIOQuery += LnStateLocoIoQuery;
-                lnState.LocoIOFound += LnStateLocoIoFound;
             }
         }
 

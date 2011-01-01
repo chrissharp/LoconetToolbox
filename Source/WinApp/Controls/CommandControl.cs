@@ -75,7 +75,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
         private void CmdServoTesterClick(object sender, EventArgs e)
         {
-            var dialog = new ServoTester(appState.LocoBuffer, appState.LocoNetState);
+            var dialog = new ServoTester(appState.LocoBuffer, appState.LocoNet.State);
             dialog.Show();
         }
 

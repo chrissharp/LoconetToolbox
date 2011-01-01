@@ -16,15 +16,24 @@ namespace LocoNetToolBox.WinApp
         public event EventHandler LocoNetChanged;
         public event EventHandler PathChanged;
 
-        private readonly Control ui;
+        // LocoBuffer events synchronized on UI thread.
+        internal event MessageHandler SendMessage;
+        internal event MessageHandler PreviewMessage;
+
+        // LocoNet (state) events synchronized on UI thread.
+        public event EventHandler Idle;
+        public event EventHandler<StateMessage> StateChanged;
+        public event EventHandler LocoIOQuery;
+        public event EventHandler<LocoIOEventArgs> LocoIOFound;
+
+        private readonly Form ui;
         private LocoNet locoNet;
         private AsyncLocoBuffer asyncLb;
-        private SyncLocoNetState syncLnState;
 
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal AppState(Control ui)
+        internal AppState(Form ui)
         {
             this.ui = ui;
         }
@@ -50,11 +59,6 @@ namespace LocoNetToolBox.WinApp
         internal AsyncLocoBuffer LocoBuffer { get { return asyncLb; } }
 
         /// <summary>
-        /// Gets the active state
-        /// </summary>
-        internal ILocoNetState LocoNetState { get { return syncLnState; } }
-
-        /// <summary>
         /// Pass the given locobuffer on to all components.
         /// </summary>
         internal void Setup(LocoBuffer lb, LocoNetConfiguration configuration)
@@ -68,9 +72,109 @@ namespace LocoNetToolBox.WinApp
                 CloseLocoBuffer();
                 locoNet = new LocoNet(lb, configuration);
                 asyncLb = new AsyncLocoBuffer(ui, lb);
-                var asyncLnState = new LocoNetState(lb);
-                syncLnState = new SyncLocoNetState(ui, asyncLnState);
+
+                lb.SendMessage += LbForwardSendMessage;
+                lb.PreviewMessage += LbForwardPreviewMessage;
+
+                var lnState = locoNet.State;
+                lnState.StateChanged += LnStateStateChanged;
+                lnState.LocoIOQuery += LnStateLocoIoQuery;
+                lnState.LocoIOFound += LnStateLocoIoFound;
+                lnState.Idle += LnStateIdle;
+
                 LocoNetChanged.Fire(this);
+            }
+        }
+
+        /// <summary>
+        /// Forward the PreviewMessage event on the UI thread.
+        /// </summary>
+        private bool LbForwardPreviewMessage(byte[] message, Protocol.Message decoded)
+        {
+            if (PreviewMessage != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    return (bool)ui.Invoke(PreviewMessage, message, decoded);
+                }
+                return PreviewMessage(message, decoded);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Forward the SendMessage event on the UI thread.
+        /// </summary>
+        private bool LbForwardSendMessage(byte[] message, Protocol.Message decoded)
+        {
+            if (SendMessage != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    return (bool)ui.Invoke(SendMessage, message, decoded);
+                }
+                return SendMessage(message, decoded);
+            }
+            return false;
+        }
+
+        void LnStateIdle(object sender, EventArgs e)
+        {
+            if (Idle != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler(LnStateIdle), sender, e);
+                }
+                else
+                {
+                    Idle.Fire(this);
+                }
+            }
+        }
+
+        private void LnStateLocoIoFound(object sender, LocoIOEventArgs e)
+        {
+            if (LocoIOFound != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler<LocoIOEventArgs>(LnStateLocoIoFound), sender, e);
+                }
+                else
+                {
+                    LocoIOFound.Fire(this, e);
+                }
+            }
+        }
+
+        private void LnStateLocoIoQuery(object sender, EventArgs e)
+        {
+            if (LocoIOQuery != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler(LnStateLocoIoQuery), sender, e);
+                }
+                else
+                {
+                    LocoIOQuery.Fire(this);
+                }
+            }
+        }
+
+        private void LnStateStateChanged(object sender, StateMessage e)
+        {
+            if (StateChanged != null)
+            {
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler<StateMessage>(LnStateStateChanged), sender, e);
+                }
+                else
+                {
+                    StateChanged.Fire(this, e);
+                }
             }
         }
 
@@ -82,21 +186,30 @@ namespace LocoNetToolBox.WinApp
             if (locoNet == null)
                 return;
 
+            var lb = ConfiguredLocoBuffer;
+            if (lb != null)
+            {
+                lb.SendMessage -= LbForwardSendMessage;
+                lb.PreviewMessage -= LbForwardPreviewMessage;
+            }
+
             if (asyncLb != null)
             {
                 asyncLb.Dispose();
                 asyncLb = null;
             }
-            if (syncLnState != null)
+
+            var lnState = locoNet.State;
+            if (lnState != null)
             {
-                syncLnState.Dispose();
-                syncLnState = null;
+                lnState.StateChanged -= LnStateStateChanged;
+                lnState.LocoIOQuery -= LnStateLocoIoQuery;
+                lnState.LocoIOFound -= LnStateLocoIoFound;
+                lnState.Idle -= LnStateIdle;
             }
-            if (locoNet != null)
-            {
-                locoNet.Dispose();
-                locoNet = null;
-            }
+
+            locoNet.Dispose();
+            locoNet = null;
         }
 
         /// <summary>
