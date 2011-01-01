@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using LocoNetToolBox.Protocol;
 
@@ -68,6 +69,20 @@ namespace LocoNetToolBox.Model
                     if (timeout <= 0)
                         return false;
                     start = now;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets all loco-io units found on the network
+        /// </summary>
+        public IEnumerable<LocoIO> FoundLocoIOs
+        {
+            get
+            {
+                lock (stateLock)
+                {
+                    return locoIOs.Values.ToList();
                 }
             }
         }

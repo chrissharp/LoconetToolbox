@@ -13,12 +13,11 @@ namespace LocoNetToolBox.WinApp
     /// </summary>
     internal sealed class AppState : IDisposable
     {
-        public event EventHandler LocoBufferChanged;
+        public event EventHandler LocoNetChanged;
         public event EventHandler PathChanged;
 
         private readonly Control ui;
-        private LocoNetConfiguration configuration = new LocoNetConfiguration();
-        private LocoBuffer lb;
+        private LocoNet locoNet;
         private AsyncLocoBuffer asyncLb;
         private SyncLocoNetState syncLnState;
 
@@ -31,14 +30,19 @@ namespace LocoNetToolBox.WinApp
         }
 
         /// <summary>
+        /// Gets the current network
+        /// </summary>
+        internal LocoNet LocoNet { get { return locoNet; } }
+
+        /// <summary>
         /// Gets the current configuration.
         /// </summary>
-        internal LocoNetConfiguration Configuration { get { return configuration; } }
+        internal LocoNetConfiguration Configuration { get { return (locoNet != null) ? locoNet.Configuration : null; } }
 
         /// <summary>
         /// Gets the synchronous locobuffer
         /// </summary>
-        internal LocoBuffer ConfiguredLocoBuffer { get { return lb; } }
+        internal LocoBuffer ConfiguredLocoBuffer { get { return (locoNet != null) ? locoNet.LocoBuffer : null; } }
 
         /// <summary>
         /// Gets the locobuffer communicator
@@ -53,16 +57,20 @@ namespace LocoNetToolBox.WinApp
         /// <summary>
         /// Pass the given locobuffer on to all components.
         /// </summary>
-        internal void SetLocoBuffer(LocoBuffer lb)
+        internal void Setup(LocoBuffer lb, LocoNetConfiguration configuration)
         {
-            if (this.lb != lb)
+            // Allow for null arguments
+            lb = lb ?? ConfiguredLocoBuffer;
+            configuration = configuration ?? Configuration;
+
+            if ((ConfiguredLocoBuffer != lb) || (Configuration != configuration))
             {
                 CloseLocoBuffer();
-                this.lb = lb;
+                locoNet = new LocoNet(lb, configuration);
                 asyncLb = new AsyncLocoBuffer(ui, lb);
                 var asyncLnState = new LocoNetState(lb);
                 syncLnState = new SyncLocoNetState(ui, asyncLnState);
-                LocoBufferChanged.Fire(this);
+                LocoNetChanged.Fire(this);
             }
         }
 
@@ -71,6 +79,9 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         private void CloseLocoBuffer()
         {
+            if (locoNet == null)
+                return;
+
             if (asyncLb != null)
             {
                 asyncLb.Dispose();
@@ -81,10 +92,10 @@ namespace LocoNetToolBox.WinApp
                 syncLnState.Dispose();
                 syncLnState = null;
             }
-            if (lb != null)
+            if (locoNet != null)
             {
-                lb.Close();
-                lb = null;
+                locoNet.Dispose();
+                locoNet = null;
             }
         }
 
@@ -101,8 +112,8 @@ namespace LocoNetToolBox.WinApp
                 // Can we close?
                 if (SaveConfigurationIfDirty())
                 {
-                    configuration = tmp;
-                    UserPreferences.Preferences.LocoNetConfigurationPath = configuration.Path;
+                    Setup(null, tmp);
+                    UserPreferences.Preferences.LocoNetConfigurationPath = path;
                     UserPreferences.SaveNow();
                     PathChanged.Fire(this);
                 }
@@ -119,6 +130,7 @@ namespace LocoNetToolBox.WinApp
         /// <returns>True if it is save to overwrite the current configuration.</returns>
         internal bool SaveConfigurationIfDirty()
         {
+            var configuration = Configuration;
             if ((configuration == null) || (!configuration.Dirty))
                 return true;
 
@@ -139,8 +151,14 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         internal bool SaveConfiguration()
         {
+            var configuration = Configuration;
+            if (configuration == null)
+                return true;
+
             if (string.IsNullOrEmpty(configuration.Path))
+            {
                 return SaveConfigurationAs();
+            }
             try
             {
                 configuration.Save(configuration.Path);
@@ -161,6 +179,10 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         internal bool SaveConfigurationAs()
         {
+            var configuration = Configuration;
+            if (configuration == null)
+                return true;
+
             using (var dialog = new SaveFileDialog())
             {
                 dialog.Title = "Save loconet configuration as";

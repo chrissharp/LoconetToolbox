@@ -82,6 +82,7 @@
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Model\AddressState.cs" />
     <Compile Include="Model\AddressStateMap.cs" />
+    <Compile Include="Model\LocoNet.cs" />
     <Compile Include="Model\LocoNetState.IdleDetection.cs" />
     <Compile Include="Model\ILocoNetState.cs" />
     <Compile Include="Model\LocoIOEventArgs.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Protocol\PeerXferRequest1.cs" />
     <Compile Include="Protocol\GlobalPowerOff.cs" />
     <Compile Include="Protocol\GlobalPowerOn.cs" />
+    <Compile Include="Services\UnknownLocoIODetector.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="WinApp\AppState.cs" />
     <Compile Include="WinApp\Communications\AsyncLocoBuffer.cs" />

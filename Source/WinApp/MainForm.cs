@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using System;
 using System.IO;
 using System.Windows.Forms;
+using LocoNetToolBox.Configuration;
 using LocoNetToolBox.Protocol;
 using LocoNetToolBox.WinApp.Preferences;
 
@@ -37,7 +38,7 @@ namespace LocoNetToolBox.WinApp
             state = new AppState(this);
             InitializeComponent();
             lbVersion.Text = string.Format("Version: {0}", GetType().Assembly.GetName().Version);
-            state.SetLocoBuffer(new SerialPortLocoBuffer());
+            state.Setup(new SerialPortLocoBuffer(), new LocoNetConfiguration());
 
             locoBufferView1.AppState = state;
             commandControl1.AppState = state;
@@ -87,7 +88,7 @@ namespace LocoNetToolBox.WinApp
         /// </summary>
         private void LocoBufferView1LocoBufferChanged(object sender, EventArgs e)
         {
-            state.SetLocoBuffer(locoBufferView1.ConfiguredLocoBuffer);
+            state.Setup(locoBufferView1.ConfiguredLocoBuffer, null);
         }
 
         /// <summary>

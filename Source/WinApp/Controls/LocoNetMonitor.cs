@@ -47,18 +47,18 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (appState != null)
                 {
-                    appState.LocoBufferChanged -= AppStateLocoBufferChanged;
+                    appState.LocoNetChanged -= AppStateLocoNetChanged;
                 }
                 appState = value;
                 if (appState != null)
                 {
-                    appState.LocoBufferChanged += AppStateLocoBufferChanged;
+                    appState.LocoNetChanged += AppStateLocoNetChanged;
                 }
-                AppStateLocoBufferChanged(null, null);
+                AppStateLocoNetChanged(null, null);
             }
         }
 
-        private void AppStateLocoBufferChanged(object sender, EventArgs e)
+        private void AppStateLocoNetChanged(object sender, EventArgs e)
         {
             if (locoBuffer != null)
             {

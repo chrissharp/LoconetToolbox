@@ -52,6 +52,7 @@ namespace LocoNetToolBox.WinApp.Controls
             this.lb = lb;
             this.programmer = new Programmer(address);
             configurationControl.Initialize(lb, programmer);
+            Text += string.Format(" [{0}]", address);
         }
 
         /// <summary>

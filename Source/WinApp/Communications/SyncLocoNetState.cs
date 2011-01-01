@@ -47,49 +47,61 @@ namespace LocoNetToolBox.WinApp.Communications
 
         void LnStateIdle(object sender, EventArgs e)
         {
-            if (ui.InvokeRequired)
+            if (Idle != null)
             {
-                ui.BeginInvoke(new EventHandler(LnStateIdle), sender, e);
-            }
-            else
-            {
-                Idle.Fire(this);
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler(LnStateIdle), sender, e);
+                }
+                else
+                {
+                    Idle.Fire(this);
+                }
             }
         }
 
         private void LnStateLocoIoFound(object sender, LocoIOEventArgs e)
         {
-            if (ui.InvokeRequired)
+            if (LocoIOFound != null)
             {
-                ui.BeginInvoke(new EventHandler<LocoIOEventArgs>(LnStateLocoIoFound), sender, e);
-            }
-            else
-            {
-                LocoIOFound.Fire(this, e);
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler<LocoIOEventArgs>(LnStateLocoIoFound), sender, e);
+                }
+                else
+                {
+                    LocoIOFound.Fire(this, e);
+                }
             }
         }
 
         private void LnStateLocoIoQuery(object sender, EventArgs e)
         {
-            if (ui.InvokeRequired)
+            if (LocoIOQuery != null)
             {
-                ui.BeginInvoke(new EventHandler(LnStateLocoIoQuery), sender, e);
-            }
-            else
-            {
-                LocoIOQuery.Fire(this);
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler(LnStateLocoIoQuery), sender, e);
+                }
+                else
+                {
+                    LocoIOQuery.Fire(this);
+                }
             }
         }
 
         private void LnStateStateChanged(object sender, StateMessage e)
         {
-            if (ui.InvokeRequired)
+            if (StateChanged != null)
             {
-                ui.BeginInvoke(new EventHandler<StateMessage>(LnStateStateChanged), sender, e);
-            }
-            else
-            {
-                StateChanged.Fire(this, e);
+                if (ui.InvokeRequired)
+                {
+                    ui.BeginInvoke(new EventHandler<StateMessage>(LnStateStateChanged), sender, e);
+                }
+                else
+                {
+                    StateChanged.Fire(this, e);
+                }
             }
         }
 

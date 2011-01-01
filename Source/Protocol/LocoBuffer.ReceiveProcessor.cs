@@ -24,7 +24,7 @@ using System.Threading;
 
 namespace LocoNetToolBox.Protocol
 {
-    partial class LocoBuffer
+    public partial class LocoBuffer
     {
         private class ReceiveProcessor
         {

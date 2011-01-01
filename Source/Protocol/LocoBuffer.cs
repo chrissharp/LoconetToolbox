@@ -28,7 +28,7 @@ namespace LocoNetToolBox.Protocol
     /// <summary>
     /// LocoBuffer communication.
     /// </summary>
-    internal abstract partial class LocoBuffer : IDisposable
+    public abstract partial class LocoBuffer : IDisposable
     {
         internal event MessageHandler SendMessage;
         internal event MessageHandler PreviewMessage;
