@@ -148,6 +148,12 @@
     <Compile Include="WinApp\Controls\LocoNetMonitor.Designer.cs">
       <DependentUpon>LocoNetMonitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinApp\Controls\ReadNewLocoIOsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\ReadNewLocoIOsForm.Designer.cs">
+      <DependentUpon>ReadNewLocoIOsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinApp\Controls\TcpLocoBufferSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     <EmbeddedResource Include="WinApp\Controls\LocoNetMonitor.resx">
       <DependentUpon>LocoNetMonitor.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\ReadNewLocoIOsForm.resx">
+      <DependentUpon>ReadNewLocoIOsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\TcpLocoBufferSettings.resx">
       <DependentUpon>TcpLocoBufferSettings.cs</DependentUpon>

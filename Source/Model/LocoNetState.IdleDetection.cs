@@ -21,6 +21,7 @@ namespace LocoNetToolBox.Model
         private void StartIdleDetection()
         {
             idleThread = new Thread(DetectIdle);
+            idleThread.Start();
         }
 
         /// <summary>

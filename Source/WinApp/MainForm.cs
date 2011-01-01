@@ -21,6 +21,7 @@ using System.IO;
 using System.Windows.Forms;
 using LocoNetToolBox.Configuration;
 using LocoNetToolBox.Protocol;
+using LocoNetToolBox.WinApp.Controls;
 using LocoNetToolBox.WinApp.Preferences;
 
 namespace LocoNetToolBox.WinApp
@@ -45,6 +46,7 @@ namespace LocoNetToolBox.WinApp
             locoIOList1.AppState = state;
             locoNetMonitor.AppState = state;
             state.PathChanged += (_, x) => UpdateTitle();
+            state.Idle += OnLocoNetIdle;
             UpdateTitle();
         }
 
@@ -89,6 +91,24 @@ namespace LocoNetToolBox.WinApp
         private void LocoBufferView1LocoBufferChanged(object sender, EventArgs e)
         {
             state.Setup(locoBufferView1.ConfiguredLocoBuffer, null);
+        }
+
+        /// <summary>
+        /// LocoNet seems idle.
+        /// Perform some checks.
+        /// </summary>
+        private void OnLocoNetIdle(object sender, EventArgs e)
+        {
+            if (ActiveForm != this)
+                return;
+
+            if (state.LocoNet.HasNewLocoIOs)
+            {
+                using (var dialog = new ReadNewLocoIOsForm(state))
+                {
+                    dialog.ShowDialog(this);
+                }
+            }
         }
 
         /// <summary>
