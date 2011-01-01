@@ -10,6 +10,11 @@ namespace LocoNetToolBox.WinApp.Communications
     internal class SyncLocoNetState : ILocoNetState
     {
         /// <summary>
+        /// Fired when the loconet is idle for more then 1 second.
+        /// </summary>
+        public event EventHandler Idle;
+
+        /// <summary>
         /// Event is fired when an input or switch state has changed.
         /// </summary>
         public event EventHandler<StateMessage> StateChanged;
@@ -37,6 +42,19 @@ namespace LocoNetToolBox.WinApp.Communications
             lnState.StateChanged += LnStateStateChanged;
             lnState.LocoIOQuery += LnStateLocoIoQuery;
             lnState.LocoIOFound += LnStateLocoIoFound;
+            lnState.Idle += LnStateIdle;
+        }
+
+        void LnStateIdle(object sender, EventArgs e)
+        {
+            if (ui.InvokeRequired)
+            {
+                ui.BeginInvoke(new EventHandler(LnStateIdle), sender, e);
+            }
+            else
+            {
+                Idle.Fire(this);
+            }
         }
 
         private void LnStateLocoIoFound(object sender, LocoIOEventArgs e)
@@ -93,9 +111,15 @@ namespace LocoNetToolBox.WinApp.Communications
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
+            StateChanged = null;
+            LocoIOQuery = null;
+            LocoIOFound = null;
+            Idle = null;
+
             lnState.StateChanged -= LnStateStateChanged;
             lnState.LocoIOQuery -= LnStateLocoIoQuery;
             lnState.LocoIOFound -= LnStateLocoIoFound;
+            lnState.Idle -= LnStateIdle;
             lnState.Dispose();
         }
     }

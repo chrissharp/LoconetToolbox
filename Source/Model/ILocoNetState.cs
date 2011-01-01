@@ -8,6 +8,11 @@ namespace LocoNetToolBox.Model
     public interface ILocoNetState : IDisposable
     {
         /// <summary>
+        /// Fired when the loconet is idle for more then 1 second.
+        /// </summary>
+        event EventHandler Idle;
+
+        /// <summary>
         /// Event is fired when an input or switch state has changed.
         /// </summary>
         event EventHandler<StateMessage> StateChanged;

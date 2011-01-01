@@ -8,7 +8,7 @@ namespace LocoNetToolBox.Model
     /// <summary>
     /// Maintains the state of all inputs and switches in the loconet.
     /// </summary>
-    public class LocoNetState : ILocoNetState
+    public partial class LocoNetState : ILocoNetState
     {
         /// <summary>
         /// Event is fired when an input or switch state has changed.
@@ -29,6 +29,7 @@ namespace LocoNetToolBox.Model
         private readonly Dictionary<LocoNetAddress, LocoIO> locoIOs = new Dictionary<LocoNetAddress, LocoIO>();
         private readonly object stateLock = new object();
         private readonly LocoBuffer lb;
+        private DateTime lastPreviewMessageTime = DateTime.Now;
 
         /// <summary>
         /// Default ctor
@@ -38,6 +39,7 @@ namespace LocoNetToolBox.Model
         {
             this.lb = lb;
             lb.PreviewMessage += ProcessMessage;
+            StartIdleDetection();
         }
 
         /// <summary>
@@ -76,6 +78,7 @@ namespace LocoNetToolBox.Model
         private bool ProcessMessage(byte[] message, Message decoded)
         {
             var response = Response.Decode(message);
+            lastPreviewMessageTime = DateTime.Now;
 
             SwitchState sw = null;
             lock (stateLock)
@@ -142,7 +145,11 @@ namespace LocoNetToolBox.Model
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
+            StopIdleDetection();
             StateChanged = null;
+            Idle = null;
+            LocoIOQuery = null;
+            LocoIOFound = null;
             lock (stateLock)
             {
                 Monitor.PulseAll(stateLock);
