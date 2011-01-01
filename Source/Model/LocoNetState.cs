@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using LocoNetToolBox.Protocol;
 
@@ -7,11 +8,25 @@ namespace LocoNetToolBox.Model
     /// <summary>
     /// Maintains the state of all inputs and switches in the loconet.
     /// </summary>
-    public class LocoNetState : IDisposable
+    public class LocoNetState : ILocoNetState
     {
+        /// <summary>
+        /// Event is fired when an input or switch state has changed.
+        /// </summary>
         public event EventHandler<StateMessage> StateChanged;
 
+        /// <summary>
+        /// Event is fired when a query for loco-io units is detected.
+        /// </summary>
+        public event EventHandler LocoIOQuery;
+
+        /// <summary>
+        /// Event is fired when a response from a loco-io unit on a query for such units is detected.
+        /// </summary>
+        public event EventHandler<LocoIOEventArgs> LocoIOFound;
+
         private readonly AddressStateMap<SwitchState> switches = new AddressStateMap<SwitchState>();
+        private readonly Dictionary<LocoNetAddress, LocoIO> locoIOs = new Dictionary<LocoNetAddress, LocoIO>();
         private readonly object stateLock = new object();
         private readonly LocoBuffer lb;
 
@@ -67,6 +82,8 @@ namespace LocoNetToolBox.Model
             {
                 var inpRep = response as InputReport;
                 var swRep = response as SwitchReport;
+                var peerXferResponse = response as PeerXferResponse;
+
                 if (inpRep != null)
                 {
                     //var item = GetItem(inpRep.Address);
@@ -85,10 +102,28 @@ namespace LocoNetToolBox.Model
                         return false;
                     }
                 }
+                else if (peerXferResponse != null)
+                {
+                    if (peerXferResponse.SvAddress == 0)
+                    {
+                        if (peerXferResponse.IsSourcePC)
+                        {
+                            // Query request
+                            locoIOs.Clear();
+                            LocoIOQuery.Fire(this);
+                        }
+                        else
+                        {
+                            var entry = new LocoIO(peerXferResponse.Source, peerXferResponse.LocoIOVersion);
+                            locoIOs[entry.Address] = entry;
+                            LocoIOFound.Fire(this, new LocoIOEventArgs(entry));
+                        }
+                    }
+                }
             }
 
             // Notify listeners
-            if (sw != null) 
+            if (sw != null)
                 StateChanged.Fire(this, new StateMessage(sw));
             return false;
         }

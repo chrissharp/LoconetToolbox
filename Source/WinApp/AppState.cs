@@ -20,7 +20,7 @@ namespace LocoNetToolBox.WinApp
         private LocoNetConfiguration configuration = new LocoNetConfiguration();
         private LocoBuffer lb;
         private AsyncLocoBuffer asyncLb;
-        private LocoNetState lnState;
+        private SyncLocoNetState syncLnState;
 
         /// <summary>
         /// Default ctor
@@ -48,7 +48,7 @@ namespace LocoNetToolBox.WinApp
         /// <summary>
         /// Gets the active state
         /// </summary>
-        internal LocoNetState LocoNetState { get { return lnState; } }
+        internal ILocoNetState LocoNetState { get { return syncLnState; } }
 
         /// <summary>
         /// Pass the given locobuffer on to all components.
@@ -60,7 +60,8 @@ namespace LocoNetToolBox.WinApp
                 CloseLocoBuffer();
                 this.lb = lb;
                 asyncLb = new AsyncLocoBuffer(ui, lb);
-                lnState = new LocoNetState(lb);
+                var asyncLnState = new LocoNetState(lb);
+                syncLnState = new SyncLocoNetState(ui, asyncLnState);
                 LocoBufferChanged.Fire(this);
             }
         }
@@ -75,10 +76,10 @@ namespace LocoNetToolBox.WinApp
                 asyncLb.Dispose();
                 asyncLb = null;
             }
-            if (lnState != null)
+            if (syncLnState != null)
             {
-                lnState.Dispose();
-                lnState = null;
+                syncLnState.Dispose();
+                syncLnState = null;
             }
             if (lb != null)
             {

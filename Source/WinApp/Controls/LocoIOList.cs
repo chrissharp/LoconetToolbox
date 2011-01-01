@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Windows.Forms;
-
+using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
-using LocoNetToolBox.WinApp.Communications;
-using Message = LocoNetToolBox.Protocol.Message;
 
 namespace LocoNetToolBox.WinApp.Controls
 {
@@ -33,7 +31,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public event EventHandler SelectionChanged;
 
         private AppState appState;
-        private AsyncLocoBuffer lb;
+        private ILocoNetState lnState;
 
         /// <summary>
         /// Default ctor
@@ -66,14 +64,17 @@ namespace LocoNetToolBox.WinApp.Controls
 
         private void AppStateLocoBufferChanged(object sender, EventArgs e)
         {
-            if (lb != null)
+            if (lnState != null)
             {
-                lb.PreviewMessage -= LbPreviewMessage;
+                lnState.LocoIOQuery -= LnStateLocoIoQuery;
+                lnState.LocoIOFound -= LnStateLocoIoFound;
             }
-            lb = (appState != null) ? appState.LocoBuffer : null;
-            if (lb != null)
+            lnState = (appState != null) ? appState.LocoNetState : null;
+            lbModules.Items.Clear();
+            if (lnState != null)
             {
-                lb.PreviewMessage += LbPreviewMessage;
+                lnState.LocoIOQuery += LnStateLocoIoQuery;
+                lnState.LocoIOFound += LnStateLocoIoFound;
             }
         }
 
@@ -95,33 +96,26 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
-        /// Listen to loconet message.
-        /// Use results of Query requests to generate a list of locoio modules.
+        /// New LocoIO unit found
         /// </summary>
-        private bool LbPreviewMessage(byte[] message, Message decoded)
+        void LnStateLocoIoFound(object sender, LocoIOEventArgs e)
         {
-            var response = Response.Decode(message) as PeerXferResponse;
-            if (response != null)
-            {
-                if (response.SvAddress == 0)
-                {
-                    if (response.IsSourcePC)
-                    {
-                        // Query request
-                        lbModules.Items.Clear();
-                    }
-                    else
-                    {
-                        var item = new ListViewItem();
-                        item.Text = response.Source.ToString();
-                        item.Tag = response.Source;
-                        item.SubItems.Add(string.Format("{0}.{1}", response.LocoIOVersion/100,
-                                                        response.LocoIOVersion%100));
-                        lbModules.Items.Add(item);
-                    }
-                }
-            }
-            return true;
+            var item = new ListViewItem();
+            var entry = e.LocoIO;
+            item.Text = entry.Address.ToString();
+            item.Tag = entry.Address;
+            item.SubItems.Add(entry.Version);
+            lbModules.Items.Add(item);
+            lbModules.Sort();
+        }
+
+        /// <summary>
+        /// Query for locoIO units.
+        /// </summary>
+        void LnStateLocoIoQuery(object sender, EventArgs e)
+        {
+            // Query request
+            lbModules.Items.Clear();
         }
 
         /// <summary>
@@ -152,7 +146,7 @@ namespace LocoNetToolBox.WinApp.Controls
             if (currentAddress != null)
             {
                 var dialog = new LocoIOConfigurationForm();
-                dialog.Initialize(lb, currentAddress);
+                dialog.Initialize(appState.LocoBuffer, currentAddress);
                 dialog.Show();
             }
         }
@@ -166,7 +160,7 @@ namespace LocoNetToolBox.WinApp.Controls
             if (currentAddress != null)
             {
                 var dialog = new LocoIOAdvancedConfigurationForm();
-                dialog.Initialize(lb, currentAddress);
+                dialog.Initialize(appState.LocoBuffer, currentAddress);
                 dialog.Show();
             }
         }

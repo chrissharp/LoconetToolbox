@@ -82,6 +82,9 @@
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Model\AddressState.cs" />
     <Compile Include="Model\AddressStateMap.cs" />
+    <Compile Include="Model\ILocoNetState.cs" />
+    <Compile Include="Model\LocoIOEventArgs.cs" />
+    <Compile Include="Model\LocoIO.cs" />
     <Compile Include="Model\LocoNetState.cs" />
     <Compile Include="Model\StateMessage.cs" />
     <Compile Include="Model\SwitchState.cs" />
@@ -105,6 +108,7 @@
     <Compile Include="WinApp\AppState.cs" />
     <Compile Include="WinApp\Communications\AsyncLocoBuffer.cs" />
     <Compile Include="WinApp\Communications\AsyncRequestCompletedEventArgs.cs" />
+    <Compile Include="WinApp\Communications\SyncLocoNetState.cs" />
     <Compile Include="WinApp\Constants.cs" />
     <Compile Include="WinApp\Controls\CommandControl.cs">
       <SubType>UserControl</SubType>

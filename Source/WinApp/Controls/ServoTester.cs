@@ -29,7 +29,7 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class ServoTester : Form
     {
         private readonly AsyncLocoBuffer lb;
-        private readonly LocoNetState lnState;
+        private readonly ILocoNetState lnState;
 
         /// <summary>
         /// Designer ctor
@@ -41,7 +41,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Default ctor
         /// </summary>
-        public ServoTester(AsyncLocoBuffer lb, LocoNetState lnState)
+        public ServoTester(AsyncLocoBuffer lb, ILocoNetState lnState)
         {
             this.lb = lb;
             this.lnState = lnState;
