@@ -54,6 +54,8 @@ namespace LocoNetToolBox.Protocol
                     return new Idle();
                 case 0xBF:
                     return new LocoAddressRequest(data);
+                case 0xBC:
+                    return new SwitchStateRequest(data);
                 case 0xBB:
                     return new SlotDataRequest(data);
                 case 0xBA:
@@ -68,6 +70,10 @@ namespace LocoNetToolBox.Protocol
                     return new LocoSpeedRequest(data);
                 case 0xA1:
                     return new LocoDirFuncRequest(data);
+                case 0xE7:
+                    return new SlotDataResponse(data);
+                case 0xEF:
+                    return new WriteSlotData(data);
 
             }
             return result;
