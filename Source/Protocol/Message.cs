@@ -40,6 +40,36 @@ namespace LocoNetToolBox.Protocol
         {
             // TODO Decode Requests also
             Message result = Response.Decode(data);
+            if (result != null)
+                return result;
+            switch (data[0])
+            {
+                case 0x81:
+                    return new Busy();
+                case 0x82:
+                    return new GlobalPowerOff();
+                case 0x83:
+                    return new GlobalPowerOn();
+                case 0x85:
+                    return new Idle();
+                case 0xBF:
+                    return new LocoAddressRequest(data);
+                case 0xBB:
+                    return new SlotDataRequest(data);
+                case 0xBA:
+                    return new MoveSlotsRequest(data);
+                case 0xB9:
+                    return new LinkSlotsRequest(data);
+                case 0xB8:
+                    return new UnlinkSlotsRequest(data);
+                case 0xB4:
+                    return new LongAck(data);
+                case 0xA0:
+                    return new LocoSpeedRequest(data);
+                case 0xA1:
+                    return new LocoDirFuncRequest(data);
+
+            }
             return result;
         }
 

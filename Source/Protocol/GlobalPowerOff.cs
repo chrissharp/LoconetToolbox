@@ -29,5 +29,13 @@ namespace LocoNetToolBox.Protocol
         {
             lb.Send(this, 0x82, 0);
         }
+
+        /// <summary>
+        /// Convert to string
+        /// </summary>
+        public override string ToString()
+        {
+            return "Global power off";
+        }
     }
 }

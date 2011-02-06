@@ -32,5 +32,13 @@ namespace LocoNetToolBox.Protocol
         {
             lb.Send(this, 0x81, 0);
         }
+
+        /// <summary>
+        /// Convert to string
+        /// </summary>
+        public override string ToString()
+        {
+            return "Busy";
+        }
     }
 }

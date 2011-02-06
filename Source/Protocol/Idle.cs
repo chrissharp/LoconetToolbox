@@ -16,18 +16,16 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace LocoNetToolBox.Protocol
 {
-    public class GlobalPowerOn : Request
+    /// <summary>
+    /// Force IDLE state
+    /// </summary>
+    public class Idle : Request
     {
         public override void Execute(LocoBuffer lb)
         {
-            lb.Send(this, 0x83, 0);
+            lb.Send(this, 0x85, 0);
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         public override string ToString()
         {
-            return "Global power on";
+            return "Idle";
         }
     }
 }
