@@ -36,7 +36,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Create a response object if the given data is recognized.
         /// </summary>
-        internal static Message Decode(byte[] data)
+        public static Message Decode(byte[] data)
         {
             // TODO Decode Requests also
             Message result = Response.Decode(data);
@@ -46,7 +46,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Convert message to string.
         /// </summary>
-        internal static string ToString(byte[] msg)
+        public static string ToString(byte[] msg)
         {
             var sb = new StringBuilder();
             for (int i = 0; i < GetMessageLength(msg); i++)
