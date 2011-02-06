@@ -51,7 +51,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Close the connection (if any)
         /// </summary>
-        internal abstract void Close();
+        public abstract void Close();
 
         /// <summary>
         /// Disconnect from the receive processor and fire the Closed event.
@@ -65,7 +65,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Send the given message
         /// </summary>
-        internal void Send(Message decoded, params byte[] msg)
+        public void Send(Message decoded, params byte[] msg)
         {
             Message.UpdateChecksum(msg, msg.Length);
             if (SendMessage != null) { SendMessage(msg, decoded); }
@@ -92,7 +92,7 @@ namespace LocoNetToolBox.Protocol
         /// Add a new handler to the handler queue.
         /// </summary>
         /// <returns>A registration. Dispose to unregister.</returns>
-        internal IDisposable AddHandler(MessageHandler handler)
+        public IDisposable AddHandler(MessageHandler handler)
         {
             lock (handlersLock)
             {

@@ -28,7 +28,7 @@ namespace LocoNetToolBox.Protocol
     /// <summary>
     /// LocoBuffer communication.
     /// </summary>
-    internal sealed class SerialPortLocoBuffer : LocoBuffer 
+    public sealed class SerialPortLocoBuffer : LocoBuffer 
     {
         private const int CTS_ATTEMPTS = 20;
 
@@ -38,7 +38,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal SerialPortLocoBuffer()
+        public SerialPortLocoBuffer()
         {
             this.PortName = "COM1";
             this.BaudRate = BaudRate.Rate57K;
@@ -91,7 +91,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Close the connection (if any)
         /// </summary>
-        internal override void Close()
+        public override void Close()
         {
             lock (portLock)
             {

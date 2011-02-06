@@ -28,7 +28,7 @@ namespace LocoNetToolBox.Protocol
     /// </summary>
     public class Busy : Request
     {
-        internal override void Execute(LocoBuffer lb)
+        public override void Execute(LocoBuffer lb)
         {
             lb.Send(this, 0x81, 0);
         }

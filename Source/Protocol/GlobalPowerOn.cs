@@ -25,7 +25,7 @@ namespace LocoNetToolBox.Protocol
 {
     public class GlobalPowerOn : Request
     {
-        internal override void Execute(LocoBuffer lb)
+        public override void Execute(LocoBuffer lb)
         {
             lb.Send(this, 0x83, 0);
         }

@@ -28,7 +28,7 @@ namespace LocoNetToolBox.Protocol
     /// <summary>
     /// LocoBuffer communication based on TCP/IP
     /// </summary>
-    internal sealed class TcpLocoBuffer : LocoBuffer 
+    public sealed class TcpLocoBuffer : LocoBuffer 
     {
         private const int CTS_ATTEMPTS = 20;
 
@@ -84,7 +84,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Close the connection (if any)
         /// </summary>
-        internal override void Close()
+        public override void Close()
         {
             lock (portLock)
             {

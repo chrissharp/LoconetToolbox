@@ -73,7 +73,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Execute the message on the given buffer
         /// </summary>
-        internal override void Execute(LocoBuffer lb)
+        public override void Execute(LocoBuffer lb)
         {
             lb.Send(this, CreateMessage());
         }

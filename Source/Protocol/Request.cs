@@ -29,7 +29,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Execute the message on the given buffer
         /// </summary>
-        internal abstract void Execute(LocoBuffer lb);
+        public abstract void Execute(LocoBuffer lb);
 
         /// <summary>
         /// Execute this request and wait for a valid response.
@@ -37,7 +37,7 @@ namespace LocoNetToolBox.Protocol
         /// <param name="lb">The locobuffer to execute on</param>
         /// <param name="validateResponse">Predicate used to filter our the valid response</param>
         /// <param name="timeout">Timeout in milliseconds to wait for a valid response</param>
-        internal T ExecuteAndWaitForResponse<T>(LocoBuffer lb, Predicate<T> validateResponse, int timeout)
+        public T ExecuteAndWaitForResponse<T>(LocoBuffer lb, Predicate<T> validateResponse, int timeout)
             where T : Response
         {
             object waitLock = new object();

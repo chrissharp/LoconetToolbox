@@ -29,5 +29,5 @@ namespace LocoNetToolBox.Protocol
     /// <param name="message">The received message</param>
     /// <param name="decoded">The message in a decoded form (null if it cannot be decoded)</param>
     /// <returns>True if the message has been handled, false to pass the message to the next handler.</returns>
-    internal delegate bool MessageHandler(byte[] message, Message decoded);
+    public delegate bool MessageHandler(byte[] message, Message decoded);
 }
