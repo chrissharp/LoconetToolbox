@@ -36,6 +36,13 @@ namespace LocoNetToolBox.Protocol
             this.Address = (low << 1) | (high << 8) | bit0;
         }
 
+        /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public override TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data)
+        {
+            return visitor.Visit(this, data);
+        }
 
         /// <summary>
         /// Create a response object if the given data is recognized.

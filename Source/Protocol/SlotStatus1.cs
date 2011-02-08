@@ -26,6 +26,8 @@ namespace LocoNetToolBox.Protocol
     [Flags]
     public enum SlotStatus1
     {
+        None = 0,
+
         /// <summary>
         /// Busy, Active:
         /// 11=IN_USE loco adr in SLOT -REFRESHED

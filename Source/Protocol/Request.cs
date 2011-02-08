@@ -38,7 +38,7 @@ namespace LocoNetToolBox.Protocol
         /// <param name="validateResponse">Predicate used to filter our the valid response</param>
         /// <param name="timeout">Timeout in milliseconds to wait for a valid response</param>
         public T ExecuteAndWaitForResponse<T>(LocoBuffer lb, Predicate<T> validateResponse, int timeout)
-            where T : Response
+            where T : Message
         {
             object waitLock = new object();
             T result = null;

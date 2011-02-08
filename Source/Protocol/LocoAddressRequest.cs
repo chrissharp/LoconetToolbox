@@ -23,6 +23,8 @@ namespace LocoNetToolBox.Protocol
     /// </summary>
     public class LocoAddressRequest : Request
     {
+        public const byte Opcode = 0xBF;
+
         /// <summary>
         /// Default ctor
         /// </summary>
@@ -36,7 +38,15 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         public LocoAddressRequest(byte[] msg)
         {
-            Address = msg[2];
+            Address = ((msg[1] & 0x7F) << 7) | (msg[2] & 0x7F);
+        }
+
+        /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public override TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data)
+        {
+            return visitor.Visit(this, data);
         }
 
         /// <summary>
@@ -50,8 +60,8 @@ namespace LocoNetToolBox.Protocol
         private byte[] CreateMessage()
         {
             var msg = new byte[4];
-            msg[0] = 0xBF; // Opcode
-            msg[1] = 0;
+            msg[0] = Opcode; // Opcode
+            msg[1] = (byte)((Address >> 7) & 0x7F);
             msg[2] = (byte)(Address & 0x7F);
             UpdateChecksum(msg, msg.Length);
             return msg;

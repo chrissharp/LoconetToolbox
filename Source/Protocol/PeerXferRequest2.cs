@@ -26,6 +26,14 @@ namespace LocoNetToolBox.Protocol
     public class PeerXferRequest2 : PeerXferRequest
     {
         /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public override TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data)
+        {
+            return visitor.Visit(this, data);
+        }
+
+        /// <summary>
         /// Create the byte level message
         /// </summary>
         private byte[] CreateMessage()

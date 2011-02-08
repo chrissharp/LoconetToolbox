@@ -37,6 +37,14 @@ namespace LocoNetToolBox.Protocol
         }
 
         /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public override TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data)
+        {
+            return visitor.Visit(this, data);
+        }
+
+        /// <summary>
         /// Low byte source address
         /// </summary>
         protected override byte SourceLow { get { return data[2]; } }

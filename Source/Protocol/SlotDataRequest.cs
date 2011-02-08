@@ -40,6 +40,14 @@ namespace LocoNetToolBox.Protocol
         }
 
         /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public override TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data)
+        {
+            return visitor.Visit(this, data);
+        }
+
+        /// <summary>
         /// Slot to request data for
         /// </summary>
         public int Slot { get; set; }

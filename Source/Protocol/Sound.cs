@@ -30,5 +30,6 @@ namespace LocoNetToolBox.Protocol
         Snd2 = 0x02,
         Snd3 = 0x04,
         Snd4 = 0x08,
+        None = 0,
     }
 }

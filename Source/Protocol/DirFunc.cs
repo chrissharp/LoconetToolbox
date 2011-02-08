@@ -26,6 +26,8 @@ namespace LocoNetToolBox.Protocol
     [Flags]
     public enum DirFunc
     {
+        None = 0,
+
         /// <summary>
         /// 1=F1 ON
         /// </summary>

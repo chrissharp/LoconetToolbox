@@ -145,5 +145,10 @@ namespace LocoNetToolBox.Protocol
         {
             return (byte)(lowValue | (((highValue >> shiftRight) & 0x01) << 7));
         }
+
+        /// <summary>
+        /// Accept a visit by the given visitor.
+        /// </summary>
+        public abstract TReturn Accept<TReturn, TData>(MessageVisitor<TReturn, TData> visitor, TData data);
     }
 }
