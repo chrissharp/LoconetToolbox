@@ -16,11 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace LocoNetToolBox.Protocol
 {
     public class InputReport : Response
@@ -34,6 +29,7 @@ namespace LocoNetToolBox.Protocol
             var high = data[2] & 0x0F;
             var bit0 = (data[2] & 0x20) >> 5;
             this.Address = (low << 1) | (high << 8) | bit0;
+            SensorLevel = (data[2] & 0x10) != 0;
         }
 
         /// <summary>
@@ -57,6 +53,11 @@ namespace LocoNetToolBox.Protocol
         /// Address
         /// </summary>
         public int Address { get; set; }
+
+        /// <summary>
+        /// Level (true=high, false=low)
+        /// </summary>
+        public bool SensorLevel { get; set; }
 
         public override string ToString()
         {
