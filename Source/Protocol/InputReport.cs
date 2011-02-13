@@ -30,6 +30,7 @@ namespace LocoNetToolBox.Protocol
             var bit0 = (data[2] & 0x20) >> 5;
             this.Address = (low << 1) | (high << 8) | bit0;
             SensorLevel = (data[2] & 0x10) != 0;
+            InputSource = ((data[2] & 0x20) == 0) ? InputSource.Aux : InputSource.Switch;
         }
 
         /// <summary>
@@ -58,6 +59,11 @@ namespace LocoNetToolBox.Protocol
         /// Level (true=high, false=low)
         /// </summary>
         public bool SensorLevel { get; set; }
+
+        /// <summary>
+        /// Source
+        /// </summary>
+        public InputSource InputSource { get; set; }
 
         public override string ToString()
         {
