@@ -55,9 +55,7 @@ namespace LocoNetToolBox.WinApp.Controls
             else if (swRep != null)
             {
                 var item = GetItem(swRep.Address);
-                item.SubItems[1].Text = string.Format("dir:{0} out:{1}",
-                    swRep.Direction ? "on " : "off",
-                    swRep.Output ? "on " : "off");
+                item.SubItems[1].Text = string.Format("level:{0}", swRep.SensorLevel ? "on " : "off");
             }
         }
 

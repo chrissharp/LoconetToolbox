@@ -90,22 +90,89 @@
     <Compile Include="Model\LocoNetState.cs" />
     <Compile Include="Model\StateMessage.cs" />
     <Compile Include="Model\SwitchState.cs" />
-    <Compile Include="Protocol\Busy.cs" />
-    <Compile Include="Protocol\Constants.cs" />
-    <Compile Include="Protocol\TcpLocoBuffer.cs" />
-    <Compile Include="Protocol\SerialPortLocoBuffer.cs" />
-    <Compile Include="Protocol\SwitchReport.cs" />
-    <Compile Include="Protocol\SwitchRequest.cs" />
-    <Compile Include="Protocol\InputReport.cs" />
-    <Compile Include="Protocol\LocoNetAddress.cs" />
-    <Compile Include="Protocol\Response.cs" />
-    <Compile Include="Protocol\Request.cs" />
-    <Compile Include="Protocol\PeerXferResponse1.cs" />
-    <Compile Include="Protocol\PeerXferResponse.cs" />
-    <Compile Include="Protocol\PeerXferRequest.cs" />
-    <Compile Include="Protocol\PeerXferRequest1.cs" />
-    <Compile Include="Protocol\GlobalPowerOff.cs" />
-    <Compile Include="Protocol\GlobalPowerOn.cs" />
+    <Compile Include="Protocol\BaudRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Busy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Constants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\DirFunc.cs" />
+    <Compile Include="Protocol\GlobalPowerOff.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\GlobalPowerOn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Idle.cs" />
+    <Compile Include="Protocol\InputReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\InputSource.cs" />
+    <Compile Include="Protocol\LinkSlotsRequest.cs" />
+    <Compile Include="Protocol\LocoAddressRequest.cs" />
+    <Compile Include="Protocol\LocoBuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\LocoBuffer.ReceiveProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\LocoDirFuncRequest.cs" />
+    <Compile Include="Protocol\LocoNetAddress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\LocoSpeedRequest.cs" />
+    <Compile Include="Protocol\LongAck.cs" />
+    <Compile Include="Protocol\Message.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\MessageHandler.cs" />
+    <Compile Include="Protocol\MessageVisitor.cs" />
+    <Compile Include="Protocol\MoveSlotsRequest.cs" />
+    <Compile Include="Protocol\PeerXferRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\PeerXferRequest1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\PeerXferRequest2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\PeerXferResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\PeerXferResponse1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Request.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\Response.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\SerialPortLocoBuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\SlotDataRequest.cs" />
+    <Compile Include="Protocol\SlotDataResponse.cs" />
+    <Compile Include="Protocol\SlotStatus1.cs" />
+    <Compile Include="Protocol\SlotStatus2.cs" />
+    <Compile Include="Protocol\Sound.cs" />
+    <Compile Include="Protocol\SwitchReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\SwitchRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\SwitchStateRequest.cs" />
+    <Compile Include="Protocol\TcpLocoBuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocol\TrackStatus.cs" />
+    <Compile Include="Protocol\UnlinkSlotsRequest.cs" />
+    <Compile Include="Protocol\WriteSlotData.cs" />
     <Compile Include="Services\UnknownLocoIODetector.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="WinApp\AppState.cs" />
@@ -405,12 +472,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Protocol\BaudRate.cs" />
-    <Compile Include="Protocol\LocoBuffer.ReceiveProcessor.cs" />
-    <Compile Include="Protocol\Message.cs" />
-    <Compile Include="Protocol\LocoBuffer.cs" />
-    <Compile Include="Protocol\MessageHandler.cs" />
-    <Compile Include="Protocol\PeerXferRequest2.cs" />
     <Compile Include="WinApp\Preferences\RegistrySettingsProvider.cs" />
     <Compile Include="WinApp\Preferences\UserPreferences.cs" />
     <Compile Include="WinApp\Strings.Designer.cs">

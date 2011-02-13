@@ -109,10 +109,10 @@ namespace LocoNetToolBox.Model
                 else if (swRep != null)
                 {
                     sw = GetSwitch(swRep.Address);
-                    if (sw.Direction != swRep.Direction)
+                    if (sw.Direction != swRep.SensorLevel)
                     {
                         // State change
-                        sw.Direction = swRep.Direction;
+                        sw.Direction = swRep.SensorLevel;
                         Monitor.PulseAll(stateLock);
                     }
                     else
