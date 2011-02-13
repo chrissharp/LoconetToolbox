@@ -21,10 +21,10 @@
                 PinMode.SteadyStatePairedOff,
                 PinMode.SteadyStatePairedOff,
                 PinMode.SteadyStatePairedOff,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2,
-                PinMode.TurnoutFeedbackDual2)
+                PinMode.TurnoutFeedbackSingle,
+                PinMode.TurnoutFeedbackSingle,
+                PinMode.TurnoutFeedbackSingle,
+                PinMode.TurnoutFeedbackSingle)
         {
         }
 
