@@ -32,9 +32,9 @@ namespace LocoNetToolBox.Protocol
         {
             var low = data[1] & 0x7F;
             var high = data[2] & 0x0F;
-            this.Address = (low | (high << 7)) + 1;
-            this.Direction = ((data[2] & 0x20) != 0);
-            this.Output = ((data[2] & 0x10) != 0);
+            Address = (low | (high << 7)) + 1;
+            InputSource = ((data[2] & 0x20) == 0) ? InputSource.Aux : InputSource.Switch;
+            SensorLevel = ((data[2] & 0x10) != 0);
         }
 
         /// <summary>
@@ -60,21 +60,21 @@ namespace LocoNetToolBox.Protocol
         public int Address { get; set; }
 
         /// <summary>
-        /// Direction: true = closed, false = thrown
+        /// Source
         /// </summary>
-        public bool Direction { get; set; }
+        public InputSource InputSource { get; set; }
 
         /// <summary>
-        /// Output: true = on, false = off
+        /// Output: true = straight, false = off
         /// </summary>
-        public bool Output { get; set; }
+        public bool SensorLevel { get; set; }
 
         public override string ToString()
         {
             return string.Format("SW_REP addr:{0}, dir:{1}, output:{2}", 
                 Address,
-                Direction ? "closed" : "thrown",
-                Output ? "on" : "off");
+                InputSource,
+                SensorLevel ? "straight" : "off");
         }
     }
 }
