@@ -35,8 +35,12 @@ namespace LocoNetToolBox.Protocol
         /// 01=COMMON loco adr IN SLOT -refreshed
         /// 00=FREE SLOT, no valid DATA -not refreshed
         /// </summary>
-        Busy = 0x20,
-        Active = 0x10,
+        xBusy = 0x20,
+        xActive = 0x10,
+        InUse = xBusy | xActive,
+        Idle = xBusy,
+        Common = xActive,
+        FreeSlot = 0,
 
         /// <summary>
         /// CONDN/CONUP: bit encoding-Control double linked Consist List
@@ -59,7 +63,5 @@ namespace LocoNetToolBox.Protocol
         DecoderType128 = 0x03, // 011=send 128 speed mode packets
         DecoderType28AdvC = 0x04, // 100=28 Step decoder ,Allow Advanced DCC consisting
         DecoderType128AdvC = 0x07 // 111=128 Step decoder, Allow Advanced DCC consisting
-
-
     }
 }
