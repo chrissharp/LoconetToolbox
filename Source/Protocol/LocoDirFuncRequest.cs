@@ -95,6 +95,21 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         public bool F4 { get; set; }
 
+        public DirFunc DirF
+        {
+            get
+            {
+                var dirf = 0;
+                if (F1) dirf |= 0x01;
+                if (F2) dirf |= 0x02;
+                if (F3) dirf |= 0x04;
+                if (F4) dirf |= 0x08;
+                if (F0) dirf |= 0x10;
+                if (Direction) dirf |= 0x20;
+                return (DirFunc) dirf;
+            }
+        }
+
         /// <summary>
         /// Create the byte level message
         /// </summary>

@@ -37,6 +37,7 @@ namespace LocoNetToolBox.Protocol
         /// </summary>
         xBusy = 0x20,
         xActive = 0x10,
+        BusyActiveMask = xBusy | xActive,
         InUse = xBusy | xActive,
         Idle = xBusy,
         Common = xActive,
