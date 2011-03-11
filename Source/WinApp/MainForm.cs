@@ -102,7 +102,7 @@ namespace LocoNetToolBox.WinApp
             if (ActiveForm != this)
                 return;
 
-            if (state.LocoNet.HasNewLocoIOs)
+            if (state.LocoNet.HasNewLocoIOs && false)
             {
                 using (var dialog = new ReadNewLocoIOsForm(state))
                 {
