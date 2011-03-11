@@ -32,6 +32,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public CommandControl()
         {
             InitializeComponent();
+            cmdAdvanced.Visible = false;
         }
 
         /// <summary>

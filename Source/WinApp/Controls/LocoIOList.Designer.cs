@@ -49,6 +49,7 @@
             this.lbModules.ContextMenuStrip = this.contextMenuStrip1;
             this.lbModules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbModules.FullRowSelect = true;
+            this.lbModules.HideSelection = false;
             this.lbModules.Location = new System.Drawing.Point(3, 3);
             this.lbModules.Name = "lbModules";
             this.tlpMain.SetRowSpan(this.lbModules, 3);

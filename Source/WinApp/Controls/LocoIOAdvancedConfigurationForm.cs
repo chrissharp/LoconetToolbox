@@ -29,6 +29,7 @@ namespace LocoNetToolBox.WinApp.Controls
     {
         private Programmer programmer;
         private AsyncLocoBuffer lb;
+        private bool configRead;
 
         /// <summary>
         /// Default ctor
@@ -48,6 +49,7 @@ namespace LocoNetToolBox.WinApp.Controls
             this.lb = lb;
             this.programmer = new Programmer(address);
             configurationControl.Initialize(lb, programmer);
+            Text += string.Format(" [{0}]", address);
         }
 
         /// <summary>
@@ -58,6 +60,19 @@ namespace LocoNetToolBox.WinApp.Controls
             base.OnFormClosing(e);
             if (configurationControl.Busy)
                 e.Cancel = true;
+        }
+
+        /// <summary>
+        /// Read settings when the form becomes visible.
+        /// </summary>
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            if (Visible && !configRead)
+            {
+                configRead = true;
+                configurationControl.Read();
+            }
         }
 
         /// <summary>

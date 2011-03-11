@@ -92,6 +92,7 @@ namespace LocoNetToolBox.WinApp.Controls
             item.SubItems.Add(entry.Version);
             lbModules.Items.Add(item);
             lbModules.Sort();
+            item.Selected = true;
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 var dialog = new LocoIOConfigurationForm();
                 dialog.Initialize(appState.LocoBuffer, currentAddress);
-                dialog.Show();
+                dialog.Show(this);
             }
         }
 
@@ -146,7 +147,7 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 var dialog = new LocoIOAdvancedConfigurationForm();
                 dialog.Initialize(appState.LocoBuffer, currentAddress);
-                dialog.Show();
+                dialog.Show(this);
             }
         }
 
