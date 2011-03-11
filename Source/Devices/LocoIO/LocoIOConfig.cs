@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+#if !NOCONFIG
 using LocoNetToolBox.Configuration;
+#endif
 using LocoNetToolBox.Protocol;
 
 namespace LocoNetToolBox.Devices.LocoIO
@@ -9,7 +11,10 @@ namespace LocoNetToolBox.Devices.LocoIO
     /// <summary>
     /// Configuration of an entire LocoIO.
     /// </summary>
-    public class LocoIOConfig : IEnumerable<SVConfig>, IConfigurationItem
+    public class LocoIOConfig : IEnumerable<SVConfig>
+#if !NOCONFIG
+        , IConfigurationItem
+#endif
     {
         private const string SvElementName = "sv";
         private const string SvIndexName = "index";
@@ -40,6 +45,7 @@ namespace LocoNetToolBox.Devices.LocoIO
             connectors[1] = new ConnectorConfig(pins.Skip(8).ToArray());
         }
 
+#if !NOCONFIG
         /// <summary>
         /// XML ctor
         /// </summary>
@@ -72,6 +78,7 @@ namespace LocoNetToolBox.Devices.LocoIO
             }
             return element;
         }
+#endif
 
         /// <summary>
         /// Gets the address of this config.
