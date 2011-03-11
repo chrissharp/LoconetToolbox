@@ -17,7 +17,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Default ctor
         /// </summary>
-        internal Programmer(LocoNetAddress address)
+        public Programmer(LocoNetAddress address)
         {
             this.address = address;
             timeout = 2000;
@@ -72,7 +72,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Read the given set of SV values into configs.
         /// </summary>
-        internal void Read(LocoBuffer lb, IEnumerable<SVConfig> configs)
+        public void Read(LocoBuffer lb, IEnumerable<SVConfig> configs)
         {
             var list = configs.ToList();
             list.Sort();
