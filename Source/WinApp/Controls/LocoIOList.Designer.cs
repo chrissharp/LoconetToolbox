@@ -51,9 +51,11 @@
             this.lbModules.FullRowSelect = true;
             this.lbModules.HideSelection = false;
             this.lbModules.Location = new System.Drawing.Point(3, 3);
+            this.lbModules.MultiSelect = false;
             this.lbModules.Name = "lbModules";
             this.tlpMain.SetRowSpan(this.lbModules, 3);
             this.lbModules.Size = new System.Drawing.Size(314, 404);
+            this.lbModules.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lbModules.TabIndex = 0;
             this.lbModules.UseCompatibleStateImageBehavior = false;
             this.lbModules.View = System.Windows.Forms.View.Details;

@@ -60,6 +60,11 @@ namespace LocoNetToolBox.Protocol
             get { return new LocoNetAddress(SourceLow, SourceHigh); }
         }
 
+        public bool IsDestinationBroadcast
+        {
+            get { return (DestinationLow == 0); }
+        }
+
         /// <summary>
         /// Destination address
         /// </summary>

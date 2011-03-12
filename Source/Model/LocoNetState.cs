@@ -126,15 +126,21 @@ namespace LocoNetToolBox.Model
                     {
                         if (peerXferResponse.IsSourcePC)
                         {
-                            // Query request
-                            locoIOs.Clear();
-                            LocoIOQuery.Fire(this);
+                            if (peerXferResponse.IsDestinationBroadcast)
+                            {
+                                // Query request
+                                locoIOs.Clear();
+                                LocoIOQuery.Fire(this);
+                            }
                         }
                         else
                         {
                             var entry = new LocoIO(peerXferResponse.Source, peerXferResponse.LocoIOVersion);
-                            locoIOs[entry.Address] = entry;
-                            LocoIOFound.Fire(this, new LocoIOEventArgs(entry));
+                            if (!locoIOs.ContainsKey(entry.Address))
+                            {
+                                locoIOs[entry.Address] = entry;
+                                LocoIOFound.Fire(this, new LocoIOEventArgs(entry));
+                            }
                         }
                     }
                 }
