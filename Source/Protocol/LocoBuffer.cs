@@ -18,10 +18,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO.Ports;
-using System.Threading;
 
 namespace LocoNetToolBox.Protocol
 {
@@ -31,7 +27,7 @@ namespace LocoNetToolBox.Protocol
     public abstract partial class LocoBuffer : IDisposable
     {
         internal event MessageHandler SendMessage;
-        internal event MessageHandler PreviewMessage;
+        public event MessageHandler PreviewMessage;
         internal event EventHandler Opened;
         internal event EventHandler Closed;
 
