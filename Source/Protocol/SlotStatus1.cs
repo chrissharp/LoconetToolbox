@@ -57,12 +57,19 @@ namespace LocoNetToolBox.Protocol
         ConsistDown = 0x08,
         ConsistUp = 0x40,
 
+        xSlSpdEx = 0x04,
+        xSlSpd14 = 0x02,
+        xSlSpd28 = 0x01,
+
         DecoderTypeMask = 0x07,
-        DecoderType28A = 0x00, // 000=28 step/ 3 BYTE PKT regular mode
-        DecoderType28B = 0x01, // 001=28 step. Generate Trinary packets for this Mobile ADR
-        DecoderType14 = 0x02, // 010=14 step MODE
-        DecoderType128 = 0x03, // 011=send 128 speed mode packets
-        DecoderType28AdvC = 0x04, // 100=28 Step decoder ,Allow Advanced DCC consisting
-        DecoderType128AdvC = 0x07 // 111=128 Step decoder, Allow Advanced DCC consisting
+        // Motorola
+        DecoderType28Tri = xSlSpd28, // 001=28 step. Generate Trinary packets for this Mobile ADR (motorola)
+        // DCC
+        DecoderType14 = xSlSpd14, // 010=14 step MODE
+        DecoderType28 = 0x00, // 000=28 step/ 3 BYTE PKT regular mode
+        DecoderType128 = xSlSpd14 | xSlSpd28, // 011=send 128 speed mode packets
+        // Advanced consisting
+        DecoderType28AdvC = xSlSpdEx, // 100=28 Step decoder ,Allow Advanced DCC consisting
+        DecoderType128AdvC = xSlSpd14 | xSlSpd28 | xSlSpdEx // 111=128 Step decoder, Allow Advanced DCC consisting
     }
 }

@@ -41,6 +41,7 @@ namespace LocoNetToolBox.Protocol
         public virtual TReturn Visit(PeerXferResponse1 msg, TData data) { return Visit((PeerXferResponse)msg, data); }
         public virtual TReturn Visit(SlotDataRequest msg, TData data) { return default(TReturn); }
         public virtual TReturn Visit(SlotDataResponse msg, TData data) { return default(TReturn); }
+        public virtual TReturn Visit(SlotStat1Request msg, TData data) { return default(TReturn); }
         public virtual TReturn Visit(SwitchReport msg, TData data) { return default(TReturn); }
         public virtual TReturn Visit(SwitchRequest msg, TData data) { return default(TReturn); }
         public virtual TReturn Visit(SwitchStateRequest msg, TData data) { return default(TReturn); }

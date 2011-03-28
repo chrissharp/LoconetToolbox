@@ -64,6 +64,8 @@ namespace LocoNetToolBox.Protocol
                     return new LinkSlotsRequest(data);
                 case 0xB8:
                     return new UnlinkSlotsRequest(data);
+                case 0xB5:
+                    return new SlotStat1Request(data);
                 case 0xB4:
                     return new LongAck(data);
                 case 0xA0:
