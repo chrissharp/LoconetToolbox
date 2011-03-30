@@ -54,7 +54,8 @@ namespace LocoNetToolBox.Protocol
         F0 = 0x10,
 
         /// <summary>
-        /// 1=loco direction FORWARD
+        /// 1=loco direction FORWARD ... so says the spec.
+        /// But this seems wrong
         /// </summary>
         Direction = 0x20,
     }
