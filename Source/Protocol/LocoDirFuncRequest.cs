@@ -29,7 +29,7 @@ namespace LocoNetToolBox.Protocol
         public LocoDirFuncRequest(int slot, bool forward, bool f0, bool f1, bool f2, bool f3, bool f4)
         {
             Slot = slot;
-            Direction = forward;
+            Forward = forward;
             F0 = f0;
             F1 = f1;
             F2 = f2;
@@ -49,7 +49,7 @@ namespace LocoNetToolBox.Protocol
             F3 = (dirf & 0x04) != 0;
             F4 = (dirf & 0x08) != 0;
             F0 = (dirf & 0x10) != 0;
-            Direction = (dirf & 0x20) != 0;
+            Forward = (dirf & 0x20) == 0;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace LocoNetToolBox.Protocol
         /// <summary>
         /// Direction (true is forward)
         /// </summary>
-        public bool Direction { get; set; }
+        public bool Forward { get; set; }
 
         /// <summary>
         /// Function 0
@@ -105,7 +105,7 @@ namespace LocoNetToolBox.Protocol
                 if (F3) dirf |= 0x04;
                 if (F4) dirf |= 0x08;
                 if (F0) dirf |= 0x10;
-                if (Direction) dirf |= 0x20;
+                if (!Forward) dirf |= 0x20;
                 return (DirFunc) dirf;
             }
         }
@@ -124,7 +124,7 @@ namespace LocoNetToolBox.Protocol
             if (F3) dirf |= 0x04;
             if (F4) dirf |= 0x08;
             if (F0) dirf |= 0x10;
-            if (Direction) dirf |= 0x20;
+            if (!Forward) dirf |= 0x20;
             msg[2] = (byte)(dirf & 0x7F);
             UpdateChecksum(msg, msg.Length);
             return msg;
@@ -144,7 +144,7 @@ namespace LocoNetToolBox.Protocol
         public override string ToString()
         {
             return string.Format("OPC_LOCO_DIRF slot:{0} dir:{1}, f0:{2}, f1:{3}, f2:{4}, f3:{5}, f4:{6}", 
-                Slot, Direction, F0, F1, F2, F3, F4);
+                Slot, Forward, F0, F1, F2, F3, F4);
         }
     }
 }
