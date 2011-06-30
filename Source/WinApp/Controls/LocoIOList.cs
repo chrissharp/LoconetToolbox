@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
 using System.Windows.Forms;
+using LocoNetToolBox.Devices.LocoIO;
 using LocoNetToolBox.Model;
 using LocoNetToolBox.Protocol;
 
@@ -152,6 +153,20 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
+        /// Change address of selected MGV50
+        /// </summary>
+        private void cmdChangeAddress_Click(object sender, EventArgs e)
+        {
+            var currentAddress = SelectedAddress;
+            if (currentAddress != null)
+            {
+                var dialog = new LocoIOChangeAddressForm();
+                dialog.Initialize(appState.LocoBuffer, currentAddress);
+                dialog.Show(this);
+            }
+        }
+
+        /// <summary>
         /// Update the controls
         /// </summary>
         private void UpdateUI()
@@ -159,6 +174,7 @@ namespace LocoNetToolBox.WinApp.Controls
             var hasAddress = (SelectedAddress != null);
             cmdConfigureMgv50.Enabled = hasAddress;
             cmdConfigMgv50Advanced.Enabled = hasAddress;
+            cmdChangeAddress.Enabled = hasAddress && (lbModules.Items.Count == 1);
         }
     }
 }

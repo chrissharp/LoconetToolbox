@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D56CE7E3-4005-4D41-9022-B6FB9F66280A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -204,6 +204,12 @@
     <Compile Include="WinApp\Controls\LocoIOAdvancedConfigurationControl.Designer.cs">
       <DependentUpon>LocoIOAdvancedConfigurationControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinApp\Controls\LocoIOChangeAddressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\LocoIOChangeAddressForm.Designer.cs">
+      <DependentUpon>LocoIOChangeAddressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinApp\Controls\PowerCommandControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     <EmbeddedResource Include="WinApp\Controls\LocoIOAdvancedConfigurationControl.resx">
       <DependentUpon>LocoIOAdvancedConfigurationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\LocoIOChangeAddressForm.resx">
+      <DependentUpon>LocoIOChangeAddressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\PowerCommandControl.resx">
       <DependentUpon>PowerCommandControl.cs</DependentUpon>

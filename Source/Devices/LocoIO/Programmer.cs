@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using LocoNetToolBox.Protocol;
@@ -22,6 +23,11 @@ namespace LocoNetToolBox.Devices.LocoIO
             this.address = address;
             timeout = 2000;
         }
+
+        /// <summary>
+        /// Gets address of device that is programmed.
+        /// </summary>
+        public LocoNetAddress Address { get { return address; } }
 
         /// <summary>
         /// Read a single SV variable at the given index.
@@ -113,6 +119,46 @@ namespace LocoNetToolBox.Devices.LocoIO
                     throw new ProgramException(string.Format("Failed to write SV {0}", config.Index));
                 }
             }
+        }
+
+        /// <summary>
+        /// Write a single SV variable at the given index with the given value.
+        /// </summary>
+        internal bool ChangeAddress(LocoBuffer lb, int address, int subAddress)
+        {
+            var cmd = new PeerXferRequest1
+            {
+                Command = PeerXferRequest.Commands.Write,
+                SvAddress = 1,
+                DestinationLow =this.address.Address,
+                SubAddress = this.address.SubAddress,
+                Data1 = (byte)address,
+            };
+            var result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
+                lb,
+                x => ((x.SvAddress == 1) && (x.OriginalCommand == PeerXferRequest.Commands.Write)),
+                timeout);
+
+            if (result == null)
+                throw new TimeoutException("Program index 1 failed");
+
+            cmd = new PeerXferRequest1
+            {
+                Command = PeerXferRequest.Commands.Write,
+                SvAddress = 2,
+                DestinationLow = this.address.Address,
+                SubAddress = this.address.SubAddress,
+                Data1 = (byte)subAddress,
+            };
+            result = cmd.ExecuteAndWaitForResponse<PeerXferResponse>(
+                lb,
+                x => ((x.SvAddress == 2) && (x.OriginalCommand == PeerXferRequest.Commands.Write)),
+                timeout);
+
+            if (result == null)
+                throw new TimeoutException("Program index 2 failed");
+
+            return true;
         }
     }
 }
