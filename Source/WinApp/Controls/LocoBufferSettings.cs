@@ -51,8 +51,10 @@ namespace LocoNetToolBox.WinApp.Controls
                     lb = value;
                     serialPortSettings.LocoBuffer = value as SerialPortLocoBuffer;
                     tcpSettings.LocoBuffer = value as TcpLocoBuffer;
+                    udpSettings.LocoBuffer = value as UdpLocoBuffer;
                     serialPortSettings.Visible = (value is SerialPortLocoBuffer);
                     tcpSettings.Visible = (value is TcpLocoBuffer);
+                    udpSettings.Visible = (value is UdpLocoBuffer);
                     LocoBufferChanged.Fire(this);
                 }
             }
@@ -72,6 +74,11 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 if (!(LocoBuffer is TcpLocoBuffer))
                     LocoBuffer = new TcpLocoBuffer();
+            }
+            else if (rbUdp.Checked)
+            {
+                if (!(LocoBuffer is UdpLocoBuffer))
+                    LocoBuffer = new UdpLocoBuffer();
             }
         }
     }
