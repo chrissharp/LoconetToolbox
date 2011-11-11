@@ -73,7 +73,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
                 lvInputs.BeginUpdate();
                 lvInputs.Items.Clear();
-                lvInputs.Items.AddRange(items.Values.ToArray());
+                lvInputs.Items.AddRange(items.Values.OrderBy(x => x.SortKey).ToArray());
                 lvInputs.EndUpdate();
             }
             return item;
@@ -84,6 +84,8 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private class InputItem : ListViewItem
         {
+            private readonly int address;
+            private readonly bool isFeedback;
             private readonly string textPrefix;
 
             /// <summary>
@@ -91,6 +93,8 @@ namespace LocoNetToolBox.WinApp.Controls
             /// </summary>
             internal InputItem(int address, bool isFeedback)
             {
+                this.address = address;
+                this.isFeedback = isFeedback;
                 textPrefix = string.Format("{0}{1}", isFeedback ? "F" : "S", address + 1);
             }
 
@@ -101,6 +105,17 @@ namespace LocoNetToolBox.WinApp.Controls
             {
                 get { return textPrefix; }
                 set { base.Text = value; }
+            }
+
+            /// <summary>
+            /// Gets a value used for sorting.
+            /// </summary>
+            public int SortKey
+            {
+                get
+                {
+                    return (address << 1) + (isFeedback ? 0 : 1);
+                }
             }
 
             /// <summary>
