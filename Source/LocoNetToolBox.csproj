@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -13,6 +13,25 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>WinApp\App.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -192,6 +211,18 @@
     </Compile>
     <Compile Include="WinApp\Controls\AdvancedCommandControl.Designer.cs">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\SwitchLogView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\SwitchLogView.Designer.cs">
+      <DependentUpon>SwitchLogView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinApp\Controls\InputLogView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinApp\Controls\InputLogView.Designer.cs">
+      <DependentUpon>InputLogView.cs</DependentUpon>
     </Compile>
     <Compile Include="WinApp\Controls\UdpLocoBufferSettings.cs">
       <SubType>UserControl</SubType>
@@ -380,6 +411,12 @@
     <EmbeddedResource Include="WinApp\Controls\AdvancedCommandControl.resx">
       <DependentUpon>AdvancedCommandControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\SwitchLogView.resx">
+      <DependentUpon>SwitchLogView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinApp\Controls\InputLogView.resx">
+      <DependentUpon>InputLogView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinApp\Controls\UdpLocoBufferSettings.resx">
       <DependentUpon>UdpLocoBufferSettings.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -503,6 +540,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Devices\LocoIO\LocoIO-SV.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -64,6 +64,8 @@ namespace LocoNetToolBox.WinApp.Controls
             var response = Response.Decode(message);
             Log("<- " + response + " { " + Message.ToString(message) + " }");
             lbInputs.ProcessResponse(response);
+            inputLogView.ProcessResponse(response);
+            switchLogView.ProcessResponse(response);
             return false;
         }
 
@@ -80,6 +82,11 @@ namespace LocoNetToolBox.WinApp.Controls
         {
             lbLog.Items.Add(msg);
             lbLog.SelectedIndex = lbLog.Items.Count - 1;
+        }
+
+        private void miClearTrafficLog_Click(object sender, System.EventArgs e)
+        {
+            lbLog.Items.Clear();
         }
     }
 }

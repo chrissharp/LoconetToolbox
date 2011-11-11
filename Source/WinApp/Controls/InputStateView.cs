@@ -16,13 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-using System;
+
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using LocoNetToolBox.Protocol;
@@ -50,25 +47,29 @@ namespace LocoNetToolBox.WinApp.Controls
             var swRep = value as SwitchReport;
             if (inpRep != null)
             {
-                var item = GetItem(inpRep.Address);
+                var item = GetItem(inpRep.Address, true);
+                item.ForeColor = inpRep.SensorLevel ? Color.Red : Color.Green;
+                item.Text += inpRep.SensorLevel ? "-On" : "-Off";
             }
             else if (swRep != null)
             {
-                var item = GetItem(swRep.Address);
-                item.SubItems[1].Text = string.Format("level:{0}", swRep.SensorLevel ? "on " : "off");
+                var item = GetItem(swRep.Address, false);
+                item.ForeColor = swRep.SensorLevel ? Color.Red : Color.Green;
+                item.Text += swRep.SensorLevel ? "-On" : "-Off";
             }
         }
 
         /// <summary>
         /// Gets or creates an item for the given address.
         /// </summary>
-        private InputItem GetItem(int address)
+        private InputItem GetItem(int address, bool isFeedback)
         {
             InputItem item;
-            if (!items.TryGetValue(address, out item))
+            var key = InputItem.GetKey(address, isFeedback);
+            if (!items.TryGetValue(key, out item))
             {
-                item = new InputItem(address);
-                items.Add(address, item);
+                item = new InputItem(address, isFeedback);
+                items.Add(key, item);
 
                 lvInputs.BeginUpdate();
                 lvInputs.Items.Clear();
@@ -83,15 +84,31 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private class InputItem : ListViewItem
         {
-            private readonly int address;
+            private readonly string textPrefix;
 
             /// <summary>
             /// Default ctor
             /// </summary>
-            internal InputItem(int address) : base(address.ToString())
+            internal InputItem(int address, bool isFeedback)
             {
-                this.address = address;
-                this.SubItems.Add(string.Empty);
+                textPrefix = string.Format("{0}{1}", isFeedback ? "F" : "S", address + 1);
+            }
+
+            /// <summary>
+            /// Merge text.
+            /// </summary>
+            public new string Text
+            {
+                get { return textPrefix; }
+                set { base.Text = value; }
+            }
+
+            /// <summary>
+            /// Indexing key.
+            /// </summary>
+            internal static int GetKey(int address, bool isFeedback)
+            {
+                return isFeedback ? address : -address; 
             }
         }
     }
