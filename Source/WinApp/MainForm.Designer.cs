@@ -71,7 +71,7 @@
             this.locoBufferView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.locoBufferView1.Location = new System.Drawing.Point(3, 3);
             this.locoBufferView1.Name = "locoBufferView1";
-            this.locoBufferView1.Size = new System.Drawing.Size(367, 83);
+            this.locoBufferView1.Size = new System.Drawing.Size(367, 141);
             this.locoBufferView1.TabIndex = 0;
             this.locoBufferView1.LocoBufferChanged += new System.EventHandler(this.LocoBufferView1LocoBufferChanged);
             // 
@@ -81,7 +81,7 @@
             this.commandControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.commandControl1.Location = new System.Drawing.Point(376, 3);
             this.commandControl1.Name = "commandControl1";
-            this.commandControl1.Size = new System.Drawing.Size(144, 223);
+            this.commandControl1.Size = new System.Drawing.Size(144, 172);
             this.commandControl1.TabIndex = 1;
             // 
             // locoIOList1
@@ -112,9 +112,11 @@
             // 
             // lbVersion
             // 
+            this.lbVersion.IsLink = true;
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(57, 17);
             this.lbVersion.Text = "Version: ?";
+            this.lbVersion.Click += new System.EventHandler(this.lbVersion_Click);
             // 
             // menuStrip1
             // 
@@ -139,21 +141,21 @@
             // miOpen
             // 
             this.miOpen.Name = "miOpen";
-            this.miOpen.Size = new System.Drawing.Size(152, 22);
+            this.miOpen.Size = new System.Drawing.Size(114, 22);
             this.miOpen.Text = "&Open";
             this.miOpen.Click += new System.EventHandler(this.miOpen_Click);
             // 
             // miSave
             // 
             this.miSave.Name = "miSave";
-            this.miSave.Size = new System.Drawing.Size(152, 22);
+            this.miSave.Size = new System.Drawing.Size(114, 22);
             this.miSave.Text = "&Save";
             this.miSave.Click += new System.EventHandler(this.miSave_Click);
             // 
             // miSaveAs
             // 
             this.miSaveAs.Name = "miSaveAs";
-            this.miSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.miSaveAs.Size = new System.Drawing.Size(114, 22);
             this.miSaveAs.Text = "Save &As";
             this.miSaveAs.Click += new System.EventHandler(this.miSaveAs_Click);
             // 

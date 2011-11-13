@@ -17,6 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using LocoNetToolBox.Configuration;
@@ -161,6 +162,22 @@ namespace LocoNetToolBox.WinApp
             var path = state.Configuration.Path;
             path = string.IsNullOrEmpty(path) ? "New" : Path.GetFileNameWithoutExtension(path);
             Text = string.Format("{0} - {1}", path, Title);
+        }
+
+        /// <summary>
+        /// Go to download website.
+        /// </summary>
+        private void lbVersion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://code.google.com/p/mgv/downloads");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Application.ProductName, "Failed to open url because: " + ex.Message,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
