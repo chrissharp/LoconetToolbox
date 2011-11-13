@@ -41,14 +41,20 @@ Source: "LocoNetToolbox.exe"; DestDir: "{app}"; Flags: replacesameversion;
 Name: "{group}\{#AppShortName}"; Filename: "{app}\LocoNetToolbox.exe"; WorkingDir: "{app}"
 
 [Run]
+Filename: "{dotnet20}\ngen.exe"; Parameters: "install ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:Optimize}; Flags: runhidden;
 Filename: "{app}\LocoNetToolbox.exe"; Description: "{cm:StartApp}"; Flags: postinstall nowait skipifsilent;
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}";
 
+[UninstallRun]
+Filename: "{dotnet20}\ngen.exe"; Parameters: "uninstall ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:UnOptimize}; Flags: runhidden;
+
 [CustomMessages]
 StartApp=Start {#AppName}
 InstallDotNet=Install the Microsoft.NET 3.5 Framework first.
+Optimize=Optimizing performance
+UnOptimize=Cleanup performance optimizations
 
 [Code]
 const
