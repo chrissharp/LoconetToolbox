@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lvInputs = new System.Windows.Forms.ListView();
             this.chAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lvInputs
@@ -49,6 +51,11 @@
             // 
             this.chAddress.Text = "Address";
             // 
+            // updateTimer
+            // 
+            this.updateTimer.Interval = 250;
+            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
+            // 
             // InputStateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -64,5 +71,6 @@
 
         private System.Windows.Forms.ListView lvInputs;
         private System.Windows.Forms.ColumnHeader chAddress;
+        private System.Windows.Forms.Timer updateTimer;
     }
 }

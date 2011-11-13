@@ -29,6 +29,7 @@ namespace LocoNetToolBox.WinApp.Controls
     public partial class InputStateView : UserControl
     {
         private readonly Dictionary<int, InputItem> items = new Dictionary<int, InputItem>();
+        private bool itemsModified = false;
 
         /// <summary>
         /// Default ctor
@@ -71,12 +72,34 @@ namespace LocoNetToolBox.WinApp.Controls
                 item = new InputItem(address, isFeedback);
                 items.Add(key, item);
 
+                // Start update timer
+                itemsModified = true;
+            }
+            return item;
+        }
+
+        /// <summary>
+        /// Update the listview on a timer to avoid excessive updates.
+        /// </summary>
+        private void updateTimer_Tick(object sender, System.EventArgs e)
+        {
+            if (itemsModified)
+            {
+                itemsModified = false;
                 lvInputs.BeginUpdate();
                 lvInputs.Items.Clear();
                 lvInputs.Items.AddRange(items.Values.OrderBy(x => x.SortKey).ToArray());
                 lvInputs.EndUpdate();
             }
-            return item;
+        }
+
+        /// <summary>
+        /// Enable update timer depending on visibility.
+        /// </summary>
+        protected override void OnVisibleChanged(System.EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            updateTimer.Enabled = Visible;
         }
 
         /// <summary>
