@@ -76,6 +76,10 @@
     <Compile Include="Configuration\LocoNetConfiguration.cs" />
     <Compile Include="Configuration\XmlExtensions.cs" />
     <Compile Include="Devices\LocoIO\AddressList.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv145J6.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv145J5.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv133HighPins.cs" />
+    <Compile Include="Devices\LocoIO\ConnectorModes\Mgv133LowPins.cs" />
     <Compile Include="Devices\LocoIO\LocoIOConfigLoader.cs" />
     <Compile Include="Devices\LocoIO\Connector.cs" />
     <Compile Include="Devices\LocoIO\ConnectorConfig.cs" />
