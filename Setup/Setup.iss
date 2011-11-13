@@ -6,7 +6,7 @@
 #define AppName    "LocoNet Toolbox"
 #define AppShortName "LocoNet Toolbox"
 #define AppExeName   "LocoNetToolbox"
-#define AppVersion GetFileVersion("Build\Application\LocoNetToolbox.exe")
+#define AppVersion GetFileVersion("..\Build\Application\LocoNetToolbox.exe")
 
 [Setup]
 AppId={#AppId}
