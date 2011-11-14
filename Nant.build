@@ -16,6 +16,7 @@
 				<include name="**/*.user" />
 			</fileset>
 		</delete>
+		<delete dir="${basedir}/Build"/>
 	</target>
 
 	<target name="prepare">
