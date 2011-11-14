@@ -75,13 +75,13 @@
             this.modeControl.Location = new System.Drawing.Point(3, 3);
             this.modeControl.Mode = null;
             this.modeControl.Name = "modeControl";
-            this.modeControl.Size = new System.Drawing.Size(376, 21);
+            this.modeControl.Size = new System.Drawing.Size(371, 21);
             this.modeControl.TabIndex = 7;
             this.modeControl.Changed += new System.EventHandler(this.OnConfigChanged);
             // 
             // tbConfig
             // 
-            this.tbConfig.Location = new System.Drawing.Point(449, 3);
+            this.tbConfig.Location = new System.Drawing.Point(444, 3);
             this.tbConfig.Name = "tbConfig";
             this.tbConfig.ReadOnly = true;
             this.tbConfig.Size = new System.Drawing.Size(26, 20);
@@ -89,7 +89,7 @@
             // 
             // tbValue1
             // 
-            this.tbValue1.Location = new System.Drawing.Point(481, 3);
+            this.tbValue1.Location = new System.Drawing.Point(476, 3);
             this.tbValue1.Name = "tbValue1";
             this.tbValue1.ReadOnly = true;
             this.tbValue1.Size = new System.Drawing.Size(26, 20);
@@ -97,7 +97,7 @@
             // 
             // tbValue2
             // 
-            this.tbValue2.Location = new System.Drawing.Point(513, 3);
+            this.tbValue2.Location = new System.Drawing.Point(508, 3);
             this.tbValue2.Name = "tbValue2";
             this.tbValue2.ReadOnly = true;
             this.tbValue2.Size = new System.Drawing.Size(27, 20);
@@ -105,7 +105,7 @@
             // 
             // tbAddr
             // 
-            this.tbAddr.Location = new System.Drawing.Point(385, 3);
+            this.tbAddr.Location = new System.Drawing.Point(380, 3);
             this.tbAddr.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -129,7 +129,7 @@
             // cmdRead
             // 
             this.cmdRead.AutoSize = true;
-            this.cmdRead.Location = new System.Drawing.Point(546, 3);
+            this.cmdRead.Location = new System.Drawing.Point(541, 3);
             this.cmdRead.Name = "cmdRead";
             this.cmdRead.Size = new System.Drawing.Size(30, 23);
             this.cmdRead.TabIndex = 13;
@@ -140,7 +140,7 @@
             // cmdWrite
             // 
             this.cmdWrite.AutoSize = true;
-            this.cmdWrite.Location = new System.Drawing.Point(582, 3);
+            this.cmdWrite.Location = new System.Drawing.Point(577, 3);
             this.cmdWrite.Name = "cmdWrite";
             this.cmdWrite.Size = new System.Drawing.Size(30, 23);
             this.cmdWrite.TabIndex = 14;
@@ -151,11 +151,11 @@
             // cmdNotUsed
             // 
             this.cmdNotUsed.AutoSize = true;
-            this.cmdNotUsed.Location = new System.Drawing.Point(618, 3);
+            this.cmdNotUsed.Location = new System.Drawing.Point(613, 3);
             this.cmdNotUsed.Name = "cmdNotUsed";
-            this.cmdNotUsed.Size = new System.Drawing.Size(60, 23);
+            this.cmdNotUsed.Size = new System.Drawing.Size(65, 23);
             this.cmdNotUsed.TabIndex = 15;
-            this.cmdNotUsed.Text = "&Not used";
+            this.cmdNotUsed.Text = "&Not in use";
             this.cmdNotUsed.UseVisualStyleBackColor = true;
             this.cmdNotUsed.Click += new System.EventHandler(this.cmdNotUsed_Click);
             // 
