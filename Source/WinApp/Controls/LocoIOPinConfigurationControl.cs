@@ -90,6 +90,7 @@ namespace LocoNetToolBox.WinApp.Controls
                 tbConfig.Text = (mode != null) ? mode.GetConfig().ToString() : string.Empty;
                 tbValue1.Text = (mode != null) ? mode.GetValue1(addr).ToString() : string.Empty;
                 tbValue2.Text = (mode != null) ? mode.GetValue2(addr).ToString() : string.Empty;
+                cmdNotUsed.Enabled = (mode != PinMode.BlockOccupied) || (addr != 2048);
             }
         }
 
@@ -123,6 +124,14 @@ namespace LocoNetToolBox.WinApp.Controls
         private void cmdWrite_Click(object sender, EventArgs e)
         {
             Write.Fire(this);
+        }
+
+        private void cmdNotUsed_Click(object sender, EventArgs e)
+        {
+            modeControl.Mode = PinMode.BlockOccupied;
+            tbAddr.Value = 2048;
+            Write.Fire(this);
+            UpdateUI();
         }
     }
 }

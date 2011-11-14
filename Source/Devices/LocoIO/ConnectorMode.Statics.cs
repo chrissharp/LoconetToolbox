@@ -13,10 +13,12 @@ namespace LocoNetToolBox.Devices.LocoIO
         public static readonly ConnectorMode Mgv136 = new ConnectorModes.Mgv136();
         public static readonly ConnectorMode Mgv145J5 = new ConnectorModes.Mgv145J5();
         public static readonly ConnectorMode Mgv145J6 = new ConnectorModes.Mgv145J6();
+        public static readonly ConnectorMode NotUsed = new ConnectorModes.NotUsed();
 
         private static readonly ConnectorMode[] Modes = new[]
         {
-            None, 
+            //None, 
+            NotUsed,
             Mgv77,
             Mgv93, 
             Mgv102, 
