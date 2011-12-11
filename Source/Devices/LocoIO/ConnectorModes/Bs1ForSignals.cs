@@ -1,31 +1,37 @@
 ﻿namespace LocoNetToolBox.Devices.LocoIO.ConnectorModes
 {
     /// <summary>
-    /// Connector mode for an MGV145 Turntable/FY controller (J6).
+    /// Connector mode for an BS-1 used for led signals.
     /// </summary>
-    public sealed class Mgv145J6 : ConnectorMode
+    public sealed class Bs1ForSignals : ConnectorMode
     {
         /// <summary>
         /// Default ctor
         /// </summary>
-        public Mgv145J6()
-            : base("MGV145 J6",
-                6,
+        public Bs1ForSignals()
+            : base("BS-1 for signals",
+                2,
                 new[] {
-                    "Feedback 1st section",
-                    "Feedback 2nd section",
-                    "Feedback 3rd section",
-                    "Feedback 4th section",
-                    "Forward sign",
-                    "Reverse sign",
+                    "Signal 1",
+                    "Signal 2",
                 },
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
-                PinMode.BlockActiveLowDelay,
+                new[] {
+                    "Pin 1, 2",
+                    "Pin 3, 4",
+                    "Pin 5, 6",
+                    "Pin 7, 8",
+                },
                 PinMode.SteadyStateSingleOff,
                 PinMode.SteadyStateSingleOff)
         {
+        }
+
+        /// <summary>
+        /// Gets the offset added to each pin number for the given submode.
+        /// </summary>
+        protected override int GetPinOffset(int subMode)
+        {
+            return subMode * 2;
         }
 
         /// <summary>
@@ -33,7 +39,7 @@
         /// </summary>
         protected override void Configure(ConnectorConfig target, AddressList addresses, int subMode)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var pin = target.Pins[i];
                 pin.Mode = GetPin(i);

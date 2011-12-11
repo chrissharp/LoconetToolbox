@@ -49,6 +49,7 @@
             this.lbPinCaption = new System.Windows.Forms.Label();
             this.lbAddressCaption = new System.Windows.Forms.Label();
             this.lbConfigCaption = new System.Windows.Forms.Label();
+            this.cbSubMode = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAddr8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbAddr7)).BeginInit();
@@ -87,10 +88,11 @@
             this.tlpMain.Controls.Add(this.lbPinCaption, 1, 0);
             this.tlpMain.Controls.Add(this.lbAddressCaption, 2, 0);
             this.tlpMain.Controls.Add(this.lbConfigCaption, 0, 0);
+            this.tlpMain.Controls.Add(this.cbSubMode, 0, 9);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 9;
+            this.tlpMain.RowCount = 10;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -100,7 +102,8 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(605, 221);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.Size = new System.Drawing.Size(605, 248);
             this.tlpMain.TabIndex = 0;
             // 
             // lbPin4
@@ -329,9 +332,9 @@
             // 
             // lvModes
             // 
-            this.lvModes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvModes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvModes.FullRowSelect = true;
             this.lvModes.HideSelection = false;
             this.lvModes.Location = new System.Drawing.Point(3, 16);
@@ -370,6 +373,16 @@
             this.lbConfigCaption.Size = new System.Drawing.Size(85, 13);
             this.lbConfigCaption.TabIndex = 29;
             this.lbConfigCaption.Text = "Attached device";
+            // 
+            // cbSubMode
+            // 
+            this.cbSubMode.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbSubMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSubMode.FormattingEnabled = true;
+            this.cbSubMode.Location = new System.Drawing.Point(3, 224);
+            this.cbSubMode.Name = "cbSubMode";
+            this.cbSubMode.Size = new System.Drawing.Size(495, 21);
+            this.cbSubMode.TabIndex = 30;
             // 
             // LocoIOConnectorConfigurationControl
             // 
@@ -416,5 +429,6 @@
         private System.Windows.Forms.Label lbPinCaption;
         private System.Windows.Forms.Label lbAddressCaption;
         private System.Windows.Forms.Label lbConfigCaption;
+        private System.Windows.Forms.ComboBox cbSubMode;
     }
 }

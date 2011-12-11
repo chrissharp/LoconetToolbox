@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LocoNetToolBox.Devices.LocoIO.ConnectorModes;
 
 namespace LocoNetToolBox.Devices.LocoIO
 {
@@ -8,8 +9,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         public static readonly ConnectorMode Mgv77 = new ConnectorModes.Mgv77();
         public static readonly ConnectorMode Mgv93 = new ConnectorModes.Mgv93();
         public static readonly ConnectorMode Mgv102 = new ConnectorModes.Mgv102();
-        public static readonly ConnectorMode Mgv133LowPins = new ConnectorModes.Mgv133LowPins();
-        public static readonly ConnectorMode Mgv133HighPins = new ConnectorModes.Mgv133HighPins();
+        public static readonly ConnectorMode Mgv133 = new ConnectorModes.Mgv133();
         public static readonly ConnectorMode Mgv136 = new ConnectorModes.Mgv136();
         public static readonly ConnectorMode Mgv145J5 = new ConnectorModes.Mgv145J5();
         public static readonly ConnectorMode Mgv145J6 = new ConnectorModes.Mgv145J6();
@@ -22,11 +22,11 @@ namespace LocoNetToolBox.Devices.LocoIO
             Mgv77,
             Mgv93, 
             Mgv102, 
-            Mgv133LowPins,
-            Mgv133HighPins,
+            Mgv133,
             Mgv136, 
             Mgv145J5,
             Mgv145J6,
+            new Bs1ForSignals(), 
             new ConnectorModes.Mgv81V1(), 
         };
 

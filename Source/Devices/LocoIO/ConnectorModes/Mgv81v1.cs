@@ -27,7 +27,7 @@
         /// <summary>
         /// Use this mode to configure the given target.
         /// </summary>
-        protected override void Configure(ConnectorConfig target, AddressList addresses)
+        protected override void Configure(ConnectorConfig target, AddressList addresses, int subMode)
         {
             for (int i = 0; i < 4; i++)
             {

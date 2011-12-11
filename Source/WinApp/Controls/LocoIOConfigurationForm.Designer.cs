@@ -59,12 +59,12 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(681, 358);
+            this.tlpMain.Size = new System.Drawing.Size(681, 381);
             this.tlpMain.TabIndex = 0;
             // 
             // cmdWriteAll
             // 
-            this.cmdWriteAll.Location = new System.Drawing.Point(102, 330);
+            this.cmdWriteAll.Location = new System.Drawing.Point(102, 353);
             this.cmdWriteAll.Name = "cmdWriteAll";
             this.cmdWriteAll.Size = new System.Drawing.Size(93, 25);
             this.cmdWriteAll.TabIndex = 2;
@@ -77,14 +77,14 @@
             this.configurationControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.configurationControl.Location = new System.Drawing.Point(3, 3);
             this.configurationControl.Name = "configurationControl";
-            this.configurationControl.Size = new System.Drawing.Size(675, 288);
+            this.configurationControl.Size = new System.Drawing.Size(675, 311);
             this.configurationControl.TabIndex = 0;
             this.configurationControl.BusyChanged += new System.EventHandler(this.ConfigurationControlBusyChanged);
             this.configurationControl.WriteSucceeded += new System.EventHandler(this.configurationControl_WriteSucceeded);
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(585, 330);
+            this.cmdClose.Location = new System.Drawing.Point(585, 353);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(93, 25);
             this.cmdClose.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             // cmdReadAll
             // 
-            this.cmdReadAll.Location = new System.Drawing.Point(3, 330);
+            this.cmdReadAll.Location = new System.Drawing.Point(3, 353);
             this.cmdReadAll.Name = "cmdReadAll";
             this.cmdReadAll.Size = new System.Drawing.Size(93, 25);
             this.cmdReadAll.TabIndex = 4;
@@ -105,7 +105,7 @@
             // 
             this.lbResetWarning.AutoSize = true;
             this.tlpMain.SetColumnSpan(this.lbResetWarning, 3);
-            this.lbResetWarning.Location = new System.Drawing.Point(3, 304);
+            this.lbResetWarning.Location = new System.Drawing.Point(3, 327);
             this.lbResetWarning.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
             this.lbResetWarning.Name = "lbResetWarning";
             this.lbResetWarning.Size = new System.Drawing.Size(183, 13);
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 358);
+            this.ClientSize = new System.Drawing.Size(681, 381);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

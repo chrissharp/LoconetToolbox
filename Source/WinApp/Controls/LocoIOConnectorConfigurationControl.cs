@@ -76,7 +76,7 @@ namespace LocoNetToolBox.WinApp.Controls
         public ConnectorConfig CreateConfig()
         {
             var mode = SelectedMode ?? ConnectorMode.None;
-            return mode.CreateConfig(connector, addresses);
+            return mode.CreateConfig(connector, addresses, SelectedSubMode);
         }
 
         /// <summary>
@@ -117,6 +117,14 @@ namespace LocoNetToolBox.WinApp.Controls
         }
 
         /// <summary>
+        /// Gets the currentlty selected sub mode
+        /// </summary>
+        private int SelectedSubMode
+        {
+            get { return Math.Max(0, cbSubMode.SelectedIndex); }
+        }
+
+        /// <summary>
         /// Update the ui controls
         /// </summary>
         private void UpdateUI()
@@ -141,6 +149,19 @@ namespace LocoNetToolBox.WinApp.Controls
                         text = selection.GetAddressName(i);
                     }
                     labels[i].Text = text;
+                }
+
+                var index = cbSubMode.SelectedIndex;
+                cbSubMode.Items.Clear();
+                if (selection != null)
+                {
+                    cbSubMode.Items.AddRange(selection.SubModes);
+                }
+                var hasSubModes = cbSubMode.Items.Count > 0;
+                cbSubMode.Enabled = hasSubModes;
+                if (hasSubModes)
+                {
+                    cbSubMode.SelectedIndex = Math.Max(0, index < cbSubMode.Items.Count ? index : 0);
                 }
             }
             finally
