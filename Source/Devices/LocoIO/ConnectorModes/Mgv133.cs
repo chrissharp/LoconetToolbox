@@ -31,7 +31,7 @@
         /// <summary>
         /// Gets the offset added to each pin number for the given submode.
         /// </summary>
-        protected override int GetPinOffset(int subMode)
+        public override int GetPinOffset(int subMode)
         {
             return (subMode == 0) ? 0 : 4;
         }

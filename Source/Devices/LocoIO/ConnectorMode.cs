@@ -108,7 +108,7 @@ namespace LocoNetToolBox.Devices.LocoIO
         /// <summary>
         /// Gets the offset added to each pin number for the given submode.
         /// </summary>
-        protected virtual int GetPinOffset(int subMode)
+        public virtual int GetPinOffset(int subMode)
         {
             return 0;
         }

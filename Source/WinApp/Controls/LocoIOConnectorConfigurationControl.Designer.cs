@@ -383,6 +383,7 @@
             this.cbSubMode.Name = "cbSubMode";
             this.cbSubMode.Size = new System.Drawing.Size(495, 21);
             this.cbSubMode.TabIndex = 30;
+            this.cbSubMode.SelectedIndexChanged += new System.EventHandler(this.cbSubMode_SelectedIndexChanged);
             // 
             // LocoIOConnectorConfigurationControl
             // 

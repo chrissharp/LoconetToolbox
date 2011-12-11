@@ -67,7 +67,7 @@ namespace LocoNetToolBox.WinApp.Controls
 
             Connector = Connector.First;
             lvModes.Items.AddRange(ConnectorMode.All.Select(x => new ListViewItem(x.Name) { Tag = x }).ToArray());
-            UpdateUI();
+            UpdateUI(true);
         }
 
         /// <summary>
@@ -76,7 +76,13 @@ namespace LocoNetToolBox.WinApp.Controls
         public ConnectorConfig CreateConfig()
         {
             var mode = SelectedMode ?? ConnectorMode.None;
-            return mode.CreateConfig(connector, addresses, SelectedSubMode);
+            var pinOffset = mode.GetPinOffset(SelectedSubMode);
+            var usedAddresses = new AddressList(8 - pinOffset);
+            for (var i = pinOffset; i < 8; i++)
+            {
+                usedAddresses[i - pinOffset] = addresses[i];
+            }
+            return mode.CreateConfig(connector, usedAddresses, SelectedSubMode);
         }
 
         /// <summary>
@@ -127,7 +133,7 @@ namespace LocoNetToolBox.WinApp.Controls
         /// <summary>
         /// Update the ui controls
         /// </summary>
-        private void UpdateUI()
+        private void UpdateUI(bool updateSubModes)
         {
             SuspendLayout();
             tlpMain.SuspendLayout();
@@ -136,32 +142,36 @@ namespace LocoNetToolBox.WinApp.Controls
                 var selection = SelectedMode;
                 var addressCount = (selection != null) ? selection.AddressCount : 0;
                 var firstPin = (connector == Connector.First) ? 1 : 9;
+                var pinOffset = (selection != null) ? selection.GetPinOffset(SelectedSubMode) : 0;
 
                 for (int i = 0; i < 8; i++)
                 {
-                    var visible = (i < addressCount);
+                    var visible = (i >= pinOffset) && (i < addressCount + pinOffset);
                     labels[i].Enabled = visible;
                     addressControls[i].Enabled = visible;
 
                     var text = (firstPin + i).ToString();
                     if (visible && (selection != null))
                     {
-                        text = selection.GetAddressName(i);
+                        text = selection.GetAddressName(i - pinOffset);
                     }
                     labels[i].Text = text;
                 }
 
-                var index = cbSubMode.SelectedIndex;
-                cbSubMode.Items.Clear();
-                if (selection != null)
+                if (updateSubModes)
                 {
-                    cbSubMode.Items.AddRange(selection.SubModes);
-                }
-                var hasSubModes = cbSubMode.Items.Count > 0;
-                cbSubMode.Enabled = hasSubModes;
-                if (hasSubModes)
-                {
-                    cbSubMode.SelectedIndex = Math.Max(0, index < cbSubMode.Items.Count ? index : 0);
+                    var index = cbSubMode.SelectedIndex;
+                    cbSubMode.Items.Clear();
+                    if (selection != null)
+                    {
+                        cbSubMode.Items.AddRange(selection.SubModes);
+                    }
+                    var hasSubModes = cbSubMode.Items.Count > 0;
+                    cbSubMode.Enabled = hasSubModes;
+                    if (hasSubModes)
+                    {
+                        cbSubMode.SelectedIndex = Math.Max(0, index < cbSubMode.Items.Count ? index : 0);
+                    }
                 }
             }
             finally
@@ -177,7 +187,15 @@ namespace LocoNetToolBox.WinApp.Controls
         /// </summary>
         private void lvModes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateUI();
+            UpdateUI(true);
+        }
+
+        /// <summary>
+        /// Selected submit has changed
+        /// </summary>
+        private void cbSubMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateUI(false);
         }
     }
 }
