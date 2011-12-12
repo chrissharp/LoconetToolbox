@@ -41,24 +41,24 @@ Source: "LocoNetToolbox.exe"; DestDir: "{app}"; Flags: replacesameversion;
 Name: "{group}\{#AppShortName}"; Filename: "{app}\LocoNetToolbox.exe"; WorkingDir: "{app}"
 
 [Run]
-Filename: "{dotnet20}\ngen.exe"; Parameters: "install ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:Optimize}; Flags: runhidden;
+Filename: "{dotnet40}\ngen.exe"; Parameters: "install ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:Optimize}; Flags: runhidden;
 Filename: "{app}\LocoNetToolbox.exe"; Description: "{cm:StartApp}"; Flags: postinstall nowait skipifsilent;
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}";
 
 [UninstallRun]
-Filename: "{dotnet20}\ngen.exe"; Parameters: "uninstall ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:UnOptimize}; Flags: runhidden;
+Filename: "{dotnet40}\ngen.exe"; Parameters: "uninstall ""{app}\LocoNetToolbox.exe"""; StatusMsg: {cm:UnOptimize}; Flags: runhidden;
 
 [CustomMessages]
 StartApp=Start {#AppName}
-InstallDotNet=Install the Microsoft.NET 3.5 Framework first.
+InstallDotNet=Install the Microsoft.NET 4.0 Framework first.
 Optimize=Optimizing performance
 UnOptimize=Cleanup performance optimizations
 
 [Code]
 const
-  dotnet35URL = 'http://download.microsoft.com/download/7/0/3/703455ee-a747-4cc8-bd3e-98a615c3aedb/dotNetFx35setup.exe';
+  dotnet40URL = 'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe';
 
 function InitializeSetup(): Boolean;
 var
@@ -67,14 +67,12 @@ var
 
 begin
   Result := true;
-  // Check for required dotnetfx 3.5 installation
-  if (not RegKeyExists(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5')) then begin
+  // Check for required dotnetfx 4.0 installation
+  if (not RegKeyExists(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full')) then begin
     msgRes := MsgBox(CustomMessage('InstallDotNet'), mbError, MB_OKCANCEL);
     if(msgRes = 1) then begin
-      ShellExec('Open', dotnet35URL, '', '', SW_SHOW, ewNoWait, errCode);
+      ShellExec('Open', dotnet40URL, '', '', SW_SHOW, ewNoWait, errCode);
     end;
     Abort();
   end;
 end;
-
-

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <project name="MGV-LocoNetToolbox" default="all" basedir=".">
 
-	<property name="nant.settings.currentframework" value="net-3.5"/>
+	<property name="nant.settings.currentframework" value="net-4.0"/>
 
 	<property name="version" value="1.2.7.1"/>
 	<property name="basedir" value="${project::get-base-directory()}"/>
