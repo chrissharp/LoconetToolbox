@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using LocoNetToolBox.Configuration;
 using LocoNetToolBox.Protocol;
@@ -63,6 +64,24 @@ namespace LocoNetToolBox.WinApp
             if (!string.IsNullOrEmpty(path))
             {
                 state.OpenConfiguration(path);
+            }
+
+            var task = Task<VersionCheckResult>.Factory.StartNew(VersionCheckResult.Load);
+            task.ContinueWith(x => ProcessVersionCheckResult(x.Result), TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        /// <summary>
+        /// Version check has been done, show results.
+        /// </summary>
+        private void ProcessVersionCheckResult(VersionCheckResult result)
+        {
+            if ((result == null) || (!result.Succeeded))
+                return;
+
+            var currentVersion = GetType().Assembly.GetName().Version;
+            if (result.LatestVersion > currentVersion)
+            {
+                lbVersion.Text += " NEW VERSION AVAILABLE";
             }
         }
 
