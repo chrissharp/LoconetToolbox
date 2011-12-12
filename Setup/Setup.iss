@@ -36,6 +36,7 @@ SourceDir=..\Build\Application
 
 [Files]
 Source: "LocoNetToolbox.exe"; DestDir: "{app}"; Flags: replacesameversion;
+Source: "LocoNetToolbox.exe.config"; DestDir: "{app}"; 
 
 [Icons]
 Name: "{group}\{#AppShortName}"; Filename: "{app}\LocoNetToolbox.exe"; WorkingDir: "{app}"

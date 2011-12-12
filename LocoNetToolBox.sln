@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocoNetToolBox", "LocoNetToolBox.csproj", "{D56CE7E3-4005-4D41-9022-B6FB9F66280A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocoNetToolBox", "Source\LocoNetToolBox.csproj", "{D56CE7E3-4005-4D41-9022-B6FB9F66280A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
