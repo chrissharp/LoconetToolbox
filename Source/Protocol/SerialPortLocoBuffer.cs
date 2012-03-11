@@ -95,10 +95,11 @@ namespace LocoNetToolBox.Protocol
         {
             lock (portLock)
             {
-                if (port != null)
+                var p = port;
+                port = null;
+                if (p != null)
                 {
-                    port.Close();
-                    port = null;
+                    p.Close();
                     OnClosed();
                 }
             }
